@@ -1,7 +1,52 @@
-# AgilyPet
-test 
+# AgilyPet 
 
+## Opis projekta
+### Člani
+Člani ekipe, ki dela na tem projektu smo Blazhe Manev, Gregor Pojbič, Kristina Ristova in Jan Lukač.
+Vodja naše ekipe je Gregor Pojbič, lastnik izdelka (product owner) pa je asistent Tilen Hliš.
+Smo ekipa 4 študentov FERI, 2. letnik smeri ITK. Projekt pa delamo pri predmetu Praktikum 2.
 
+### Opis
+AgilyPet je naziv našega projekta, ki smo si ge izbrali pri predmetu Praktikum 2. 
+
+### Naloga
+Naša naloga je nareiti rešitev glede na podano navodilo in jo na koncu predstaviti.
+
+### Navodilo
+```
+Vse več ljudi ima hišne ljubljenčke, s katerimi si želijo aktivno preživeti čas. Ena izmed možnosti za
+aktivno preživljanje prostega časa s svojim ljubljenčkom je postavitev domačega agility-ja. Večina
+ljudi si pod pojmom agilty predstavlja progo za večje pse, kjer psi tečejo in preskakujejo ovire.
+Vendar pa so posebne oblike proge za agilty primerne tudi za manjše pse, za pse z zdravstvenimi
+težavami in tudi druge vrste hišnih ljubljenčkov, kot so hrčki in vietnamski prašički. 
+
+Na skupnem seznamu označite, katere proge so dodane s strani administratorja in katere s strani
+registriranih uporabnikov. Omogočite, da se lahko uporabniki prijavijo na določenega avtorja prog in
+mu sledijo ter so obveščeni (preko elektronske pošte), ko je s strani avtorja dodana nova proga.
+```
+
+## Ciji
+Naš cilj je narediti rešitev, ki bo zadovoljevala vsem pogojem/vmesnim ciljem/funkcionalnostim, ki si jih zastavimo.
+Cilj je narediti čim boljšo spletno aplikacijo, ki bo tehnološko zahtevna in lepo oblikovana. Cilj je tudi pravilno uporabljati
+vse tehnologije ki smo se dogovorili uporabiti. V kartekem je naš cilj zadovoljiva in uporabna spletna aplikacija.
+
+## Specifikacije
+### Tehnologije
+- Node.js
+- Express
+- React
+- MongoDB
+- Git (GitLab)
+
+### Razvojno okolje
+- Visual studio code
+
+### Sledenje poteku dela
+- GitLab
+
+## Način dela
+Delo si bomo med posamezniki razdelili po dogovoru v skupini. Delo posameznika bomo sledili in posledično lahko spremljali v GitLab-u s pomočjo List-ov in Milestone-ov. Liste bomo lahko spremljali s pomočjo premikanja po tabli (Board) glede na to pod
+katero labelo (To do, Doing, Done) se nahaja določen list.
 
 ## Getting started
 
