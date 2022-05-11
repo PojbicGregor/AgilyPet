@@ -48,6 +48,32 @@ vse tehnologije ki smo se dogovorili uporabiti. V kartekem je naš cilj zadovolj
 Delo si bomo med posamezniki razdelili po dogovoru v skupini. Delo posameznika bomo sledili in posledično lahko spremljali v GitLab-u s pomočjo List-ov in Milestone-ov. Liste bomo lahko spremljali s pomočjo premikanja po tabli (Board) glede na to pod
 katero labelo (To do, Doing, Done) se nahaja določen list.
 
+## Vzpostavitev
+Navodila kako vzpostaviti začetno aplikacijo.
+
+Najprej bo potrebno izvesti pull, da pridobimo vse datoteke na veji main
+
+### Vzpostavitev React (frontend)
+Za vzpostavitev bomo se morali pomakniti v podmapo our-app ki se nahaja v mapi frontend.
+![Mape frontend](/slike/react_mape.PNG)
+To naredimo z ukazom ```cd .\frontend\```, da se premaknemo v mapo frontend, nato pa še uporabimo ukaz ```cd .\our-app\``` da se
+premaknemo v podmapo our-app. Zdaj bi naš terminal moral zgledati nekako tako: ![Terminal react](/slike/terminal_react.PNG)
+Sedaj moramo ustvariti še node_modules, kar pa naredimo z ukazom ```npm install```. Sedaj imamo React vzpostavljen.
+
+### Vzpostavitev backend-a
+Za vzpostavitev bomo se morali pomakniti v mapo backend.
+![Mape backend](/slike/backend_mapa.PNG)
+To naredimo z ukazom ```cd .\backend\```, da se premaknemo v mapo backend (Seveda se moramo pred izvedbo tega ukaza nahajati v korenski mapi).  Zdaj bi naš terminal moral zgledati nekako tako: ![Terminal backend](/slike/terminal_backend.PNG)
+Sedaj moramo ustvariti še node_modules, kar pa naredimo z ukazom ```npm install```. Sedaj imamo backend vzpostavljen.
+
+## Zagon aplikacije
+Po vzpostavitvi aplikacije lahko aplikacijo zaženemo.
+
+### Zagon backend-a
+Backend zaženemo, tako da ko se nahajamo v podmapi backend v terminal napišemo ukaz ```node index.js```. Sedaj imamo zagnan backend na port-u 3001.
+
+### Zagon React-a (frontend)
+React zaženemo, tako da ko se nahajamo v podmapi our-app, ki je v mapi frontend in v terminal napišemo ukaz ```npm start```. Sedaj imamo zagnan React na port-u 3000.
 <!--
 ## Getting started
 
