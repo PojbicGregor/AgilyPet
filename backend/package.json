@@ -1,0 +1,24 @@
+{
+  "name": "agilypet",
+  "version": "1.0.0",
+  "description": "praktikum2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/LukacJan/agilypet.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/LukacJan/agilypet/issues"
+  },
+  "homepage": "https://gitlab.com/LukacJan/agilypet#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.3.3"
+  }
+}
