@@ -3,11 +3,14 @@ const mongoose = require("mongoose");
 
 const Pes = require("./schemas/pes.js");
 
-const port = 3000;
+const port = 3001;
 const app = express();
+const MONGODB_URI = 'mongodb+srv://AgilyPet:PWFp2JX63wJkfAc@agilypet.8wt9o.mongodb.net/agilyPet?retryWrites=true&w=majority';
+// Username: AgilyPet
+// Password: PWFp2JX63wJkfAc
 const url = "mongodb://localhost:27017/projekttest";
 
-mongoose.connect(url, {useNewUrlParser:true, useUnifiedTopology: true}).then(runsrvr);
+mongoose.connect(MONGODB_URI || url, {useNewUrlParser:true, useUnifiedTopology: true}).then(runsrvr);
 
 
 app.get("/", (req, res) => {
