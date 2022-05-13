@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const Pes = require("./schemas/pes.js");
+var mail = require('./mailer/mailer.js');
 
 const port = 3001;
 const app = express();
@@ -12,10 +13,11 @@ const url = "mongodb://localhost:27017/projekttest";
 
 mongoose.connect(MONGODB_URI || url, {useNewUrlParser:true, useUnifiedTopology: true}).then(runsrvr);
 
-
 app.get("/", (req, res) => {
-    
     res.send("hello, world");
+
+    //Primer pošiljanja emaila
+    mail.sendEmail('janlukac2000@gmail.com', 'posiljam', 'posiljam iz node');
 });
 
 app.get("/getpsi", (req, res) => {
