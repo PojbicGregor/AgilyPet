@@ -27,12 +27,13 @@ app.get("/getpsi", (req, res) => {
     });
 });
 
-app.get("/savepes/:pasma/:visina/:starost", (req, res) => {
+app.get("/savepes/:ime/:pasma/:visina/:starost", (req, res) => {
+    const ime = req.params.ime;
     const pasma = req.params.pasma;
     const visina = req.params.visina;
     const starost = req.params.starost;
 
-    const pes = new Pes({pasma: pasma, visina: visina, starost: starost});
+    const pes = new Pes({ime: ime, pasma: pasma, visina: visina, starost: starost});
     pes.save().then(() => {
         res.send(`saved pes ${pes}`);
 
