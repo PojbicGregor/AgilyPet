@@ -26,12 +26,13 @@ module.exports = {
             from: '"AgilyPet" <agilypet@outlook.com>',
             to: to,
             subject: subject,
+            //text več ni pomemben, ker vse spremenljivke lahko obdelamo v handlebarsju/templejtu
             text: text,
             //template
             template: 'obvesti_agily',
             //namenjeno spremenljivkam
             context: {
-                nekaj: 'stvar'
+                avtor: 'nek avtor'
             }
         }, (err, info) => {
             if (err) {
