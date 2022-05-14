@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer');
+const hbs = require('nodemailer-express-handlebars');
 
 const transporter = nodemailer.createTransport({
     service: 'hotmail',
@@ -8,13 +9,30 @@ const transporter = nodemailer.createTransport({
     }
 });
 
+transporter.use('compile', hbs({
+    viewEngine: {
+        extName: '.handlebars',
+        partialsDir: './mailer/views',
+        layoutsDir: './mailer/views',
+        defaultLayout: false
+    },
+    viewPath: './mailer/views',
+    extName: '.handlebars'
+}));
+
 module.exports = {
     sendEmail: (to, subject, text) => {
         transporter.sendMail({
             from: '"AgilyPet" <agilypet@outlook.com>',
             to: to,
             subject: subject,
-            text: text
+            text: text,
+            //template
+            template: 'obvesti_agily',
+            //namenjeno spremenljivkam
+            context: {
+                nekaj: 'stvar'
+            }
         }, (err, info) => {
             if (err) {
                 console.log(err);
