@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './komponente/App';
+import App from './komponente/App.js';
+import DodajPsa from './komponente/DodajPsa.tsx';
 import {
   BrowserRouter,
   Routes,
@@ -13,6 +14,7 @@ root.render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
+      <Route path="/dodajpsa" element={<DodajPsa/>} />
     </Routes>
   </BrowserRouter>
 );
