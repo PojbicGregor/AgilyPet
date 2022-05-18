@@ -1,7 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require('body-parser');
+const cors = require("cors");
 
 const Pes = require("./schemas/pes.js");
+const pes = require("./schemas/pes.js");
 
 const port = 3001;
 const app = express();
@@ -10,7 +13,11 @@ const MONGODB_URI = 'mongodb+srv://AgilyPet:PWFp2JX63wJkfAc@agilypet.8wt9o.mongo
 // Password: PWFp2JX63wJkfAc
 const url = "mongodb://localhost:27017/projekttest";
 
-mongoose.connect(MONGODB_URI || url, {useNewUrlParser:true, useUnifiedTopology: true}).then(runsrvr);
+app.use(cors());
+// parse application/json
+app.use(bodyParser.json());
+
+const db = mongoose.connect(MONGODB_URI || url, {useNewUrlParser:true, useUnifiedTopology: true}).then(runsrvr);
 
 
 app.get("/", (req, res) => {
@@ -42,6 +49,20 @@ app.get("/savepes/:ime/:pasma/:visina/:starost", (req, res) => {
             console.log(docs);
         });
     });
+});
+
+app.post("/post_test", async (req, res) => {
+    const ime = req.body.ime;
+    const pasma = req.body.pasma;
+    const visina = req.body.visina;
+    const starost = req.body.starost;
+
+    const pes = new Pes({ime: ime, pasma: pasma, visina: visina, starost: starost});
+    pes.save(req.body, (err, data) => {
+        if(err) return console.log(err);
+        res.send((data));
+    })
+    console.log(req.body);
 });
 
 

@@ -7,4 +7,4 @@ const pesSchema = new mongoose.Schema({
     starost: Number
 });
 
-module.exports = mongoose.model("User", pesSchema);
+module.exports = mongoose.model("Pes", pesSchema);
