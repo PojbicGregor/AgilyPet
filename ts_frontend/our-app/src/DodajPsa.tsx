@@ -28,7 +28,7 @@ let DodajPsa = (props: DodajPsaProps) => {
             starost: lastnosti.starost
         }
 
-        fetch("http://localhost:3001/post_test", {
+        fetch("http://localhost:3001/dodan_pes", {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
