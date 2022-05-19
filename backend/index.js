@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 
 const Pes = require("./schemas/pes.js");
 const Uporabnik=require('./schemas/uporabnik')
+var mail = require('./mailer/mailer.js');
 
 const bcrypt =require('bcryptjs');
 const jwt = require('jsonwebtoken')
@@ -20,11 +21,11 @@ const url = "mongodb://localhost:27017/projekttest";
 
 mongoose.connect(MONGODB_URI || url, {useNewUrlParser:true, useUnifiedTopology: true}).then(runsrvr);
 
-
 app.get("/", (req, res) => {
-    
-    res.send("hello, world ");
-   
+    res.send("hello, world");
+
+    //Primer pošiljanja emaila
+    mail.sendEmail('janlukac2000@gmail.com', 'posiljam', 'posiljam iz node');
 });
 
 app.get("/getpsi", (req, res) => {
