@@ -1,7 +1,24 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser');
-const cors = require("cors");
+const bodyParser = require('body-parser'); // tuka
+
+var cors = require('cors');
+var allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+const app = express();
+app.use(cors({
+  credentials: true,
+  origin: function(origin, callback){
+    // Allow requests with no origin (mobile apps, curl)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin)===-1){
+      var msg = "The CORS policy does not allow access from the specified Origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+router = express.Router();
 
 const Pes = require("./schemas/pes.js");
 const Uporabnik=require('./schemas/uporabnik')
@@ -16,11 +33,11 @@ const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhf
 const { stringify } = require('querystring');
 const fetch = require('node-fetch');
 const port = 3001;
-const app = express();
 const MONGODB_URI = 'mongodb+srv://AgilyPet:PWFp2JX63wJkfAc@agilypet.8wt9o.mongodb.net/agilyPet?retryWrites=true&w=majority';
 // Username: AgilyPet
 // Password: PWFp2JX63wJkfAc
 const url = "mongodb://localhost:27017/projekttest";
+
 
 app.use(cors());
 // parse application/json
@@ -43,6 +60,11 @@ app.get("/getpsi", (req, res) => {
         res.send(docs);
     });
 });
+const courseController = require('../backend/controllers/courseController.js');
+
+var courseRouter = require("./routes/courseRoutes.js");
+
+app.use('/courses', courseRouter);
 
 app.get("/savepes/:ime/:pasma/:visina/:starost", (req, res) => {
     const ime = req.params.ime;
@@ -60,6 +82,7 @@ app.get("/savepes/:ime/:pasma/:visina/:starost", (req, res) => {
         });
     });
 });
+
 
 app.post("/post_test", async (req, res) => {
     const ime = req.body.ime;
@@ -86,16 +109,17 @@ function runsrvr () {
         console.log(`server is running on port ${port}`);
     });
 }
-const bodyParser= require('express');
-app.use(bodyParser.json());
+const bodyParser2= require('express');      //menjam
+const { Router } = require("express");
+app.use(bodyParser2.json());                //menjam
 app.get("/register", (req, res) => {
     res.sendFile(__dirname + "/views/register.html");
-    app.use(bodyParser.json());
+    app.use(bodyParser2.json());             //menjam
 
   });
   app.get("/login", (req, res) => {
     res.sendFile(__dirname + "/views/login.html");
-    app.use(bodyParser.json());
+    app.use(bodyParser2.json());             //menjam
 
   });
 
