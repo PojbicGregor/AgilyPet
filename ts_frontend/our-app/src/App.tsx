@@ -10,6 +10,7 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import DodajPsa from './DodajPsa';
 import {Pes} from './razredi/Pes';
 import SeznamPsov from './SeznamPsov';
+import Osnovna from './komponente/Osnovna';
 
 function App() {
 
@@ -26,7 +27,9 @@ function App() {
       <div className = "App">
         <Routes>
 
-          <Route path='/' element ={<SeznamPsov seznam = {seznamPsov} />} />
+          <Route path="/" element={<Osnovna></Osnovna>} />
+
+          <Route path='/psi' element ={<SeznamPsov seznam = {seznamPsov} />} />
         
           <Route path='/dodajPsa' element={<DodajPsa onAdd={handleDodajPsa}/>} />
 

@@ -1,0 +1,12 @@
+.bg-orange {
+  background-color: #b87a00;
+}
+
+.pisava-white {
+  color: #fff;
+}
+
+.mouse_over:hover {
+  cursor: pointer;
+  background-color: #a66f02;
+}

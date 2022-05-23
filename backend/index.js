@@ -86,16 +86,16 @@ function runsrvr () {
         console.log(`server is running on port ${port}`);
     });
 }
-const bodyParser= require('express');
-app.use(bodyParser.json());
+const bodyParser1 = require('express');
+app.use(bodyParser1.json());
 app.get("/register", (req, res) => {
     res.sendFile(__dirname + "/views/register.html");
-    app.use(bodyParser.json());
+    app.use(bodyParser1.json());
 
   });
   app.get("/login", (req, res) => {
     res.sendFile(__dirname + "/views/login.html");
-    app.use(bodyParser.json());
+    app.use(bodyParser1.json());
 
   });
 
