@@ -158,7 +158,9 @@ app.get("/register", (req, res) => {
 
   app.post('/api/login', async (req,res)=>{
     
-    const { email, password } = req.body
+    const email = req.body.email;
+    const password = req.body.geslo;
+
 	const user = await Uporabnik.findOne({ email }).lean()
 
 	if (!user) {

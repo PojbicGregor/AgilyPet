@@ -13,6 +13,7 @@ import { Uporabnik } from './razredi/Uporabnik';
 import SeznamPsov from './SeznamPsov';
 import Osnovna from './komponente/Osnovna';
 import Registracija from './komponente/Registracija';
+import Prijava from './komponente/Prijava';
 
 function App() {
 
@@ -29,6 +30,11 @@ function App() {
     console.log(uporabnik);
   }
 
+  // spremeni handle
+  const handlePrijava = (uporabnik: Uporabnik) => {
+    console.log(uporabnik);
+  }
+
 
   return (
     <Router>
@@ -38,6 +44,8 @@ function App() {
           <Route path="/" element={<Osnovna></Osnovna>} />
 
           <Route path="/registracija" element={<Registracija onAdd={handleRegistracija}></Registracija>} />
+
+          <Route path="/prijava" element={<Prijava onAdd={handlePrijava}></Prijava>} />
 
           <Route path='/psi' element ={<SeznamPsov seznam = {seznamPsov} />} />
         

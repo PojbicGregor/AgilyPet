@@ -16,6 +16,8 @@
   border: 2px solid #a66f02;
   border-radius: 1em;
   background-color: rgb(224, 224, 224);
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .margin_reg {

@@ -34,7 +34,7 @@ const Navigacija: React.FC = () => {
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end">
                                 <Nav.Link className="mouse_over" href="/registracija"><div className="pisava-white">Registracija</div></Nav.Link>
-                                <Nav.Link className="mouse_over" href="#link"><div className="pisava-white">Prijava</div></Nav.Link>
+                                <Nav.Link className="mouse_over" href="/prijava"><div className="pisava-white">Prijava</div></Nav.Link>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
