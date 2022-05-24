@@ -9,8 +9,10 @@ import {BrowserRouter as Router} from 'react-router-dom';
 
 import DodajPsa from './DodajPsa';
 import {Pes} from './razredi/Pes';
+import { Uporabnik } from './razredi/Uporabnik';
 import SeznamPsov from './SeznamPsov';
 import Osnovna from './komponente/Osnovna';
+import Registracija from './komponente/Registracija';
 
 function App() {
 
@@ -22,12 +24,20 @@ function App() {
     setSeznamPsov(nov);
   }
 
+  // spremeni handle
+  const handleRegistracija = (uporabnik: Uporabnik) => {
+    console.log(uporabnik);
+  }
+
+
   return (
     <Router>
       <div className = "App">
         <Routes>
 
           <Route path="/" element={<Osnovna></Osnovna>} />
+
+          <Route path="/registracija" element={<Registracija onAdd={handleRegistracija}></Registracija>} />
 
           <Route path='/psi' element ={<SeznamPsov seznam = {seznamPsov} />} />
         

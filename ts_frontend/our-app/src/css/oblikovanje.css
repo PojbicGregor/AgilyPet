@@ -10,3 +10,19 @@
   cursor: pointer;
   background-color: #a66f02;
 }
+
+.border_color {
+  min-height: 100%;
+  border: 2px solid #a66f02;
+  border-radius: 1em;
+  background-color: rgb(224, 224, 224);
+}
+
+.margin_reg {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.footer {
+  margin-top: -50px;
+}

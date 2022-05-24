@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Login</title>
-	</head>
-	<body>
-		<h1>Login</h1>
-		<form id="login">
-			<input type="text" autocomplete="off" id="email" placeholder="email" />
-			<input type="password" autocomplete="off" id="password" placeholder="Password" />
-			<div
-            class="g-recaptcha"
-            data-sitekey="6LdpvDEUAAAAAMy8x0y8PS99j4BavfO2oBdVTQGZ"
-          ></div>
-			<input type="submit" value="Submit Form" />
-		</form>
 
-		<script>
-			        
-					const form = document.getElementById('login')
-form.addEventListener('submit', login)
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Login</title>
+</head>
 
-			async function login(event) {
-				event.preventDefault()
-				const email = document.getElementById('email').value
-				const password = document.getElementById('password').value
-				const captcha = document.querySelector('#g-recaptcha-response').value;
+<body>
+	<h1>Login</h1>
+	<form id="login">
+		<input type="text" autocomplete="off" id="email" placeholder="email" />
+		<input type="password" autocomplete="off" id="password" placeholder="Password" />
+		<div class="g-recaptcha" data-sitekey="6LdpvDEUAAAAAMy8x0y8PS99j4BavfO2oBdVTQGZ"></div>
+		<input type="submit" value="Submit Form" />
+	</form>
 
-              if(captcha === ""){
-           console.log("null ee")
-             alert("select the box  I'm not a robot")
+	<script>
 
-              }else if(captcha !==null){
+		const form = document.getElementById('login')
+		form.addEventListener('submit', login)
+
+		async function login(event) {
+			event.preventDefault()
+			const email = document.getElementById('email').value
+			const password = document.getElementById('password').value
+			const captcha = document.querySelector('#g-recaptcha-response').value;
+
+			if (captcha === "") {
+				console.log("null ee")
+				alert("select the box  I'm not a robot")
+
+			} else if (captcha !== null) {
 
 				const result = await fetch('/api/login', {
 					method: 'POST',
@@ -49,14 +48,15 @@ form.addEventListener('submit', login)
 					// everythign went fine
 					console.log('Got the token: ', result.data)
 					localStorage.setItem('token', result.data)
-                    alert('Success')
+					alert('Success')
 				} else {
 					alert(result.error)
 				}
 			}
 		} 
-		</script>
-		    <script src="https://www.google.com/recaptcha/api.js"></script>
+	</script>
+	<script src="https://www.google.com/recaptcha/api.js"></script>
 
-	</body>
+</body>
+
 </html>

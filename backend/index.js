@@ -101,8 +101,12 @@ app.get("/register", (req, res) => {
 
 
   app.post('/api/register', async(req,res)=>{
-    const {email,username,password:plainTextPassword}=req.body;
-    const password = await bcrypt.hash(plainTextPassword, 10)
+    const email = req.body.email;
+    const geslo = req.body.geslo;
+    const username = req.body.username;
+    //const {email,username,password:plainTextPassword}=req.body;
+    //const password = await bcrypt.hash(plainTextPassword, 10)
+    const password = await bcrypt.hash(geslo, 10)
 
    	if (!username || typeof username !== 'string') {
 		return res.json({ status: 'error', error: 'Invalid username' })
@@ -111,11 +115,22 @@ app.get("/register", (req, res) => {
 		return res.json({ status: 'error', error: 'Invalid email' })
 	}
 
-	if (!plainTextPassword || typeof plainTextPassword !== 'string') {
+	/*if (!plainTextPassword || typeof plainTextPassword !== 'string') {
+		return res.json({ status: 'error', error: 'Invalid password' })
+	}*/
+
+    if (!geslo || typeof geslo !== 'string') {
 		return res.json({ status: 'error', error: 'Invalid password' })
 	}
 
-	if (plainTextPassword.length < 5) {
+	/*if (plainTextPassword.length < 5) {
+		return res.json({
+			status: 'error',
+			error: 'Password too small. Should be atleast 6 characters'
+		})
+	}*/
+
+    if (geslo.length < 5) {
 		return res.json({
 			status: 'error',
 			error: 'Password too small. Should be atleast 6 characters'
@@ -137,7 +152,7 @@ app.get("/register", (req, res) => {
 		throw error
 	}
 
-	res.json({ status: 'ok' })
+	res.json({ status: 200 })
 
   });
 

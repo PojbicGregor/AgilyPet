@@ -9,7 +9,7 @@ const Noga: React.FC = () => {
 
     return (
         <>
-            <footer className="bg-orange text-center text-lg-start">
+            <footer className="bg-orange text-center text-lg-start fixed-bottom">
                 <div className="text-center p-3">
                     © 2020 Copyright: 
                     <a className="text-dark" href="">AgilyPet</a>
