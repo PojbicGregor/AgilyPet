@@ -9,6 +9,7 @@ const Noga: React.FC = () => {
 
     return (
         <>
+            <div className='padding_bottom padding_top'></div>
             <footer className="bg-orange text-center text-lg-start fixed-bottom">
                 <div className="text-center p-3">
                     © 2020 Copyright: 

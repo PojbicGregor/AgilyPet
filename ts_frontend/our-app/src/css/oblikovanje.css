@@ -2,6 +2,10 @@
   background-color: #b87a00;
 }
 
+.bg-orange_vsebina {
+  background-color: #f5e6c2;
+}
+
 .pisava-white {
   color: #fff;
 }
@@ -20,11 +24,27 @@
   padding-bottom: 1em;
 }
 
+.slika {
+  border-radius: 1em;
+}
+
 .margin_reg {
   margin-top: 2em;
   margin-bottom: 2em;
 }
 
+.margin_top {
+  margin-top: 2em;
+}
+
 .footer {
   margin-top: -50px;
+}
+
+.padding_top {
+  padding-top: 2em;
+}
+
+.padding_bottom {
+  padding-bottom: 2em;
 }
