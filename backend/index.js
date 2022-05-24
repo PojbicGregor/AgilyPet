@@ -182,7 +182,7 @@ app.get("/register", (req, res) => {
        await Uporabnik.updateOne(
 		   {_id},
 		   {
-			   $set:{tokeni:token}
+			   $set:{token:token}
 		   }
 	   )
 		return res.json({ status: 'ok', data: token })
