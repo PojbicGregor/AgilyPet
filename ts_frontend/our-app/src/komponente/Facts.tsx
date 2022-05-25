@@ -5,6 +5,7 @@ import Navigacija from './Navigacija';
 import Noga from './Noga';
 
 import { Uporabnik } from '../razredi/Uporabnik';
+import '../css/oblikovanje.css';
 
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
@@ -69,7 +70,8 @@ const Facts: React.FC = () => {
                 </Row>
                 <Row>
                     <Col></Col>
-                    <Col xs={6}>
+                    <Col className='podatki' xs={6}>
+                        <div className=''>
                         <Row>
                             <Col>
                                 <h1>
@@ -125,6 +127,7 @@ const Facts: React.FC = () => {
                                 <p className='text-justify mt-2'>{lastnosti.temperament}</p>
                             </Col>
                         </Row>
+                        </div>
                     </Col>
                     <Col></Col>
                 </Row>
