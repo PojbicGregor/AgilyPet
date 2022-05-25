@@ -15,7 +15,8 @@ let DodajPsa = (props: DodajPsaProps) => {
         ime: "",
         pasma: "",
         visina: 0,
-        starost: 0
+        starost: 0,
+        zdravstvenoStanje: ""
     });
 
     const handleSubmit = (e: FormEvent) => {
@@ -25,10 +26,11 @@ let DodajPsa = (props: DodajPsaProps) => {
             ime: lastnosti.ime,
             pasma: lastnosti.pasma,
             visina: lastnosti.visina,
-            starost: lastnosti.starost
+            starost: lastnosti.starost,
+            zdravstvenoStanje: lastnosti.zdravstvenoStanje
         }
 
-        fetch("http://localhost:3001/dodan_pes", {
+        fetch("http://localhost:3001/api/dodaj_psa", {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
@@ -58,7 +60,9 @@ let DodajPsa = (props: DodajPsaProps) => {
             <label>Starost:</label>
             <input name="starost" type="number" value={lastnosti.starost} onChange={handleChange}/>
             <br />
-            
+            <label>Zdravstveno stanje:</label>
+            <input name="zdravstvenoStanje" type="text" value={lastnosti.zdravstvenoStanje} onChange={handleChange}/>
+            <br />
             <input type="submit" value="Dodaj"/>
         </form>
         <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>
