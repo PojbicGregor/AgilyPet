@@ -4,6 +4,7 @@ import Navigacija from './Navigacija';
 import Noga from './Noga';
 import UserNav from './UserNav';
 import Vsebina from './Vsebina';
+import Vsebina_prijavljen from './Vsebina_prijavljen';
 
 const Osnovna: React.FC = (props: any) => {
 
@@ -16,7 +17,7 @@ const Osnovna: React.FC = (props: any) => {
     return(
         <>
             {prijavljen ? <UserNav /> : <Navigacija />}
-            {prijavljen ? <UserNav /> : <Vsebina />}
+            {prijavljen ? <Vsebina_prijavljen /> : <Vsebina />}
             <Noga></Noga>
         </>
     );

@@ -15,7 +15,7 @@ const Navigacija: React.FC = () => {
         <>
             <Navbar className='bg-orange pisava-white'>
                 <Container>
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                         <img
                             alt=""
                             src={logo}

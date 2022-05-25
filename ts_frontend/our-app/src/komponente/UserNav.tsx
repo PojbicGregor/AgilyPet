@@ -20,7 +20,7 @@ const UserNav: React.FC = () => {
         <>
             <Navbar className='bg-orange pisava-white'>
                 <Container>
-                    <Navbar.Brand href="#home">
+                    <Navbar.Brand href="/">
                         <img
                             alt=""
                             src={logo}
@@ -36,7 +36,7 @@ const UserNav: React.FC = () => {
                             <Nav.Link className="mouse_over" href="#link"><div className="pisava-white">Vsi coursi</div></Nav.Link>
                             <Nav.Link className="mouse_over" href="#link"><div className="pisava-white">Moji coursi</div></Nav.Link>
                             <Nav.Link className="mouse_over" href="#link"><div className="pisava-white">Kreiraj cours</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="#link"><div className="pisava-white">Dodaj psa</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/dodajPsa"><div className="pisava-white">Dodaj psa</div></Nav.Link>
 
                         </Nav>
                     </Navbar.Collapse>
