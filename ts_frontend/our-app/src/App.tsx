@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import {Routes} from 'react-router-dom';     //TO JE NAMESTO SWITCH
@@ -10,7 +9,6 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import DodajPsa from './DodajPsa';
 import {Pes} from './razredi/Pes';
 import SeznamPsov from './SeznamPsov';
-
 function App() {
 
   const [seznamPsov, setSeznamPsov] = React.useState<Pes[]>([]);
