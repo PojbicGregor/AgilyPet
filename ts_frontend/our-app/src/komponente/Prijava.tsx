@@ -46,6 +46,7 @@ const Prijava: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProps) =>
                 response.json().then(data => {
                     console.log(data.data);
                     localStorage.setItem("token", data.data);
+                    sessionStorage.setItem('reloadCount', String(0));
                 })
                 navigate("/");
             }
