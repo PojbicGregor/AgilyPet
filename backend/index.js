@@ -1,11 +1,10 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser');
 const cors = require("cors");
 const {google} = require('googleapis');
 const bodyParser = require('body-parser'); // tuka
 
-var cors = require('cors');
+
 var allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
 const app = express();
 app.use(cors({
