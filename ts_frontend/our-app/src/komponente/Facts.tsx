@@ -30,7 +30,7 @@ const Facts: React.FC = () => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83'
+                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
             }
         }).then(response => {
             if (response.status === 200) {

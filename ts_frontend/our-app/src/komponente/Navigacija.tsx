@@ -29,6 +29,7 @@ const Navigacija: React.FC = () => {
                         <Nav className="me-auto pisava-white">
                             <Nav.Link className="mouse_over" href="/"> <div className="pisava-white">Domov</div></Nav.Link>
                             <Nav.Link className="mouse_over" href="#link"><div className="pisava-white">Seznam coursov</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/dogodki"><div className="pisava-white">Dogodki</div></Nav.Link>
 
                         </Nav>
                     </Navbar.Collapse>

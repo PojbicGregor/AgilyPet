@@ -15,6 +15,7 @@ import SeznamPsov from './SeznamPsov';
 import Osnovna from './komponente/Osnovna';
 import Registracija from './komponente/Registracija';
 import Prijava from './komponente/Prijava';
+import Dogodki from './komponente/Dogodki';
 
 function App() {
 
@@ -49,6 +50,8 @@ function App() {
         <Routes>
 
           <Route path="/" element={<Osnovna></Osnovna>} />
+
+          <Route path="/dogodki" element={<Dogodki></Dogodki>} />
 
           <Route path="/registracija" element={<Registracija onAdd={handleRegistracija}></Registracija>} />
 

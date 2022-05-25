@@ -48,3 +48,10 @@
 .padding_bottom {
   padding-bottom: 2em;
 }
+
+.koledar{
+  border:solid 1px rgb(0, 0, 0);
+  width:800px;
+  height:600px;
+  border-radius: 1em;
+}
