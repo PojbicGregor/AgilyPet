@@ -4,6 +4,7 @@ import {FormEvent} from 'react';
 import {Pes} from './razredi/Pes';
 import { Link } from 'react-router-dom';
 //import Menu from './Menu';
+import './koledar.css';
 
 interface DodajPsaProps {
     onAdd: (pes: Pes) => any;
@@ -44,7 +45,6 @@ let DodajPsa = (props: DodajPsaProps) => {
     }
 
     return(<div>
-        
         <h2 className='podnaslov'>Vnesite podatke o psu:</h2>
         <form id="form" onSubmit = {handleSubmit}>
             
@@ -66,6 +66,8 @@ let DodajPsa = (props: DodajPsaProps) => {
             <input type="submit" value="Dodaj"/>
         </form>
         <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>
+      <h1 className='proba'>koledar za course</h1>
+        <iframe className='koledar' src="https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23039BE5&ctz=Europe%2FBelgrade&src=YmxhemhlbWFuZXZyaXNAZ21haWwuY29t&src=ZW4uc2xvdmVuaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%230B8043" ></iframe>
     </div>);
 }
 

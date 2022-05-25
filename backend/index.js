@@ -1,18 +1,43 @@
 const express = require("express");
 //const bodyParser = require('body-parser');
+const mongoose = require("mongoose");
 const cors = require("cors");
+const {google} = require('googleapis');
+const bodyParser = require('body-parser'); // tuka
+
+
+var allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+const app = express();
+app.use(cors({
+  credentials: true,
+  origin: function(origin, callback){
+    // Allow requests with no origin (mobile apps, curl)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin)===-1){
+      var msg = "The CORS policy does not allow access from the specified Origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+router = express.Router();
+
+const Pes = require("./schemas/pes.js");
+const Uporabnik=require('./schemas/uporabnik')
+var mail = require('./mailer/mailer.js');
+const pes = require("./schemas/pes.js");
+const Course=require('./schemas/course.js')
 
 const bcrypt =require('bcryptjs');
 const jwt = require('jsonwebtoken')
 
 const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
-const app = express();
 
 var corsOptions = {
     origin: "http://localhost:3000"
 }
-
 
 app.use(cors(corsOptions));
 
