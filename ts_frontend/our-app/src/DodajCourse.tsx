@@ -52,7 +52,7 @@ let DodajCourse = (props: DodajCourseProps) => {
             zdrastvenoStanje : zdrastvenoStanjeArray
         }
       
-        fetch("http://localhost:3001/courses/dodan_course", {
+        fetch("http://localhost:3001/course/dodan_course", {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {

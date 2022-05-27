@@ -1,17 +1,15 @@
-var CourseModel = require('../schemas/course.js');
+//var CourseModel = require('../schemas/course.js');
+const db = require("../models/baza");
+const Course = db.courses; 
 
-/**
- * courseController.js
- *
- * @description :: Server-side logic for managing courses.
- */
+
 module.exports = {
 
     /**
      * courseController.list()
      */
     list: function (req, res) {
-        CourseModel.find(function (err, courses) {
+        Course.find(function (err, courses) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting course.',
@@ -29,7 +27,7 @@ module.exports = {
     show: function (req, res) {
         var id = req.params.id;
 
-        CourseModel.findOne({_id: id}, function (err, course) {
+        Course.findOne({_id: id}, function (err, course) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting course.',
@@ -51,7 +49,7 @@ module.exports = {
      * courseController.create()
      */
     create: function (req, res) {
-        var course = new CourseModel({
+        var course = new Course({
 			naziv : req.body.naziv,
 			slika : req.body.slika,
 			opis : req.body.opis,
@@ -77,7 +75,7 @@ module.exports = {
     update: function (req, res) {
         var id = req.params.id;
 
-        CourseModel.findOne({_id: id}, function (err, course) {
+        Course.findOne({_id: id}, function (err, course) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when getting course',
@@ -116,7 +114,7 @@ module.exports = {
     remove: function (req, res) {
         var id = req.params.id;
 
-        CourseModel.findByIdAndRemove(id, function (err, course) {
+        Course.findByIdAndRemove(id, function (err, course) {
             if (err) {
                 return res.status(500).json({
                     message: 'Error when deleting the course.',

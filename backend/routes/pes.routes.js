@@ -5,6 +5,10 @@ module.exports = app => {
   
     // Ustvari psa
     router.post("/dodaj_psa", pes.create);
+
+    router.get("/vsi", pes.findAll);
+
+    router.get("/:id", pes.findOne);
   
     
   

@@ -6,8 +6,10 @@ const {google} = require('googleapis');
 const bodyParser = require('body-parser'); // tuka
 
 
-var allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
 const app = express();
+
+/*var allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+
 app.use(cors({
   credentials: true,
   origin: function(origin, callback){
@@ -19,20 +21,11 @@ app.use(cors({
     }
     return callback(null, true);
   }
-}));
+}));*/
 
 router = express.Router();
-
-const Pes = require("./schemas/pes.js");
-const Uporabnik=require('./schemas/uporabnik')
 var mail = require('./mailer/mailer.js');
-const pes = require("./schemas/pes.js");
-const Course=require('./schemas/course.js')
 
-const bcrypt =require('bcryptjs');
-const jwt = require('jsonwebtoken')
-
-const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
 
 var corsOptions = {
@@ -68,6 +61,8 @@ app.get("/", (req, res) => {
 });
 
 require("./routes/pes.routes")(app);
+require("./routes/uporabnik.routes")(app);
+require("./routes/courseRoutes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3001;
