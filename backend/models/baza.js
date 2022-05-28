@@ -9,5 +9,6 @@ db.url = dbConfig.url;
 db.pes = require("./pes.model.js")(mongoose); //TU MOGOČE PSI
 db.registriran_uporabniks = require("./uporabnik.model.js")(mongoose);
 db.courses = require("./course.model.js")(mongoose);
+db.event = require("./event.model.js")(mongoose);
 
 module.exports = db;

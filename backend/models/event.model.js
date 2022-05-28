@@ -4,7 +4,7 @@ module.exports = mongoose => {
 
 var eventSchema = new Schema({
 	ime: { type: String, required: true },
-	datum: { type: Number, required: true },
+	datum: { type: String, required: true },
 	opis: {type: String, required: true},
 	naslov: {type: String, required:true}
 });

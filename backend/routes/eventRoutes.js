@@ -17,7 +17,7 @@ router.get('/:id', eventController.show);
 /*
  * POST
  */
-router.post('/', eventController.create);
+router.post('/dodajEvent', eventController.create);
 
 /*
  * PUT
@@ -28,5 +28,6 @@ router.put('/:id', eventController.update);
  * DELETE
  */
 router.delete('/:id', eventController.remove);
+app.use("/event", router);
 
 }
