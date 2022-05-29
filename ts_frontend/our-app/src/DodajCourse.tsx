@@ -1,25 +1,39 @@
 import React from 'react';
-import {ChangeEvent} from 'react';
-import {FormEvent} from 'react';
-import {Course} from './razredi/Course';
-import { Link } from 'react-router-dom';
+import { ChangeEvent } from 'react';
+import { FormEvent } from 'react';
+import { Course } from './razredi/Course';
+import { Link, useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import UserNav from './komponente/UserNav';
+import Navigacija from './komponente/Navigacija';
+import Noga from './komponente/Noga';
 //import Menu from './Menu';
 
 interface DodajCourseProps {
     onAdd: (course: Course) => any;
 }
 
-let DodajCourse = (props: DodajCourseProps) => {
+let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
+
+    const navigate = useNavigate();
 
     const [lastnosti, setLastnosti] = React.useState({
         naziv: "",
         slika: 0,
         opis: "",
         velikostiString: "",
-        zdrastvenoStanjeString:""
+        zdrastvenoStanjeString: ""
     });
 
-    
+
+    let prijavljen;
+
+    if (localStorage.getItem("token") != null) {
+        prijavljen = true;
+    } else {
+        prijavljen = false;
+    }
+
 
 
     const handleSubmit = (e: FormEvent) => {
@@ -28,18 +42,18 @@ let DodajCourse = (props: DodajCourseProps) => {
         var zdrastvenoStanjeArray = Array<string>();
 
         zdrastvenoStanjeArray = lastnosti.zdrastvenoStanjeString.split(" ");
-        
+
         var numString = "";
-        for(let i=0; i<lastnosti.velikostiString.length; i++){
-            if(lastnosti.velikostiString[i] != ' '){
-                numString+=lastnosti.velikostiString[i];
+        for (let i = 0; i < lastnosti.velikostiString.length; i++) {
+            if (lastnosti.velikostiString[i] != ' ') {
+                numString += lastnosti.velikostiString[i];
             } else {
-                var myNum : number = +numString;
+                var myNum: number = +numString;
                 velikostiArray.push(myNum);
                 numString = "";
             }
         }
-        let myNum1 : number = +numString;
+        let myNum1: number = +numString;
         velikostiArray.push(myNum1);
         numString = "";
 
@@ -49,9 +63,9 @@ let DodajCourse = (props: DodajCourseProps) => {
             slika: lastnosti.slika,
             opis: lastnosti.opis,
             velikost: velikostiArray,
-            zdrastvenoStanje : zdrastvenoStanjeArray
+            zdrastvenoStanje: zdrastvenoStanjeArray
         }
-      
+
         fetch("http://localhost:3001/courses/dodan_course", {
             method: 'POST',
             body: JSON.stringify(data),
@@ -59,37 +73,73 @@ let DodajCourse = (props: DodajCourseProps) => {
                 'Content-Type': 'application/json'
             }
         })
+        navigate("/");
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setLastnosti({...lastnosti, [e.target.name]: e.target.value});
+        setLastnosti({ ...lastnosti, [e.target.name]: e.target.value });
     }
-    
 
 
-    return(<div> 
-        
-        <h2 className='podnaslov'>Vnesite podatke o course:</h2>
-        <form id="form" onSubmit = {handleSubmit}>
-            
-            <label>Naziv:</label>
-            <input name="naziv" type="text" onChange={handleChange}/>
-            <br />
-            <label>Slika:</label>
-            <input name="slika" type="file"/>
-            <br />
-            <label>Opis:</label>
-            <input name="opis" type="text" onChange={handleChange}/>
-            <br />
-            <label>Velikost:</label>
-            <input name="velikostiString" type="text"  onChange={handleChange}/>
-            <br/>
-            <label>zdrastveno stanje:</label>
-            <input name="zdrastvenoStanjeString" type="text" onChange={handleChange}/>
-            <br/>
-            <input type="submit" value="Dodaj"/>
-        </form>
-        <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>
+
+    return (<div>
+
+        {prijavljen ? <UserNav /> : <Navigacija />}
+
+        <Container className='margin_reg'>
+            <Row>
+                <Col></Col>
+                <Col xs={6} >
+                    <h1>
+                        Vnesite podatke o course:
+                    </h1>
+                </Col>
+                <Col></Col>
+            </Row>
+            <Row>
+                <Col></Col>
+                <Col xs={6} className="border_color">
+                    <Form id='form' onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" >
+                            <Form.Label>Naziv</Form.Label>
+                            <Form.Control name="naziv" type="text" placeholder="Vnesite naziv" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Slika</Form.Label>
+                            <Form.Control name="slika" type="file" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Opis</Form.Label>
+                            <Form.Control name="opis" type="text" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Velikost</Form.Label>
+                            <Form.Control name="velikostiString" type="text" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Zdrastveno stanje</Form.Label>
+                            <Form.Control name="zdrastvenoStanjeString" type="text" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Row>
+                            <Col className='text-center'>
+                                <Button variant="primary" type="submit">
+                                    Dodaj
+                                </Button>
+                            </Col>
+                        </Row>
+
+                    </Form>
+                </Col>
+                <Col></Col>
+            </Row>
+        </Container>
+
+        <Noga></Noga>
     </div>);
 }
 
