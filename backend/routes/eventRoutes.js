@@ -7,7 +7,7 @@ var eventController = require('../controllers/eventController.js');
 /*
  * GET
  */
-router.get('/', eventController.list);
+router.get('/vseDogodke', eventController.list);
 
 /*
  * GET

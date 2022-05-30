@@ -17,6 +17,7 @@ import Registracija from './komponente/Registracija';
 import Prijava from './komponente/Prijava';
 import DodajEvent from './DodajEvent';
 import {Event} from './razredi/Event';
+import VsedDogodke from './komponente/VseDogodke';
 
 function App() {
 
@@ -66,6 +67,8 @@ function App() {
         
           <Route path='/dodajPsa' element={<DodajPsa onAdd={handleDodajPsa}/>} />
           
+          <Route path='/vseDogodkev' element={<VsedDogodke  />} />
+
           <Route path='/dodajCourse' element={<DodajCourse onAdd={handleDodajCourse}/>} />
 
           <Route path='/dodajEvent' element={<DodajEvent onAdd={handleDodajEvent}/> } />

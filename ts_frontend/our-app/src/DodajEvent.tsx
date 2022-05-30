@@ -5,6 +5,7 @@ import {Event} from './razredi/Event';
 import { Link } from 'react-router-dom';
 import UserNav from './komponente/UserNav';
 import Noga from './komponente/Noga';
+import Koledar from './komponente/Koledar';
 //import Menu from './Menu';
 
 interface DodajEventProps {
@@ -65,8 +66,7 @@ let DodajEvent = (props: DodajEventProps) => {
             <br/>
             <input type="submit" value="Dodaj"/>
         </form>
-        <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>
-        <iframe className='koledar'  src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23039BE5&ctz=Europe%2FBelgrade&showPrint=1&showDate=1&showNav=1&showTitle=0&src=YmxhemhlbWFuZXZyaXNAZ21haWwuY29t&color=%23039BE5"></iframe>
+         <Koledar/>
         <Noga></Noga>
     </div>);
 }
