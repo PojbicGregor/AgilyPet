@@ -1,56 +1,71 @@
 const express = require("express");
+//const bodyParser = require('body-parser');
 const mongoose = require("mongoose");
+const cors = require("cors");
+const {google} = require('googleapis');
+const bodyParser = require('body-parser'); // tuka
 
-const Pes = require("./schemas/pes.js");
 
-const port = 3001;
 const app = express();
-const MONGODB_URI = 'mongodb+srv://AgilyPet:PWFp2JX63wJkfAc@agilypet.8wt9o.mongodb.net/agilyPet?retryWrites=true&w=majority';
-// Username: AgilyPet
-// Password: PWFp2JX63wJkfAc
-const url = "mongodb://localhost:27017/projekttest";
 
-mongoose.connect(MONGODB_URI || url, {useNewUrlParser:true, useUnifiedTopology: true}).then(runsrvr);
+/*var allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
 
+app.use(cors({
+  credentials: true,
+  origin: function(origin, callback){
+    // Allow requests with no origin (mobile apps, curl)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin)===-1){
+      var msg = "The CORS policy does not allow access from the specified Origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));*/
 
-app.get("/", (req, res) => {
-    
-    res.send("hello, world");
-});
-
-app.get("/getpsi", (req, res) => {
-    Pes.find({}, (err, docs) => {
-        res.set('Content-Type', 'text/html');
-        if(err) return err;
-        console.log(docs);
-        res.send(docs);
-    });
-});
-
-app.get("/savepes/:pasma/:visina/:starost", (req, res) => {
-    const pasma = req.params.pasma;
-    const visina = req.params.visina;
-    const starost = req.params.starost;
-
-    const pes = new Pes({pasma: pasma, visina: visina, starost: starost});
-    pes.save().then(() => {
-        res.send(`saved pes ${pes}`);
-
-        Pes.find({}, (err, docs) => {
-            if (err) return err;
-            console.log(docs);
-        });
-    });
-});
+router = express.Router();
+var mail = require('./mailer/mailer.js');
 
 
 
-function runsrvr () {
-    /*const db = mongoose.connection;
-    console.log(db);
-    db.on("error", () => {console.log("dg error");});
-    db.once("open", () => {console.log("connected to db");});*/
-    app.listen(port, () => {
-        console.log(`server is running on port ${port}`);
-    });
+var corsOptions = {
+    origin: "http://localhost:3000"
 }
+
+app.use(cors(corsOptions));
+
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: true }));
+
+const db = require("./models/baza");
+
+
+
+db.mongoose
+  .connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  })
+  .then(() => {
+    console.log("Connected to the database!");
+  })
+  .catch(err => {
+    console.log("Cannot connect to the database!", err);
+    process.exit();
+  });
+
+// simple route
+app.get("/", (req, res) => {
+  res.json({ message: "Začetna stran AgilyPet" });
+});
+
+require("./routes/pes.routes")(app);
+require("./routes/uporabnik.routes")(app);
+require("./routes/courseRoutes")(app);
+
+// set port, listen for requests
+const PORT = process.env.PORT || 3001;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}.`);
+});
