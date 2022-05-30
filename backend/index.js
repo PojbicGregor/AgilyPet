@@ -1,8 +1,12 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require('body-parser'); // tuka
+const bodyParser = require('body-parser');
+const cors = require("cors");
+const {google} = require('googleapis');
 
-var cors = require('cors');
+//const bodyParser = require('body-parser'); // tuka
+
+//var cors = require('cors');
 var allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
 const app = express();
 app.use(cors({
@@ -24,6 +28,7 @@ const Pes = require("./schemas/pes.js");
 const Uporabnik=require('./schemas/uporabnik')
 var mail = require('./mailer/mailer.js');
 const pes = require("./schemas/pes.js");
+const Course=require('./schemas/course.js')
 
 const bcrypt =require('bcryptjs');
 const jwt = require('jsonwebtoken')
@@ -31,7 +36,8 @@ const jwt = require('jsonwebtoken')
 const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
 const { stringify } = require('querystring');
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
+const { resolve4 } = require("dns");
 const port = 3001;
 const MONGODB_URI = 'mongodb+srv://AgilyPet:PWFp2JX63wJkfAc@agilypet.8wt9o.mongodb.net/agilyPet?retryWrites=true&w=majority';
 // Username: AgilyPet
@@ -109,6 +115,7 @@ function runsrvr () {
         console.log(`server is running on port ${port}`);
     });
 }
+app.use(bodyParser.json());
 const bodyParser2= require('express');      //menjam
 const { Router } = require("express");
 app.use(bodyParser2.json());                //menjam
@@ -200,3 +207,79 @@ app.get("/register", (req, res) => {
 app.post('/api/logout', async (req,res)=>{
     
 })
+
+
+	 Course.find()
+	 	.then((results) =>{
+	//	res.send(results)
+		zacuvaj=results
+		console.log(zacuvaj)
+		
+	})
+	.catch((err)=>{
+		console.log(err)
+	})
+      
+const { OAuth2 } = google.auth
+
+const oAuth2Client = new OAuth2(
+  '395321912984-mqg57h5o34radlvlf99jlrqqmmfas82k.apps.googleusercontent.com',
+  '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'
+)
+
+oAuth2Client.setCredentials({
+	refresh_token: '1//04nF377NVe3N6CgYIARAAGAQSNwF-L9IrJ93FIBNBCjFKbfQijXLQylPEFJkrS3e1Kxt55og46PUDhjiDGaAlVxpmJWSYCqBElOc'
+})
+
+const calendar = google.calendar({ version: 'v3', auth: oAuth2Client })
+
+const eventStartTime = new Date('2022-05-27T09:58:20.843Z')
+
+console.log(eventStartTime);
+
+const eventEndTime = new Date('2022-05-27T09:58:20.843Z')
+eventEndTime.setMinutes(eventEndTime.getMinutes() + 45)
+
+console.log(eventEndTime)
+const event = {
+  summary: `AgilyPet`,
+  location: `MARIBOR`,
+  description: `TEST AGILYPET`,
+  colorId: 1,
+  start: {
+    dateTime: eventStartTime,
+    timeZone: 'America/Denver',
+  },
+  end: {
+    dateTime: eventEndTime,
+    timeZone: 'America/Denver',
+
+  },
+}
+calendar.freebusy.query(
+  {
+    resource: {
+      timeMin: eventStartTime,
+      timeMax: eventEndTime,
+      timeZone: 'America/Denver',
+      items: [{ id: 'primary' }],
+    },
+  },
+  (err, res) => {
+    if (err) return console.error('Free Busy Query Error: ', err)
+
+    const eventArr = res.data.calendars.primary.busy
+
+    if (eventArr.length === 0)
+      return calendar.events.insert(
+        { calendarId: 'primary', resource: event },
+        err => {
+          if (err) return console.error('Error Creating Calender Event:', err)
+          return console.log('Calendar event successfully created.')
+        }
+      )
+
+    return console.log(`Sorry I'm busy...`)
+  }
+)
+

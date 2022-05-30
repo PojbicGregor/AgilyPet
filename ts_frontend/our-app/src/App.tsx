@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import {Routes} from 'react-router-dom';     //TO JE NAMESTO SWITCH
@@ -12,7 +11,7 @@ import DodajCourse from './DodajCourse';
 import {Pes} from './razredi/Pes';
 import {Course} from './razredi/Course';
 import SeznamPsov from './SeznamPsov';
-
+import SeznamCourse from './SeznamCourse';
 function App() {
 
   const [seznamPsov, setSeznamPsov] = React.useState<Pes[]>([]);
@@ -39,6 +38,8 @@ function App() {
           <Route path='/dodajPsa' element={<DodajPsa onAdd={handleDodajPsa}/>} />
           
           <Route path='/dodajCourse' element={<DodajCourse onAdd={handleDodajCourse}/>} />
+
+          <Route path='/seznamCourse' element={<SeznamCourse/>} />
 
           <Route path="/404" element={<h2>404 - Not found</h2>}/>
 
