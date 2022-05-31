@@ -49,25 +49,29 @@ module.exports = {
      * courseController.create()
      */
     create: function (req, res) {
-        var course = new Course({
-			naziv : req.body.naziv,
-			slika : req.body.slika,
-			opis : req.body.opis,
-			velikost : req.body.velikost,
-			zdrastvenoStanje : req.body.zdrastvenoStanje
-        });
+    
 
-        course.save(function (err, course) {
-            if (err) {
-                return res.status(500).json({
-                    message: 'Error when creating course',
-                    error: err
+                var course = new CourseModel({
+                    naziv: req.body.naziv,
+                    slika : "image"+ resp.data.length + ".png", 
+                    opis: req.body.opis,
+                    velikost: req.body.velikost,
+                    zdrastvenoStanje: req.body.zdrastvenoStanje
                 });
-            }
 
-            return res.status(201).json(course);
-        });
-    },
+                course.save(function (err, course) {
+                    if (err) {
+                        return res.status(500).json({
+                            message: 'Error when creating course',
+                            error: err
+                        });
+                    }
+
+                    return res.status(201).json(course);
+                });
+            },
+        
+
 
     /**
      * courseController.update()
@@ -90,11 +94,11 @@ module.exports = {
             }
 
             course.naziv = req.body.naziv ? req.body.naziv : course.naziv;
-			course.slika = req.body.slika ? req.body.slika : course.slika;
-			course.opis = req.body.opis ? req.body.opis : course.opis;
-			course.velikost = req.body.velikost ? req.body.velikost : course.velikost;
-			course.zdrastvenoStanje = req.body.zdrastvenoStanje ? req.body.zdrastvenoStanje : course.zdrastvenoStanje;
-			
+            // course.slika = req.body.slika ? req.body.slika : course.slika;
+            course.opis = req.body.opis ? req.body.opis : course.opis;
+            course.velikost = req.body.velikost ? req.body.velikost : course.velikost;
+            course.zdrastvenoStanje = req.body.zdrastvenoStanje ? req.body.zdrastvenoStanje : course.zdrastvenoStanje;
+
             course.save(function (err, course) {
                 if (err) {
                     return res.status(500).json({
