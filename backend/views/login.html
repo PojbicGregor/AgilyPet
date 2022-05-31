@@ -49,14 +49,15 @@ form.addEventListener('submit', login)
 					// everythign went fine
 					console.log('Got the token: ', result.data)
 					localStorage.setItem('token', result.data)
-                    alert('Success')
+					alert('Success')
 				} else {
 					alert(result.error)
 				}
 			}
 		} 
-		</script>
-		    <script src="https://www.google.com/recaptcha/api.js"></script>
+	</script>
+	<script src="https://www.google.com/recaptcha/api.js"></script>
 
-	</body>
+</body>
+
 </html>

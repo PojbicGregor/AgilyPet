@@ -5,14 +5,21 @@ import { Course } from './razredi/Course';
 import { Link } from 'react-router-dom';
 import MyRow from './MyRow';
 import html2canvas from 'html2canvas';
+import { useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import UserNav from './komponente/UserNav';
+import Navigacija from './komponente/Navigacija';
+import Noga from './komponente/Noga';
 //import Menu from './Menu';
 
 interface DodajCourseProps {
     onAdd: (course: Course) => any;
 }
 
-let DodajCourse = (props: DodajCourseProps) => {
+
+let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
     const exportRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+    const navigate = useNavigate();
 
     const [lastnosti, setLastnosti] = React.useState({
         naziv: "",
@@ -54,6 +61,14 @@ let DodajCourse = (props: DodajCourseProps) => {
 
         fakeLink.remove();
     };
+
+    let prijavljen;
+
+    if (localStorage.getItem("token") != null) {
+        prijavljen = true;
+    } else {
+        prijavljen = false;
+    }
 
 
 
@@ -113,6 +128,7 @@ let DodajCourse = (props: DodajCourseProps) => {
        
 
 
+        navigate("/");
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -185,6 +201,65 @@ let DodajCourse = (props: DodajCourseProps) => {
                 <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>
             </div>
         </div>
+
+{/*
+        {prijavljen ? <UserNav /> : <Navigacija />}
+
+        <Container className='margin_reg'>
+            <Row>
+                <Col></Col>
+                <Col xs={6} >
+                    <h1>
+                        Vnesite podatke o course:
+                    </h1>
+                </Col>
+                <Col></Col>
+            </Row>
+            <Row>
+                <Col></Col>
+                <Col xs={6} className="border_color">
+                    <Form id='form' onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" >
+                            <Form.Label>Naziv</Form.Label>
+                            <Form.Control name="naziv" type="text" placeholder="Vnesite naziv" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group controlId="formFile" className="mb-3">
+                            <Form.Label>Slika</Form.Label>
+                            <Form.Control name="slika" type="file" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Opis</Form.Label>
+                            <Form.Control name="opis" type="text" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Velikost</Form.Label>
+                            <Form.Control name="velikostiString" type="text" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Zdrastveno stanje</Form.Label>
+                            <Form.Control name="zdrastvenoStanjeString" type="text" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Row>
+                            <Col className='text-center'>
+                                <Button variant="primary" type="submit">
+                                    Dodaj
+                                </Button>
+                            </Col>
+                        </Row>
+
+                    </Form>
+                </Col>
+                <Col></Col>
+            </Row>
+        </Container>
+
+        <Noga></Noga>
+    */}
     </div>);
 }
 

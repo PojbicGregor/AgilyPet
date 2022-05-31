@@ -10,8 +10,14 @@ import DodajPsa from './DodajPsa';
 import DodajCourse from './DodajCourse';
 import {Pes} from './razredi/Pes';
 import {Course} from './razredi/Course';
+import { Uporabnik } from './razredi/Uporabnik';
 import SeznamPsov from './SeznamPsov';
 import SeznamCourse from './SeznamCourse';
+import Osnovna from './komponente/Osnovna';
+import Registracija from './komponente/Registracija';
+import Prijava from './komponente/Prijava';
+import Dogodki from './komponente/Dogodki';
+
 function App() {
 
   const [seznamPsov, setSeznamPsov] = React.useState<Pes[]>([]);
@@ -28,12 +34,31 @@ function App() {
     setSeznamCourses(nov);
   }
 
+  // spremeni handle
+  const handleRegistracija = (uporabnik: Uporabnik) => {
+    console.log(uporabnik);
+  }
+
+  // spremeni handle
+  const handlePrijava = (uporabnik: Uporabnik) => {
+    console.log(uporabnik);
+  }
+
+
   return (
     <Router>
       <div className = "App">
         <Routes>
 
-          <Route path='/' element ={<SeznamPsov seznam = {seznamPsov} />} />
+          <Route path="/" element={<Osnovna></Osnovna>} />
+
+          <Route path="/dogodki" element={<Dogodki></Dogodki>} />
+
+          <Route path="/registracija" element={<Registracija onAdd={handleRegistracija}></Registracija>} />
+
+          <Route path="/prijava" element={<Prijava onAdd={handlePrijava}></Prijava>} />
+
+          <Route path='/psi' element ={<SeznamPsov seznam = {seznamPsov} />} />
         
           <Route path='/dodajPsa' element={<DodajPsa onAdd={handleDodajPsa}/>} />
           
