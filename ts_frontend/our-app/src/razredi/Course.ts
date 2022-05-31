@@ -1,6 +1,6 @@
 interface Course {
     naziv: string,
-    slika: number,
+    slika: string,
     opis: string,
     velikost:{ type : Array<number> , "default" : [] },
     zdrastvenoStanje:{ type : Array<string> , "default" : [] }

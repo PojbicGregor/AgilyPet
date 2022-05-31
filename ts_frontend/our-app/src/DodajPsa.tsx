@@ -31,7 +31,8 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
         ime: "",
         pasma: "",
         visina: 0,
-        starost: 0
+        starost: 0,
+        zdravstvenoStanje: ""
     });
 
     const handleSubmit = (e: FormEvent) => {
@@ -41,10 +42,11 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
             ime: lastnosti.ime,
             pasma: lastnosti.pasma,
             visina: lastnosti.visina,
-            starost: lastnosti.starost
+            starost: lastnosti.starost,
+            zdravstvenoStanje: lastnosti.zdravstvenoStanje
         }
 
-        fetch("http://localhost:3001/dodan_pes", { //bo poterbno spremeniti klic
+        fetch("http://localhost:3001/api/dodaj_psa", {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
