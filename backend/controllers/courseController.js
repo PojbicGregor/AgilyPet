@@ -72,8 +72,9 @@ module.exports = {
                      naziv: req.body.naziv,
                      slika : "image"+ resp.data.length + ".png", 
                      opis: req.body.opis,
-                     velikost: req.body.velikost,
-                     zdrastvenoStanje: req.body.zdrastvenoStanje
+                     manjkaEna: req.body.manjkaEna,
+                     manjkataDve: req.body.manjkataDve,
+                     sklepi: req.body.sklepi
                  });
                  console.log(course)
  
