@@ -43,7 +43,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
 
     React.useEffect(function () {
         const getCourses = async function () {
-            const response = await fetch("http://localhost:3001/courses");
+            const response = await fetch("http://localhost:3001/course");
             const data = await response.json();
             setImagesTotal(data.length);
         }
@@ -119,14 +119,14 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
 
         console.log(data);
 
-        fetch("http://localhost:3001/courses/dodan_course", {
+        fetch("http://localhost:3001/course/dodan_course", {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-        navigate("/");
+       // navigate("/");
        
 
 
@@ -142,6 +142,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
     }
 
     return (<div>
+        <UserNav/>
         <div className="container" >
             <div className='container-md' style={{backgroundColor: "white", borderRadius:"15px"}}>
                 <h2 className='podnaslov'>Vnesite podatke o course:</h2>
@@ -202,7 +203,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                 <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>
             </div>
         </div>
-
+             <Noga/>
         {/*
 {prijavljen ? <UserNav /> : <Navigacija />}
 
