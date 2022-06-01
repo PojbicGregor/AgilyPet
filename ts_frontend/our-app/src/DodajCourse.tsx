@@ -1,25 +1,25 @@
-import React, { MouseEventHandler, TableHTMLAttributes, TdHTMLAttributes, useRef } from 'react';
+import React from 'react';
 import { ChangeEvent } from 'react';
 import { FormEvent } from 'react';
 import { Course } from './razredi/Course';
-import { Link } from 'react-router-dom';
-import MyRow from './MyRow';
-import html2canvas from 'html2canvas';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import UserNav from './komponente/UserNav';
 import Navigacija from './komponente/Navigacija';
 import Noga from './komponente/Noga';
+import { MouseEventHandler, TableHTMLAttributes, TdHTMLAttributes, useRef } from 'react';
+import MyRow from './MyRow';
+import html2canvas from 'html2canvas';
 //import Menu from './Menu';
 
 interface DodajCourseProps {
     onAdd: (course: Course) => any;
 }
 
-
 let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
-    const exportRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+
     const navigate = useNavigate();
+    const exportRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
     const [lastnosti, setLastnosti] = React.useState({
         naziv: "",
@@ -29,13 +29,21 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
         zdrastvenoStanjeString: ""
     });
 
+
+    let prijavljen;
+
+    if (localStorage.getItem("token") != null) {
+        prijavljen = true;
+    } else {
+        prijavljen = false;
+    }
     const [selectedImg, setSelectedImg] = React.useState(0);
     const [imagesTotal, setImagesTotal] = React.useState(0);
     const [blobForBackend, setMyBlob] = React.useState("");
 
     React.useEffect(function () {
         const getCourses = async function () {
-            const response = await fetch("http://localhost:3001/courses");
+            const response = await fetch("http://localhost:3001/course");
             const data = await response.json();
             setImagesTotal(data.length);
         }
@@ -61,14 +69,6 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
 
         fakeLink.remove();
     };
-
-    let prijavljen;
-
-    if (localStorage.getItem("token") != null) {
-        prijavljen = true;
-    } else {
-        prijavljen = false;
-    }
 
 
 
@@ -115,20 +115,21 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
             velikost: velikostiArray,
             zdrastvenoStanje: zdrastvenoStanjeArray
         }
+      
 
         console.log(data);
 
-        fetch("http://localhost:3001/courses/dodan_course", {
+        fetch("http://localhost:3001/course/dodan_course", {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
             }
         })
+       // navigate("/");
        
 
 
-        navigate("/");
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -141,6 +142,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
     }
 
     return (<div>
+        <UserNav/>
         <div className="container" >
             <div className='container-md' style={{backgroundColor: "white", borderRadius:"15px"}}>
                 <h2 className='podnaslov'>Vnesite podatke o course:</h2>
@@ -201,9 +203,9 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                 <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>
             </div>
         </div>
-
-{/*
-        {prijavljen ? <UserNav /> : <Navigacija />}
+             <Noga/>
+        {/*
+{prijavljen ? <UserNav /> : <Navigacija />}
 
         <Container className='margin_reg'>
             <Row>
