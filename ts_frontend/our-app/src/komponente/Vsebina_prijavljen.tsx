@@ -10,6 +10,7 @@ import psi from '../slike/dogs.jpg';
 import podatki from '../slike/podatki.png';
 import ilustr from '../slike/ilustr.jpg';
 import Facts from './Facts';
+import SelectFacts from './SelectFacts';
 
 const Vsebina_prijavljen: React.FC = () => {
 
@@ -23,13 +24,7 @@ const Vsebina_prijavljen: React.FC = () => {
                     <hr></hr>
                 </Row>
                 <Row className='padding_bottom'>
-                    
-                </Row>
-                <Row>
-                    <hr></hr>
-                </Row>
-                <Row className='padding_bottom'>
-                    
+                    <SelectFacts></SelectFacts>
                 </Row>
             </Container>
 

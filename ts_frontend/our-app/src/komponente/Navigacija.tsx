@@ -28,7 +28,8 @@ const Navigacija: React.FC = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto pisava-white">
                             <Nav.Link className="mouse_over" href="/"> <div className="pisava-white">Domov</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="#link"><div className="pisava-white">Seznam coursov</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/seznamCourse"><div className="pisava-white">Seznam coursov</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/vseDogodkev"><div className="pisava-white">Dogodki</div></Nav.Link>
 
                         </Nav>
                     </Navbar.Collapse>

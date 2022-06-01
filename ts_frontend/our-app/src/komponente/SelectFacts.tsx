@@ -12,7 +12,9 @@ import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { stringify } from 'querystring';
 
-const Facts: React.FC = () => {
+const SelectFacts: React.FC = () => {
+
+    const [psi, setPsi] = React.useState<string[]>([]);
 
     const [lastnosti, setLastnosti] = React.useState({
         name: "",
@@ -24,6 +26,35 @@ const Facts: React.FC = () => {
     });
 
     const [urlImg, setUrlImg] = React.useState("");
+
+    const [izbranPes, setIzbranPes] = React.useState("");
+
+    if (psi.length === 0) {
+        fetch('https://api.thedogapi.com/v1/breeds', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                console.log(response);
+                response.json().then(data => {
+                    console.log(data);
+                    let pisi: string[] = [];
+
+                    for (let i = 0; i < data.length && i < 172; i++) {
+                        pisi.push(data[i].name);
+
+                    }
+                    setPsi(pisi);
+                });
+            }
+        });
+    }
+
+    console.log(psi);
+
 
     const handleSubmit = (e: FormEvent) => {
         console.log("submit");
@@ -69,6 +100,49 @@ const Facts: React.FC = () => {
         })
     }
 
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        setIzbranPes(e.target.value);
+        fetch("https://api.thedogapi.com/v1/breeds/search?q=" + e.target.value, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                console.log(response);
+                response.json().then(data => {
+                    console.log(data[0]);
+                    setLastnosti({
+                        name: data[0].name,
+                        weight: data[0].weight.metric,
+                        height: data[0].height.metric,
+                        bred_for: data[0].bred_for,
+                        life_span: data[0].life_span,
+                        temperament: data[0].temperament
+                    });
+
+                    fetch('https://api.thedogapi.com/v1/images/' + data[0].reference_image_id, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+                        }
+                    }).then(response => {
+                        if (response.status === 200) {
+                            console.log(response);
+                            response.json().then(data => {
+                                console.log(data);
+                                setUrlImg(data.url);
+                            });
+                        }
+                    });
+                })
+            }
+        })
+    }
+
+    console.log(izbranPes);
     return (
         <>
 
@@ -77,12 +151,11 @@ const Facts: React.FC = () => {
                 <Row>
                     <Col></Col>
                     <Col xs={6} className="">
-                        <Form onSubmit={handleSubmit}>
-
-                            <Button variant="primary" type="submit">
-                                Select
-                            </Button>
-                        </Form>
+                        <Form.Select aria-label="Default select example" value={izbranPes} onChange={handleChange}>
+                        {psi.map(e => {
+                            return <option key={e} value={e}>{e}</option>;
+                        })}
+                        </Form.Select>
                     </Col>
                     <Col></Col>
                 </Row>
@@ -139,7 +212,7 @@ const Facts: React.FC = () => {
                             </Row>
                             <Row>
                                 <Col>
-                                {lastnosti.temperament ? <h2>Temperament:</h2> : null}
+                                    {lastnosti.temperament ? <h2>Temperament:</h2> : null}
                                 </Col>
                                 <Col className='text-justify'>
                                     {lastnosti.temperament ? <p className='text-justify mt-2'>{lastnosti.temperament}</p> : null}
@@ -161,4 +234,4 @@ const Facts: React.FC = () => {
     );
 }
 
-export default Facts;
+export default SelectFacts;

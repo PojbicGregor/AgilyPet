@@ -32,8 +32,25 @@ var corsOptions = {
     origin: "http://localhost:3000"
 }
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 
+
+//new
+var allowedOrigins = ['http://localhost:3000', 'http://localhost:3001'];
+app.use(cors({
+  credentials: true,
+  origin: function(origin, callback){
+    // Allow requests with no origin (mobile apps, curl)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin)===-1){
+      var msg = "The CORS policy does not allow access from the specified Origin.";
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  }
+}));
+
+//konec new
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
@@ -63,6 +80,8 @@ app.get("/", (req, res) => {
 require("./routes/pes.routes")(app);
 require("./routes/uporabnik.routes")(app);
 require("./routes/courseRoutes")(app);
+require("./routes/eventRoutes")(app);
+
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3001;
