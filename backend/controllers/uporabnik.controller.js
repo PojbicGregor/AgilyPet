@@ -7,19 +7,12 @@ const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhf
 const bcrypt =require('bcryptjs');
 const Uporabnik = db.registriran_uporabniks; 
 
-//COURSE, PRIJAVLJEN, PES PA GESLO SE MI NE SHRANIJO
 
 //registriraj novega uporabnika
 exports.register = async (req, res) => {
     console.log("nekaj dela");
     console.log(req.body);
 
-    /*const uporabnik = new Uporabnik({
-        email: req.body.email,
-        //geslo: req.body.geslo,
-        geslo: await bcrypt.hash(req.body.geslo, 10),  ////////
-        username: req.body.username
-    });*/
 
     const email = req.body.email;
     const geslo = req.body.geslo;
@@ -57,19 +50,6 @@ exports.register = async (req, res) => {
         res.status(400).send({ message: "Password too small. Should be atleast 6 characters" });
         return;
 	}
-
-
-    /*uporabnik
-    .save(uporabnik)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Error"
-      });
-    });*/
 
     try {
 		const response = await Uporabnik.create({
@@ -125,3 +105,41 @@ exports.login = async (req, res) => {
 
 	res.json({ status: 'error', error: 'Invalid username/password' })
 }
+
+exports.dodajPsa = async (req,res) => {
+	const pes = {
+		ime: req.body.ime,
+    	pasma: req.body.pasma,
+    	visina: req.body.visina,
+    	starost: req.body.starost,
+    	manjkaEna: req.body.manjkaEna,
+		manjkataDve: req.body.manjkataDve,
+		sklepi: req.body.sklepi
+	}
+	
+
+	const zeton = req.body.token;
+	const user = await Uporabnik.findOne({ zeton }).lean()
+
+	
+		await Uporabnik.updateOne({token: zeton}, {
+			$push:{pes:pes} 
+		})
+		console.log('User updated successfully')
+	
+	
+	console.log(pes);
+	console.log(zeton);
+	
+	//res.json({ status: 200 })
+};
+
+exports.izpisiPse = async (req, res) => {
+	const zeton = req.body.token;
+	const user = await Uporabnik.findOne({ token: zeton }).lean()
+	const user_name = await Uporabnik.findOne({ username: "Tester6" }).lean()
+  
+	console.log(user_name.pes);
+
+	//Dela, treba samo frontend in spremeniti izpis
+};

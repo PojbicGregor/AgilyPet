@@ -17,7 +17,9 @@ let DodajPsa = (props: DodajPsaProps) => {
         pasma: "",
         visina: 0,
         starost: 0,
-        zdravstvenoStanje: ""
+        manjkaEna: false,
+        manjkataDve: false,
+        sklepi: false
     });
 
     const handleSubmit = (e: FormEvent) => {
@@ -28,7 +30,10 @@ let DodajPsa = (props: DodajPsaProps) => {
             pasma: lastnosti.pasma,
             visina: lastnosti.visina,
             starost: lastnosti.starost,
-            zdravstvenoStanje: lastnosti.zdravstvenoStanje
+            manjkaEna: lastnosti.manjkaEna,
+            manjkataDve: lastnosti.manjkataDve,
+            sklepi: lastnosti.sklepi,
+            token: localStorage.getItem("token")
         }
 
         fetch("http://localhost:3001/api/dodaj_psa", {
@@ -36,6 +41,14 @@ let DodajPsa = (props: DodajPsaProps) => {
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                console.log(response);
+                response.json().then(data => {
+                    console.log(localStorage.getItem("token"));
+                    localStorage.getItem("token");              //???
+                })
             }
         })
     }
@@ -60,8 +73,14 @@ let DodajPsa = (props: DodajPsaProps) => {
             <label>Starost:</label>
             <input name="starost" type="number" value={lastnosti.starost} onChange={handleChange}/>
             <br />
-            <label>Zdravstveno stanje:</label>
-            <input name="zdravstvenoStanje" type="text" value={lastnosti.zdravstvenoStanje} onChange={handleChange}/>
+            <label>Missing one limb?</label>
+            <input name="manjkaEna" type="checkbox" value = "true" onChange={handleChange}/> Yes
+            <br />
+            <label>Missing two limbs?</label>
+            <input name="manjkataDve" type="checkbox" value = "true" onChange={handleChange}/> Yes
+            <br />
+            <label>Joint related problems?</label>
+            <input name="sklepi" type="checkbox" value = "true" onChange={handleChange}/> Yes
             <br />
             <input type="submit" value="Dodaj"/>
         </form>

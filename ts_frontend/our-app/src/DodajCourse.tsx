@@ -13,10 +13,12 @@ let DodajCourse = (props: DodajCourseProps) => {
 
     const [lastnosti, setLastnosti] = React.useState({
         naziv: "",
-        slika: 0,
+        slika: "",
         opis: "",
-        velikostiString: "",
-        zdrastvenoStanjeString:""
+        //velikostiString: "",
+        manjkaEna: false,
+        manjkataDve: false,
+        sklepi: false
     });
 
     
@@ -27,7 +29,7 @@ let DodajCourse = (props: DodajCourseProps) => {
         var velikostiArray = Array<number>();
         var zdrastvenoStanjeArray = Array<string>();
 
-        zdrastvenoStanjeArray = lastnosti.zdrastvenoStanjeString.split(" ");
+        /*zdrastvenoStanjeArray = lastnosti.zdrastvenoStanjeString.split(" ");
         
         var numString = "";
         for(let i=0; i<lastnosti.velikostiString.length; i++){
@@ -41,15 +43,18 @@ let DodajCourse = (props: DodajCourseProps) => {
         }
         let myNum1 : number = +numString;
         velikostiArray.push(myNum1);
-        numString = "";
+        numString = "";*/
 
 
         let data = {
             naziv: lastnosti.naziv,
             slika: lastnosti.slika,
             opis: lastnosti.opis,
-            velikost: velikostiArray,
-            zdrastvenoStanje : zdrastvenoStanjeArray
+            //velikost: velikostiArray,
+            manjkaEna: lastnosti.manjkaEna,
+            manjkataDve: lastnosti.manjkataDve,
+            sklepi: lastnosti.sklepi,
+            token: localStorage.getItem("token")
         }
       
         fetch("http://localhost:3001/course/dodan_course", {
@@ -81,11 +86,14 @@ let DodajCourse = (props: DodajCourseProps) => {
             <label>Opis:</label>
             <input name="opis" type="text" onChange={handleChange}/>
             <br />
-            <label>Velikost:</label>
-            <input name="velikostiString" type="text"  onChange={handleChange}/>
+            <label>For dogs with a missing limb?</label>
+            <input name="manjkaEna" type="checkbox" value = "true" onChange={handleChange}/>
             <br/>
-            <label>zdrastveno stanje:</label>
-            <input name="zdrastvenoStanjeString" type="text" onChange={handleChange}/>
+            <label>For dogs with two missing limbs?</label>
+            <input name="manjkataDve" type="checkbox" value = "true" onChange={handleChange}/>
+            <br/>
+            <label>For dogs with join issues?</label>
+            <input name="sklepi" type="checkbox" value = "true" onChange={handleChange}/>
             <br/>
             <input type="submit" value="Dodaj"/>
         </form>

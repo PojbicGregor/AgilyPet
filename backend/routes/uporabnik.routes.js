@@ -7,6 +7,10 @@ module.exports = app => {
     router.post("/register", uporabnik.register);
 
     router.post("/login", uporabnik.login);
+
+    router.post("/dodaj_psa", uporabnik.dodajPsa);
+
+    router.get("/izpis_psov", uporabnik.izpisiPse);
   
     
   
