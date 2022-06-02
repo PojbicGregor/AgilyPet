@@ -44,6 +44,7 @@ module.exports = {
                     message: 'No such event'
                 });
             }
+                   console.log(event.ime)
 
             return res.json(event);
         });

@@ -88,24 +88,6 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
     const handleSubmit = (e: FormEvent) => {
 
         e.preventDefault();
-        var velikostiArray = Array<number>();
-        var zdrastvenoStanjeArray = Array<string>();
-
-        /*zdrastvenoStanjeArray = lastnosti.zdrastvenoStanjeString.split(" ");
-        
-        var numString = "";
-        for (let i = 0; i < lastnosti.velikostiString.length; i++) {
-            if (lastnosti.velikostiString[i] != ' ') {
-                numString += lastnosti.velikostiString[i];
-            } else {
-                var myNum: number = +numString;
-                velikostiArray.push(myNum);
-                numString = "";
-            }
-        }
-        let myNum1: number = +numString;
-        velikostiArray.push(myNum1);
-        numString = "";*/
 
         exportAsImage(exportRef.current, "image");
 
@@ -161,9 +143,6 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                     <label>Opis:</label>
                     <input name="opis" type="text" onChange={handleChange} />
                     <br />
-                    {/*<label>Velikost:</label>
-                    <input name="velikostiString" type="text" onChange={handleChange} />
-                    <br />*/}
                     <label>For dogs with a missing limb?</label>
                     <input name="manjkaEna" type="checkbox" value = "true" onChange={handleChange}/>
                     <br/>

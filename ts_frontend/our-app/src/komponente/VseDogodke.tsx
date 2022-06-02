@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { FormEvent } from 'react';
 import { Button } from 'react-bootstrap';
-
+import { MouseEvent } from 'react';
 //import { Course } from './razredi/Course';
 import { Event } from '../razredi/Event';
 import Koledar from './Koledar';
@@ -22,6 +22,21 @@ function SeznamCourse() {
         getEvents();
 
     }, [])
+
+    async function getData(id: string | number) {
+
+        const response = await fetch("http://localhost:3001/event/" + id);
+        const data = await response.json();
+        return data;
+    }
+
+    const handleClick = (e: MouseEvent<HTMLElement>) => {
+        const id = e.currentTarget.id;
+        console.log(id);
+        const data=getData(id);
+        console.log(data)
+    }
+
     return (
 
         <div >
@@ -38,9 +53,10 @@ function SeznamCourse() {
 
                     <span>{event.datum}</span><br />
 
+                    <Button id={event.id.toString()} onClick={handleClick}>Prijava</Button>
                 </div>))}
-             
-                    <Koledar />
+
+                <Koledar />
                 <Noga />
             </div>
 
