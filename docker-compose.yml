@@ -7,7 +7,7 @@ services:
       - "3001:3001"
 
   frontend:
-    image: janlukac/agilypet-frontend:0.1
+    image: janlukac/agilypet-frontend:0.2
     ports:
       - "3000:3000"
     depends_on:
