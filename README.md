@@ -74,6 +74,23 @@ Backend zaženemo, tako da ko se nahajamo v podmapi backend v terminal napišemo
 
 ### Zagon React-a (frontend)
 React zaženemo, tako da ko se nahajamo v podmapi our-app, ki je v mapi frontend in v terminal napišemo ukaz ```npm start```. Sedaj imamo zagnan React na port-u 3000.
+
+## Nameščanje rešitve 
+Našo aplikacijo se lahko namesti s pomočjo docker-compose ali pa s pomočjo dockerfile
+
+### Nameščanje rešitve s pomočjo Dockerfile
+Najprej je potrebno klonirati [repozitorij našega projekta](https://gitlab.com/LukacJan/agilypet). Ko smo projekt klonirali in ga imamo nameščenega na svoji napravi, se premaknemo v ta projekt.
+
+#### Nameščanje rešitve s pomočjo Dockerfile (backend)
+Najprej se premaknemo v mapo ![backend](/slike/backend_mapa.PNG), z ukazom ```cd .\backend\```. Nato pa zaženemo ukaz 
+```docker build . -t {username}/agilypet-backend:0.1```. S tem ukazom smo ustvarili docker image za backend. Nato lahko docker image zaženemo, kar lahko storimo kar najlažje preko [Docker Desktop](https://www.docker.com/products/docker-desktop/), ali pa z ukazom ```docker run -d -p 3001:3001 {username}/agilypet-backend:0.1```. Tako smo namestili in zagnali backend.
+
+#### Nameščanje rešitve s pomočjo Dockerfile (frontend)
+Najprej se premaknemo v mapo ![ts_frontend/our-app](/slike/react_mape.PNG), z ukazom ```cd .\ts_frontend\our-app```. Nato pa zaženemo ukaz 
+```docker build . -t {username}/agilypet-frontend:0.1```. S tem ukazom smo ustvarili docker image za frontend. Nato lahko docker image zaženemo, kar lahko storimo kar najlažje preko [Docker Desktop](https://www.docker.com/products/docker-desktop/), ali pa z ukazom ```docker run -d -p 3000:3000 {username}/agilypet-frontend:0.1```. Tako smo namestili in zagnali frontend.
+
+### Nameščanje rešitve s pomočjo docker-compose
+Dokaj preprosto lahko namestimo aplikacijo s pomočjo docker-compose. Ker so image-i že zgrajeni in dodani v javni repozitorij, lahko preprosto celotno aplikacijo namestimo s pomočjo ukaza ```docker-compose up```, seveda se moramo v tistem trenutku nahajati v mapi, kjer je datoteka docker-compose.yml.
 <!--
 ## Getting started
 
