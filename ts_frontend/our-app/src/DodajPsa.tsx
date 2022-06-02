@@ -75,7 +75,7 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
     }
 
     return(<div>
-        <h2 className='podnaslov'>Vnesite podatke o psu:</h2>
+        {/*<h2 className='podnaslov'>Vnesite podatke o psu:</h2>
         <form id="form" onSubmit = {handleSubmit}>
             
             <label>Ime:</label>
@@ -101,9 +101,75 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
             <br />
             <input type="submit" value="Dodaj"/>
         </form>
-        <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>
-      <h1 className='proba'>koledar za course</h1>
-        <iframe className='koledar' src="https://calendar.google.com/calendar/embed?height=600&wkst=2&bgcolor=%23039BE5&ctz=Europe%2FBelgrade&src=YmxhemhlbWFuZXZyaXNAZ21haWwuY29t&src=ZW4uc2xvdmVuaWFuI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23039BE5&color=%230B8043" ></iframe>
+    <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>*/}
+
+        {prijavljen ? <UserNav /> : <Navigacija />}
+
+        <Container className='margin_reg'>
+            <Row>
+                <Col></Col>
+                <Col xs={6} >
+                    <h1>
+                        Vnesite podatke o vašem psu:
+                    </h1>
+                </Col>
+                <Col></Col>
+            </Row>
+            <Row>
+                <Col></Col>
+                <Col xs={6} className="border_color">
+                    <Form id='form' onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" >
+                            <Form.Label>Ime</Form.Label>
+                            <Form.Control name="ime" type="text" placeholder="Vnesite ime" value={lastnosti.ime} onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Pasma</Form.Label>
+                            <Form.Control name="pasma" type="text" placeholder="Vnesite pasmo" value={lastnosti.pasma} onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Višina</Form.Label>
+                            <Form.Control name="visina" type="number" value={lastnosti.visina} onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Starost</Form.Label>
+                            <Form.Control name="starost" type="number" value={lastnosti.starost} onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Missing one limb?</Form.Label>
+                            <input name="manjkaEna" type="checkbox" value = "true" onChange={handleChange}/>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Missing two limbs?</Form.Label>
+                            <input name="manjkataDve" type="checkbox" value = "true" onChange={handleChange}/>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Joint related problems?</Form.Label>
+                            <input name="sklepi" type="checkbox" value = "true" onChange={handleChange}/>
+                        </Form.Group>
+
+
+                        <Row>
+                            <Col className='text-center'>
+                                <Button variant="primary" type="submit">
+                                    Dodaj
+                                </Button>
+                            </Col>
+                        </Row>
+                        
+                    </Form>
+                </Col>
+                <Col></Col>
+            </Row>
+        </Container>
+
+    <Noga></Noga>
     {/*<div>
 
         {prijavljen ? <UserNav /> : <Navigacija />}
