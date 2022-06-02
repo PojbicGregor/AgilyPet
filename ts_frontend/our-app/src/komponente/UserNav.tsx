@@ -8,12 +8,18 @@ import Image from 'react-bootstrap/Image'
 import '../css/oblikovanje.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../slike/AgilyPet_Logo.png';
+import { useNavigate } from 'react-router';
 
 const UserNav: React.FC = () => {
 
+    const navigate = useNavigate();
+
     const handleClick = () => {
         localStorage.removeItem("token");
-        window.location.reload();
+        navigate("/");
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
     }
 
     return (
