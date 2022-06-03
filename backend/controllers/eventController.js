@@ -30,7 +30,7 @@ module.exports = {
      */
     show: function (req, res) {
         var id = req.params.id;
-
+        
         EventModel.findOne({ _id: id }, function (err, event) {
             if (err) {
                 return res.status(500).json({
@@ -44,7 +44,6 @@ module.exports = {
                     message: 'No such event'
                 });
             }
-                   console.log(event.ime)
 
             return res.json(event);
         });
@@ -75,12 +74,12 @@ module.exports = {
 
 
         const calendar = google.calendar({ version: 'v3', auth: oAuth2Client })
-        
-        const eventStartTime = new Date(req.body.datum+ 'T09:58:20.843Z')
 
-        const  eventEndTime = new Date(req.body.datum+'T09:58:20.843Z' )
+        const eventStartTime = new Date(req.body.datum + 'T09:58:20.843Z')
 
-         eventEndTime.setMinutes(eventEndTime.getMinutes() + 45)
+        const eventEndTime = new Date(req.body.datum + 'T09:58:20.843Z')
+
+        eventEndTime.setMinutes(eventEndTime.getMinutes() + 45)
 
 
         console.log(eventEndTime)

@@ -50,7 +50,6 @@ module.exports = {
      * courseController.create()
      */
         create: async function (req, res) {
-        brojac = 0;
         console.log(req.body.slika.length)
         if (req.body.slika.length > 0) {
             var fs = require('fs');
@@ -65,7 +64,6 @@ module.exports = {
 
                 //vaso pateko do slike
                 fs.writeFile('C:/Users/Blazhe/agilypet/ts_frontend/our-app/public/slike/courseImages/image' + resp.data.length + '.png', buf, function () {
-                    console.log("uspesno");
                 });
 
                 var course = new Course({
@@ -76,14 +74,11 @@ module.exports = {
                     manjkataDve: req.body.manjkataDve,
                     sklepi: req.body.sklepi
                 });
-                console.log(course)
 
                 course.save(function (err, course) {
-                    console.log("BIDNA");
                     brojac++;
                     console.log(brojac)
                     if (err) {
-                        console.log("NE BIDNA");   //Tu se izpise error log tudi ce dela pravilno?
 
                         return res.status(500).json({
                             message: 'Error when creating course',
@@ -98,17 +93,12 @@ module.exports = {
 
 
             })
-            console.log("borjac")
 
-            console.log(brojac)
             setTimeout(async () => {
-                //C - 1 second later
-
+  
                 const naz = req.body.naziv;
-                console.log(naz);
                 const nov_course = await Course.findOne({ naziv: naz })
 
-                console.log(nov_course);
 
                 const id = nov_course._id;
                 const zeton = req.body.token;
@@ -116,14 +106,10 @@ module.exports = {
                 await Uporabnik.updateOne({ token: zeton }, {
                     $push: { course: id }
                 })
-                console.log(id);
 
                 const up = await Uporabnik.findOne({ token: zeton }).lean()
-                console.log("tukaaa")
 
-                console.log(up)
 
-                console.log(up.email)
                 const up_id = up._id;
                 const coursePromena = await Course.findOne({ naziv: naz }).lean()
                 if (up.email === "admin@admin.com") {
@@ -134,7 +120,6 @@ module.exports = {
                     await Course.updateOne({ naziv: naz }, {
                         $set: { jeDodal: " added from : "+ up.email }
                     })
-                    console.log("USER")
 
                 }
                 await Course.updateOne({ naziv: naz }, {
