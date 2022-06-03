@@ -12,6 +12,8 @@ module.exports = app => {
 
     router.get("/izpis_psov", uporabnik.izpisiPse);
   
+    router.post("/follow", uporabnik.follow);
+  
     
   
     app.use("/api", router);
