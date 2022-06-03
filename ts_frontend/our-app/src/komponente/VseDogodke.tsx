@@ -18,10 +18,10 @@ const VseDogodke: React.FC = () => {
         const dataRefresh = await refreshData(dataEventi)
         setTimeout(async () => {
 
-            setElements(dataRefresh)
+            setElements(dataRefresh.reverse()) //Vrne vse dogodke v vrstnem redu od najnovejšega do najstarejšega
         }, 500);
     } //Zato sem dodal tu '}' za zaključek funkcije, upam da je vredu, ker nevem kje drugje bi se morala zaključiti, 
-    //če je potrebno potem se nja popravi 
+    //če je potrebno potem se naj popravi 
 
         let prijavljen;
 
@@ -159,6 +159,8 @@ const VseDogodke: React.FC = () => {
                 {prijavljen ? <UserNav /> : <Navigacija />}
                 <div className='container-md' >
 
+                <Koledar />
+
                     {elements?.map(event => (<div style={{ border: "solid 4px whiteSmoke", borderRadius: "10px", margin: "15px" }} key={event.ime}>
 
                         <span><h3>{event.ime}</h3></span><br />
@@ -174,8 +176,6 @@ const VseDogodke: React.FC = () => {
                         }
 
                     </div>))}
-
-                    <Koledar />
                     <Noga />
                 </div>
 

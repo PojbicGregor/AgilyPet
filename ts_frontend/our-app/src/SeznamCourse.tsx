@@ -13,7 +13,7 @@ function SeznamCourse () {
         const getCourses = async function () {
             const res = await fetch("http://localhost:3001/course");
             const data = await res.json();
-            setElements(data);
+            setElements(data.reverse()); // 'reverse()', zato da so na vrhu prikazani najnovejši coursi
             console.log(data)
         }
         getCourses();
