@@ -15,7 +15,7 @@ interface DodajPsaProps {
     onAdd: (pes: Pes) => any;
 }
 
-let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
+let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
 
     const navigate = useNavigate();
 
@@ -23,9 +23,11 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
 
     if (localStorage.getItem("token") != null) {
         prijavljen = true;
-    }else{
+    } else {
         prijavljen = false;
     }
+
+    const [psi, setPsi] = React.useState<string[]>([]);
 
     const [lastnosti, setLastnosti] = React.useState({
         ime: "",
@@ -36,6 +38,30 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
         manjkataDve: false,
         sklepi: false
     });
+
+    if (psi.length === 0) {
+        fetch('https://api.thedogapi.com/v1/breeds', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                console.log(response);
+                response.json().then(data => {
+                    console.log(data);
+                    let pisi: string[] = [];
+
+                    for (let i = 0; i < data.length && i < 172; i++) {
+                        pisi.push(data[i].name);
+
+                    }
+                    setPsi(pisi);
+                });
+            }
+        });
+    }
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -74,7 +100,11 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
         setLastnosti({ ...lastnosti, [e.target.name]: e.target.value });
     }
 
-    return(<div>
+    const handleChange2 = (e: ChangeEvent<HTMLSelectElement>) => {
+        setLastnosti({ ...lastnosti, [e.target.name]: e.target.value });
+    }
+
+    return (<div>
         {/*<h2 className='podnaslov'>Vnesite podatke o psu:</h2>
         <form id="form" onSubmit = {handleSubmit}>
             
@@ -126,7 +156,11 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Pasma</Form.Label>
-                            <Form.Control name="pasma" type="text" placeholder="Vnesite pasmo" value={lastnosti.pasma} onChange={handleChange} />
+                            <Form.Select aria-label="Default select example" name="pasma" value={lastnosti.pasma} onChange={handleChange2}>
+                                {psi.map(e => {
+                                    return <option key={e} value={e}>{e}</option>;
+                                })}
+                            </Form.Select>
                         </Form.Group>
 
                         <Form.Group className="mb-3">
@@ -141,17 +175,17 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
 
                         <Form.Group className="mb-3">
                             <Form.Label>Missing one limb?</Form.Label>
-                            <input name="manjkaEna" type="checkbox" value = "true" onChange={handleChange}/>
+                            <input name="manjkaEna" type="checkbox" value="true" onChange={handleChange} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label>Missing two limbs?</Form.Label>
-                            <input name="manjkataDve" type="checkbox" value = "true" onChange={handleChange}/>
+                            <input name="manjkataDve" type="checkbox" value="true" onChange={handleChange} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
                             <Form.Label>Joint related problems?</Form.Label>
-                            <input name="sklepi" type="checkbox" value = "true" onChange={handleChange}/>
+                            <input name="sklepi" type="checkbox" value="true" onChange={handleChange} />
                         </Form.Group>
 
 
@@ -162,15 +196,15 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
                                 </Button>
                             </Col>
                         </Row>
-                        
+
                     </Form>
                 </Col>
                 <Col></Col>
             </Row>
         </Container>
 
-    <Noga></Noga>
-    {/*<div>
+        <Noga></Noga>
+        {/*<div>
 
         {prijavljen ? <UserNav /> : <Navigacija />}
 
