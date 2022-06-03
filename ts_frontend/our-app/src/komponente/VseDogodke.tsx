@@ -4,11 +4,13 @@ import { MouseEvent } from 'react';
 //import { Course } from './razredi/Course';
 import { Event } from '../razredi/Event';
 import Koledar from './Koledar';
+import Navigacija from './Navigacija';
 import Noga from './Noga';
 import UserNav from './UserNav';
 import Vsebina_prijavljen from './Vsebina_prijavljen';
 
-function SeznamCourse() {
+const VseDogodke: React.FC = () => {
+
     const [elements, setElements] = React.useState<Event[]>();
     async function getEvents () {
         const res = await fetch("http://localhost:3001/event/vseDogodke")
@@ -19,7 +21,16 @@ function SeznamCourse() {
          setElements(dataRefresh)
         }, 500);
 
+    let prijavljen;
+
+    
+
+    if (localStorage.getItem("token") != null) {
+        prijavljen = true;
+    }else{
+        prijavljen = false;
     }
+
     React.useEffect(function () {
 
   
@@ -142,7 +153,7 @@ function SeznamCourse() {
     return (
 
         <div >
-            <UserNav />
+            {prijavljen ? <UserNav /> : <Navigacija />}
             <div className='container-md' >
 
                 {elements?.map(event => (<div style={{ border: "solid 4px whiteSmoke", borderRadius: "10px", margin: "15px" }} key={event.ime}>
@@ -171,4 +182,4 @@ function SeznamCourse() {
 
 }
 
-export default SeznamCourse;
+export default VseDogodke;

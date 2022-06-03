@@ -72,3 +72,28 @@
   border-style: solid;
   border-width: 0.2em;
 }
+
+.izbran_element {
+  margin-top: 1em;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.izbrana_slika{
+  border-radius: 100%;
+  border-color: #a66f02;
+  border-style: solid;
+  border-width: 0.2em;
+}
+
+.domov{
+  text-decoration: none;
+  color: #fff;
+}
+
+.margin_left{
+  margin-left: 1.5em;
+}
