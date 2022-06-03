@@ -3,6 +3,8 @@ interface Event {
     datum: string,
     opis: string,
     naslov: string,
+    id:number,
+    daIliNe?:boolean
 }
 
 export type {Event};

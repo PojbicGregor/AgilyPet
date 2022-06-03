@@ -8,7 +8,8 @@ module.exports = mongoose => {
         manjkaEna: {type:Boolean},
         manjkataDve: {type:Boolean},
         sklepi: {type:Boolean},
-        uporabnik: [String]
+        uporabnik: [String],
+        jeDodal:{type:String}
         }
     );
   

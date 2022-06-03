@@ -81,7 +81,7 @@ require("./routes/pes.routes")(app);
 require("./routes/uporabnik.routes")(app);
 require("./routes/courseRoutes")(app);
 require("./routes/eventRoutes")(app);
-
+require("./routes/tokenRoutes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 3001;

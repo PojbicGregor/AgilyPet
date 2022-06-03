@@ -55,51 +55,6 @@ const SelectFacts: React.FC = () => {
 
     console.log(psi);
 
-
-    const handleSubmit = (e: FormEvent) => {
-        console.log("submit");
-        e.preventDefault();
-
-        fetch("https://api.thedogapi.com/v1/breeds/search?q=german she", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
-            }
-        }).then(response => {
-            if (response.status === 200) {
-                console.log(response);
-                response.json().then(data => {
-                    console.log(data[0]);
-                    setLastnosti({
-                        name: data[0].name,
-                        weight: data[0].weight.metric,
-                        height: data[0].height.metric,
-                        bred_for: data[0].bred_for,
-                        life_span: data[0].life_span,
-                        temperament: data[0].temperament
-                    });
-
-                    fetch('https://api.thedogapi.com/v1/images/' + data[0].reference_image_id, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
-                        }
-                    }).then(response => {
-                        if (response.status === 200) {
-                            console.log(response);
-                            response.json().then(data => {
-                                console.log(data);
-                                setUrlImg(data.url);
-                            });
-                        }
-                    });
-                })
-            }
-        })
-    }
-
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
         setIzbranPes(e.target.value);
         fetch("https://api.thedogapi.com/v1/breeds/search?q=" + e.target.value, {

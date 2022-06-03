@@ -8,12 +8,18 @@ import Image from 'react-bootstrap/Image'
 import '../css/oblikovanje.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../slike/AgilyPet_Logo.png';
+import { useNavigate } from 'react-router';
 
 const UserNav: React.FC = () => {
 
+    const navigate = useNavigate();
+
     const handleClick = () => {
         localStorage.removeItem("token");
-        window.location.reload();
+        navigate("/");
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
     }
 
     return (
@@ -37,8 +43,7 @@ const UserNav: React.FC = () => {
                             <Nav.Link className="mouse_over" href="#link"><div className="pisava-white">Moji coursi</div></Nav.Link>
                             <Nav.Link className="mouse_over" href="/dodajCourse"><div className="pisava-white">Kreiraj cours</div></Nav.Link>
                             <Nav.Link className="mouse_over" href="/dodajPsa"><div className="pisava-white">Dodaj psa</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/dogodki"><div className="pisava-white">Dogodki</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/vseDogodkev"><div className="pisava-white">Dogodki2</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/vseDogodkev"><div className="pisava-white">Dogodki</div></Nav.Link>
                             <Nav.Link className="mouse_over" href="/dodajEvent"><div className="pisava-white">Dodaj dogodek</div></Nav.Link>
 
                         </Nav>

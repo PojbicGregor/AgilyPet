@@ -5,7 +5,8 @@ interface Course {
     //velikost:{ type : Array<number> , "default" : [] },
     manjkaEna: boolean,
     manjkataDve: boolean,
-    sklepi: boolean
+    sklepi: boolean,
+    jeDodal:string,
 }
 
 export type {Course};

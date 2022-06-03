@@ -6,7 +6,9 @@ var eventSchema = new Schema({
 	ime: { type: String, required: true },
 	datum: { type: String, required: true },
 	opis: {type: String, required: true},
-	naslov: {type: String, required:true}
+	naslov: {type: String, required:true},
+	prijavljeni_Users:{ type : Array , "default" : [] },
+
 });
 
 eventSchema.method("toJSON", function() {
