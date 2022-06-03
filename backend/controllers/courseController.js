@@ -76,8 +76,6 @@ module.exports = {
                 });
 
                 course.save(function (err, course) {
-                    brojac++;
-                    console.log(brojac)
                     if (err) {
 
                         return res.status(500).json({
@@ -116,7 +114,8 @@ module.exports = {
                     await Course.updateOne({ naziv: naz }, {
                         $set: { jeDodal: " added from a Administrator" }
                     })
-                } else {
+                } else {              
+                              console.log("zxvzxvxzv")
                     await Course.updateOne({ naziv: naz }, {
                         $set: { jeDodal: " added from : "+ up.email }
                     })
@@ -131,7 +130,7 @@ module.exports = {
                     },
                     $push: { uporabnik: up_id }
                 })
-            }, 3000);
+            }, 1000);
         }
 
     },
