@@ -4,7 +4,7 @@ module.exports = app => {
     var router = require("express").Router();
   
     // Ustvari psa
-    router.post("/dodaj_psa", pes.create);
+    router.post("/dodaj_psa_dep", pes.create);
 
     router.get("/vsi", pes.findAll);
 

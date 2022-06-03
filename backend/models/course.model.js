@@ -4,8 +4,12 @@ module.exports = mongoose => {
         naziv: {type:String ,required:true},
         slika: {type:String},
         opis: {type:String ,required:true},
-        velikost:{ type : Array , "default" : [] },
-        zdrastvenoStanje:{ type : Array , "default" : [] }
+        //velikost:{ type : Array , "default" : [] },
+        manjkaEna: {type:Boolean},
+        manjkataDve: {type:Boolean},
+        sklepi: {type:Boolean},
+        uporabnik: [String],
+        jeDodal:{type:String}
         }
     );
   

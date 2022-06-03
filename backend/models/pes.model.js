@@ -1,17 +1,14 @@
 module.exports = mongoose => {
     var schema = mongoose.Schema(
       {
-        /*ime: String,
-        pasma: String,
-        visina: Number,
-        starost: Number,
-        zdrastvenoStanje: String*/
 
         ime: {type:String ,required:true},
             pasma: {type:String ,required:true},
             visina: {type:Number ,required:true},
             starost: {type:Number ,required:true},
-            zdravstvenoStanje: {type:String ,required:true}
+            manjkaEna: {type:Boolean},
+            manjkataDve: {type:Boolean},
+            sklepi: {type:Boolean}
       }
     );
   

@@ -3,7 +3,6 @@ const Pes = db.pes;                    //
 
 
 exports.create = (req, res) => {
-  // Validate request
   console.log("nekaj dela");
   console.log(req.body);
   if (!req.body.ime) {
@@ -17,7 +16,9 @@ exports.create = (req, res) => {
     pasma: req.body.pasma,
     visina: req.body.visina,
     starost: req.body.starost,
-    zdravstvenoStanje: req.body.zdravstvenoStanje
+    manjkaEna: req.body.manjkaEna,
+		manjkataDve: req.body.manjkataDve,
+		sklepi: req.body.sklepi
   });
 
   // Shrani v bazo

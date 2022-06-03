@@ -10,6 +10,8 @@ import Noga from './komponente/Noga';
 import { MouseEventHandler, TableHTMLAttributes, TdHTMLAttributes, useRef } from 'react';
 import MyRow from './MyRow';
 import html2canvas from 'html2canvas';
+import './css/oblikovanje.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 //import Menu from './Menu';
 
 interface DodajCourseProps {
@@ -25,8 +27,10 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
         naziv: "",
         slika: "",
         opis: "",
-        velikostiString: "",
-        zdrastvenoStanjeString: ""
+        //velikostiString: "",
+        manjkaEna: false,
+        manjkataDve: false,
+        sklepi: false
     });
 
 
@@ -86,24 +90,6 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
     const handleSubmit = (e: FormEvent) => {
 
         e.preventDefault();
-        var velikostiArray = Array<number>();
-        var zdrastvenoStanjeArray = Array<string>();
-
-        zdrastvenoStanjeArray = lastnosti.zdrastvenoStanjeString.split(" ");
-
-        var numString = "";
-        for (let i = 0; i < lastnosti.velikostiString.length; i++) {
-            if (lastnosti.velikostiString[i] != ' ') {
-                numString += lastnosti.velikostiString[i];
-            } else {
-                var myNum: number = +numString;
-                velikostiArray.push(myNum);
-                numString = "";
-            }
-        }
-        let myNum1: number = +numString;
-        velikostiArray.push(myNum1);
-        numString = "";
 
         exportAsImage(exportRef.current, "image");
 
@@ -112,10 +98,13 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
             naziv: lastnosti.naziv,
             slika: blobForBackend,
             opis: lastnosti.opis,
-            velikost: velikostiArray,
-            zdrastvenoStanje: zdrastvenoStanjeArray
+            //velikost: velikostiArray,
+            manjkaEna: lastnosti.manjkaEna,
+            manjkataDve: lastnosti.manjkataDve,
+            sklepi: lastnosti.sklepi,
+            token: localStorage.getItem("token")
         }
-      
+
 
         console.log(data);
 
@@ -126,11 +115,13 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                 'Content-Type': 'application/json'
             }
         })
-       // navigate("/");
-       
+        // navigate("/");
+
 
 
     }
+
+
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setLastnosti({ ...lastnosti, [e.target.name]: e.target.value });
@@ -142,7 +133,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
     }
 
     return (<div>
-        <UserNav/>
+        {/*<UserNav/>
         <div className="container" >
             <div className='container-md' style={{backgroundColor: "white", borderRadius:"15px"}}>
                 <h2 className='podnaslov'>Vnesite podatke o course:</h2>
@@ -154,11 +145,15 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                     <label>Opis:</label>
                     <input name="opis" type="text" onChange={handleChange} />
                     <br />
-                    <label>Velikost:</label>
-                    <input name="velikostiString" type="text" onChange={handleChange} />
-                    <br />
-                    <label>zdrastveno stanje:</label>
-                    <input name="zdrastvenoStanjeString" type="text" onChange={handleChange} />
+                    <label>For dogs with a missing limb?</label>
+                    <input name="manjkaEna" type="checkbox" value = "true" onChange={handleChange}/>
+                    <br/>
+                    <label>For dogs with two missing limbs?</label>
+                    <input name="manjkataDve" type="checkbox" value = "true" onChange={handleChange}/>
+                    <br/>
+                    <label>For dogs with join issues?</label>
+                    <input name="sklepi" type="checkbox" value = "true" onChange={handleChange}/>
+                    <br/>
 
 
                     <div>
@@ -193,75 +188,157 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                                 <MyRow handleAddObstacle={handleAddObstacle} rowNum={4}></MyRow>
                                 <MyRow handleAddObstacle={handleAddObstacle} rowNum={5}></MyRow>
                             </tbody>
-                        </table>
+    </table>*/}
+        <UserNav />
+        <Container className='margin_top'>
+            <Row>
+                <Col xs={0}>
+                </Col>
+                <Col xs={12} className="border_color">
+                    <div className="container" >
+                        <div className='container-md' style={{ backgroundColor: "white", borderRadius: "15px" }}>
+                            <h2 className='podnaslov'>Vnesite podatke o course:</h2>
+                            <form id="form" onSubmit={handleSubmit}>
+
+                                <label>Naziv:</label>
+                                <input name="naziv" type="text" className='form-control' onChange={handleChange} />
+                                <br />
+                                <label>Opis:</label>
+                                <input name="opis" type="text" className='form-control' onChange={handleChange} />
+                                <br />
+                                
+                                <div className='margin_left'>
+                                <input name="manjkaEna" type="checkbox" value="true" className='form-check-input' onChange={handleChange} />
+                                <label className='form-check-label'>For dogs with a missing limb?</label>
+                                <br />
+                                <input name="manjkataDve" type="checkbox" value="true" className='form-check-input' onChange={handleChange} />
+                                <label className='form-check-label'>For dogs with two missing limbs?</label>
+                                <br />
+                                <input name="sklepi" type="checkbox" value="true" className='form-check-input' onChange={handleChange} />
+                                <label className='form-check-label'>For dogs with joint issues?</label>
+                                <br />
+                                </div>
+                                <Row>
+                                    <Col>
+                                        <hr />
+                                    </Col>
+
+                                </Row>
+                                <Row>
+                                    <h2 className='podnaslov'>Build a course:</h2>
+                                </Row>
+                                <Row>
+                                    <Col xs={3} md={1}>
+                                        <img onClick={handleImgClick} id='5' style={{ maxWidth: "50px", maxHeight: "50px" }} src='../slike/start.png'></img>
+                                    </Col>
+
+                                    <Col xs={3} md={2}>
+                                        <img onClick={handleImgClick} id='0' style={{ maxWidth: "50px", maxHeight: "50px" }} src='../slike/jump.png'></img>
+                                    </Col>
+                                    <Col xs={3} md={2}>
+                                        <img onClick={handleImgClick} id='1' style={{ maxWidth: "50px", maxHeight: "50px" }} src='../slike/tire.png'></img>
+                                    </Col>
+                                    <Col xs={3} md={2}>
+                                        <img onClick={handleImgClick} id='2' style={{ maxWidth: "50px", maxHeight: "50px" }} src="../slike/tunnel.png"></img>
+                                    </Col>
+
+                                    <Col xs={3} md={2}>
+                                        <img onClick={handleImgClick} id='3' style={{ maxWidth: "50px", maxHeight: "50px" }} src="../slike/tunnel90.png"></img>
+                                    </Col>
+
+                                    <Col xs={3} md={2}>
+                                        <img onClick={handleImgClick} id='4' style={{ maxWidth: "50px", maxHeight: "50px" }} src="../slike/totter.png"></img>
+                                    </Col>
+
+                                    <Col xs={3} md={1}>
+                                        <img onClick={handleImgClick} id='6' style={{ maxWidth: "50px", maxHeight: "50px" }} src="../slike/end.png"></img>
+                                    </Col>
+                                </Row>
+
+                                <Row >
+                                    <br />
+                                    <Col>
+                                    </Col>
+                                    {selectedImg === null ? <div></div> : <Col xs={5} className='izbran_element center'><h3 className='izbran_element'>Chosen element:</h3></Col>}
+                                    <Col xs={3} md={2} lg={1}>
+                                        {selectedImg === 0 && <img className='izbrana_slika' style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/jump.png'></img>}
+                                        {selectedImg === 1 && <img className='izbrana_slika' style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/tire.png'></img>}
+                                        {selectedImg === 2 && <img className='izbrana_slika' style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/tunnel.png'></img>}
+                                        {selectedImg === 3 && <img className='izbrana_slika' style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/tunnel90.png'></img>}
+                                        {selectedImg === 4 && <img className='izbrana_slika' style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/totter.png'></img>}
+                                        {selectedImg === 5 && <img className='izbrana_slika' style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/start.png'></img>}
+                                        {selectedImg === 6 && <img className='izbrana_slika' style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/end.png'></img>}
+                                    </Col>
+                                    <Col xs={3} md={2} lg={2}>
+                                        {selectedImg === 0 && <h4 className='izbran_element'>Jump</h4>}
+                                        {selectedImg === 1 && <h4 className='izbran_element'>Tire</h4>}
+                                        {selectedImg === 2 && <h4 className='izbran_element'>Tunnel x</h4>}
+                                        {selectedImg === 3 && <h4 className='izbran_element'>Tunnel y</h4>}
+                                        {selectedImg === 4 && <h4 className='izbran_element'>Totter</h4>}
+                                        {selectedImg === 5 && <h4 className='izbran_element'>Start</h4>}
+                                        {selectedImg === 6 && <h4 className='izbran_element'>End</h4>}
+                                    </Col>
+                                    <Col>
+                                    </Col>
+                                </Row>
+
+
+
+                                <Row>
+                                    <Col>
+                                    </Col>
+                                    <Col xs={10} className="center">
+                                        <div ref={exportRef} style={{ display: "inline-block", textAlign: "center", margin: "10px" }}>
+                                            <table >
+                                                <tbody >
+                                                    <MyRow handleAddObstacle={handleAddObstacle} rowNum={0}></MyRow>
+                                                    <MyRow handleAddObstacle={handleAddObstacle} rowNum={1}></MyRow>
+                                                    <MyRow handleAddObstacle={handleAddObstacle} rowNum={2}></MyRow>
+                                                    <MyRow handleAddObstacle={handleAddObstacle} rowNum={3}></MyRow>
+                                                    <MyRow handleAddObstacle={handleAddObstacle} rowNum={4}></MyRow>
+                                                    <MyRow handleAddObstacle={handleAddObstacle} rowNum={5}></MyRow>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </Col>
+                                    <Col>
+                                    </Col>
+                                </Row>
+
+
+                                <br />
+                                <Row>
+                                    <Col></Col>
+                                    <Col xs={8} className='center'>
+                                        <p>Doube click to save</p>
+                                    </Col>
+                                    <Col></Col>
+                                </Row>
+                                <Row>
+                                    <Col></Col>
+                                    <Col className='center'>
+                                        <input type="submit" className='btn btn-success btn-block' value="Dodaj" />
+                                    </Col>
+                                    <Col></Col>
+                                </Row>
+                            </form>
+                            <br />
+                            <Row >
+                                <Col></Col>
+                                <Col className='center'>
+                                    <button className='btn btn-primary btn-block'>{<Link className="domov" to={`/`}>Domov</Link>}</button>
+                                </Col>
+                                <Col></Col>
+                            </Row>
+                        </div>
                     </div>
-
-
-                    <br />
-                    <input type="submit" value="Dodaj" />
-                </form>
-                <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>
-            </div>
-        </div>
-             <Noga/>
-        {/*
-{prijavljen ? <UserNav /> : <Navigacija />}
-
-        <Container className='margin_reg'>
-            <Row>
-                <Col></Col>
-                <Col xs={6} >
-                    <h1>
-                        Vnesite podatke o course:
-                    </h1>
                 </Col>
-                <Col></Col>
-            </Row>
-            <Row>
-                <Col></Col>
-                <Col xs={6} className="border_color">
-                    <Form id='form' onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" >
-                            <Form.Label>Naziv</Form.Label>
-                            <Form.Control name="naziv" type="text" placeholder="Vnesite naziv" onChange={handleChange} />
-                        </Form.Group>
-
-                        <Form.Group controlId="formFile" className="mb-3">
-                            <Form.Label>Slika</Form.Label>
-                            <Form.Control name="slika" type="file" onChange={handleChange} />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Opis</Form.Label>
-                            <Form.Control name="opis" type="text" onChange={handleChange} />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Velikost</Form.Label>
-                            <Form.Control name="velikostiString" type="text" onChange={handleChange} />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Zdrastveno stanje</Form.Label>
-                            <Form.Control name="zdrastvenoStanjeString" type="text" onChange={handleChange} />
-                        </Form.Group>
-
-                        <Row>
-                            <Col className='text-center'>
-                                <Button variant="primary" type="submit">
-                                    Dodaj
-                                </Button>
-                            </Col>
-                        </Row>
-
-                    </Form>
+                <Col xs={0}>
                 </Col>
-                <Col></Col>
             </Row>
         </Container>
-
-        <Noga></Noga>
-    */}
+        <Noga />
+    
     </div>);
 }
 

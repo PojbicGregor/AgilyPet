@@ -3,7 +3,9 @@ interface Pes {
     pasma: string,
     visina: number,
     starost: number,
-    zdravstvenoStanje: string
+    manjkaEna: boolean,
+    manjkataDve: boolean,
+    sklepi: boolean
 }
 
 export type {Pes};

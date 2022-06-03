@@ -15,7 +15,7 @@ interface DodajPsaProps {
     onAdd: (pes: Pes) => any;
 }
 
-let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
+let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
 
     const navigate = useNavigate();
 
@@ -23,17 +23,45 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
 
     if (localStorage.getItem("token") != null) {
         prijavljen = true;
-    }else{
+    } else {
         prijavljen = false;
     }
+
+    const [psi, setPsi] = React.useState<string[]>([]);
 
     const [lastnosti, setLastnosti] = React.useState({
         ime: "",
         pasma: "",
         visina: 0,
         starost: 0,
-        zdravstvenoStanje: ""
+        manjkaEna: false,
+        manjkataDve: false,
+        sklepi: false
     });
+
+    if (psi.length === 0) {
+        fetch('https://api.thedogapi.com/v1/breeds', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                console.log(response);
+                response.json().then(data => {
+                    console.log(data);
+                    let pisi: string[] = [];
+
+                    for (let i = 0; i < data.length && i < 172; i++) {
+                        pisi.push(data[i].name);
+
+                    }
+                    setPsi(pisi);
+                });
+            }
+        });
+    }
 
     const handleSubmit = (e: FormEvent) => {
         e.preventDefault();
@@ -43,7 +71,10 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
             pasma: lastnosti.pasma,
             visina: lastnosti.visina,
             starost: lastnosti.starost,
-            zdravstvenoStanje: lastnosti.zdravstvenoStanje
+            manjkaEna: lastnosti.manjkaEna,
+            manjkataDve: lastnosti.manjkataDve,
+            sklepi: lastnosti.sklepi,
+            token: localStorage.getItem("token")
         }
 
         fetch("http://localhost:3001/api/dodaj_psa", {
@@ -51,6 +82,14 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
             body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                console.log(response);
+                response.json().then(data => {
+                    console.log(localStorage.getItem("token"));
+                    localStorage.getItem("token");              //???
+                })
             }
         })
 
@@ -61,7 +100,111 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
         setLastnosti({ ...lastnosti, [e.target.name]: e.target.value });
     }
 
+    const handleChange2 = (e: ChangeEvent<HTMLSelectElement>) => {
+        setLastnosti({ ...lastnosti, [e.target.name]: e.target.value });
+    }
+
     return (<div>
+        {/*<h2 className='podnaslov'>Vnesite podatke o psu:</h2>
+        <form id="form" onSubmit = {handleSubmit}>
+            
+            <label>Ime:</label>
+            <input name="ime" type="text" value={lastnosti.ime} onChange={handleChange}/>
+            <br />
+            <label>Pasma:</label>
+            <input name="pasma" type="text" value={lastnosti.pasma} onChange={handleChange}/>
+            <br />
+            <label>Visina:</label>
+            <input name="visina" type="number" value={lastnosti.visina} onChange={handleChange}/>
+            <br />
+            <label>Starost:</label>
+            <input name="starost" type="number" value={lastnosti.starost} onChange={handleChange}/>
+            <br />
+            <label>Missing one limb?</label>
+            <input name="manjkaEna" type="checkbox" value = "true" onChange={handleChange}/> Yes
+            <br />
+            <label>Missing two limbs?</label>
+            <input name="manjkataDve" type="checkbox" value = "true" onChange={handleChange}/> Yes
+            <br />
+            <label>Joint related problems?</label>
+            <input name="sklepi" type="checkbox" value = "true" onChange={handleChange}/> Yes
+            <br />
+            <input type="submit" value="Dodaj"/>
+        </form>
+    <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>*/}
+
+        {prijavljen ? <UserNav /> : <Navigacija />}
+
+        <Container className='margin_reg'>
+            <Row>
+                <Col></Col>
+                <Col xs={6} >
+                    <h1>
+                        Vnesite podatke o vašem psu:
+                    </h1>
+                </Col>
+                <Col></Col>
+            </Row>
+            <Row>
+                <Col></Col>
+                <Col xs={6} className="border_color">
+                    <Form id='form' onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" >
+                            <Form.Label>Ime</Form.Label>
+                            <Form.Control name="ime" type="text" placeholder="Vnesite ime" value={lastnosti.ime} onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Pasma</Form.Label>
+                            <Form.Select aria-label="Default select example" name="pasma" value={lastnosti.pasma} onChange={handleChange2}>
+                                {psi.map(e => {
+                                    return <option key={e} value={e}>{e}</option>;
+                                })}
+                            </Form.Select>
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Višina</Form.Label>
+                            <Form.Control name="visina" type="number" value={lastnosti.visina} onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Starost</Form.Label>
+                            <Form.Control name="starost" type="number" value={lastnosti.starost} onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Missing one limb?</Form.Label>
+                            <input name="manjkaEna" type="checkbox" value="true" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Missing two limbs?</Form.Label>
+                            <input name="manjkataDve" type="checkbox" value="true" onChange={handleChange} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Joint related problems?</Form.Label>
+                            <input name="sklepi" type="checkbox" value="true" onChange={handleChange} />
+                        </Form.Group>
+
+
+                        <Row>
+                            <Col className='text-center'>
+                                <Button variant="primary" type="submit">
+                                    Dodaj
+                                </Button>
+                            </Col>
+                        </Row>
+
+                    </Form>
+                </Col>
+                <Col></Col>
+            </Row>
+        </Container>
+
+        <Noga></Noga>
+        {/*<div>
 
         {prijavljen ? <UserNav /> : <Navigacija />}
 
@@ -113,7 +256,7 @@ let DodajPsa: React.FC<DodajPsaProps> =  (props: DodajPsaProps) => {
             </Row>
         </Container>
 
-    <Noga></Noga>
+    <Noga></Noga>*/}
 
     </div>);
 }
