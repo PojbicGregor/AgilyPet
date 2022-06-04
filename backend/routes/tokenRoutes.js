@@ -13,5 +13,9 @@ module.exports = app => {
 
     router.post("/mojCourse",tokens.mojCourse);
 
+    router.get("/:id",tokens.myDogs)
+    
+    router.post("/deleteDog",tokens.deleteDog)
+
     app.use("/token", router);
   };

@@ -5,7 +5,8 @@ interface Pes {
     starost: number,
     manjkaEna: boolean,
     manjkataDve: boolean,
-    sklepi: boolean
+    sklepi: boolean,
+    _id:number
 }
 
 export type {Pes};

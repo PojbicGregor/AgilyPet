@@ -71,3 +71,21 @@ exports.mojCourse = async (req, res) => {
            
 
 }
+
+
+exports.myDogs = async (req, res) => {
+    const novUporabnik = await Uporabnik.findOne({ token: req.params.id })
+    return res.json(novUporabnik.pes);
+
+}
+exports.deleteDog=async(req,res)=>{
+
+    await Uporabnik.updateOne({ token: req.body.token }, {
+        "$pull":{"pes":{"_id":req.body.id}} 
+       })
+    const uporabnik = await Uporabnik.findOne({ token: req.body.token })
+    return res.json(uporabnik.pes);
+   
+
+
+}
