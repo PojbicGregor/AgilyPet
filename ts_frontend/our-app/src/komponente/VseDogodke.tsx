@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Container, Row, Col, Card, Badge } from 'react-bootstrap';
 import { MouseEvent } from 'react';
 //import { Course } from './razredi/Course';
 import { Event } from '../razredi/Event';
@@ -158,41 +158,55 @@ const VseDogodke: React.FC = () => {
         <div >
             {prijavljen ? <UserNav /> : <Navigacija />}
             <div className='container-md' >
-
                 <Koledar />
+                <Container className='margin_reg'>
+                    <Row xs={1} md={2} className="g-4">
+                        {elements?.map(event => (
+                            <Col>
+                                <Card key={event.ime} border="info" >
+                                    <Card.Header><h3>{event.ime}</h3></Card.Header>
+                                    <Card.Body>
+                                        <Card.Text>
+                                            <h6>Opis:</h6>
+                                            <span>{event.opis}</span>
+                                        </Card.Text>
+                                        <Card.Text>
+                                            <h6>Naslov:</h6>
+                                            <span>{event.naslov}</span>
+                                        </Card.Text>
+                                        <Card.Text>
+                                            <h6>Datum: <Badge bg="success">{event.datum}</Badge></h6>
+                                        </Card.Text>
+                                        <div className='center'>
+                                    {
+                                        (() => {
+                                            if (prijavljen) {
+                                                if (event.daIliNe && (prijavljen)) {
+                                                    return <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button>
+                                                }
+                                                if (!event.daIliNe && (prijavljen)) {
+                                                    return <Button id={event.id.toString()} onClick={handleClick}>Prijava</Button>
+                                                }
+                                            }
+                                            else {
+                                                return null
+                                            }
+                                        })()
+                                    }
+                                    </div>
+                                    </Card.Body>
+                                    </Card>
 
-                {elements?.map(event => (<div style={{ border: "solid 4px whiteSmoke", borderRadius: "10px", margin: "15px" }} key={event.ime}>
-
-                    <span><h3>{event.ime}</h3></span><br />
-
-                    <span>{event.opis}</span><br />
-
-                    <span>{event.naslov}</span><br />
-
-                    <span>{event.datum}</span><br />
-
-                    {
-                        (() => {
-                            if (prijavljen) {
-                                if (event.daIliNe && (prijavljen)) {
-                                    return <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button>
-                                }
-                                if (!event.daIliNe && (prijavljen)) {
-                                    return <Button id={event.id.toString()} onClick={handleClick}>Prijava</Button>
-                                }
-                            }
-                            else {
-                                return null
-                            }
-                        })()
-                    }
-
-                    {/*event.daIliNe ? <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button> :
+                                    {/*event.daIliNe ? <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button> :
                         <Button id={event.id.toString()} onClick={handleClick}>Prijava</Button>
                 */}
 
-                </div>))}
-                <Noga />
+                                {/*</div>*/}
+                            </Col>))}
+                    </Row>
+                    <Noga />
+
+                </Container>
             </div>
 
         </div>

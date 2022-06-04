@@ -51,7 +51,14 @@
 
 .koledar{
   border:solid 1px rgb(0, 0, 0);
-  width:800px;
+  width:40em; 
+  height:30em;
+  border-radius: 1em;
+}
+
+.koledar2{
+  border:solid 1px rgb(0, 0, 0);
+  width:800px; 
   height:600px;
   border-radius: 1em;
 }
