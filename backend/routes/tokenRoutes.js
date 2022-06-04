@@ -11,5 +11,7 @@ module.exports = app => {
 
     router.post("/odjavaEvent",tokens.odjavaDogodek);
 
+    router.post("/mojCourse",tokens.mojCourse);
+
     app.use("/token", router);
   };
