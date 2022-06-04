@@ -112,7 +112,7 @@ module.exports = {
                 const coursePromena = await Course.findOne({ naziv: naz }).lean()
                 if (up.email === "admin@admin.com") {
                     await Course.updateOne({ naziv: naz }, {
-                        $set: { jeDodal: " added from a Administrator" }
+                        $set: { jeDodal: " added by an Administrator" }
                     })
                 } else {              
                               console.log("zxvzxvxzv")
