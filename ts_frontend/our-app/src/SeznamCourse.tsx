@@ -76,7 +76,7 @@ const SeznamCourse: React.FC = () => {
                     <span>
                     <form id="form" onSubmit={handleSubmit}>
 
-                    {/*<span><ZdrastvenoStanje seznam = {course.zdrastvenoStanje}></ZdrastvenoStanje></span>*/}
+                    {/*<span><ZdrastvenoStanje seznam = {course.zdrastvenoStanje}></ZdrastvenoStanje></span>*/
                    
                         {/*<select name="jeDodal" value={lastnosti.jeDodal} onChange={handleChange}>
                             <option  value={course.jeDodal}>{course.jeDodal}</option>
@@ -146,5 +146,5 @@ const SeznamCourse: React.FC = () => {
     </>
     );
 }
-
+}
 export default SeznamCourse;
