@@ -109,7 +109,7 @@ module.exports = {
                 })
 
                 const up = await Uporabnik.findOne({ token: zeton }).lean()
-
+                    console.log(up)
 
                 const up_id = up._id;
                 const coursePromena = await Course.findOne({ naziv: naz }).lean()
