@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken')
 const JWT_SECRET = 'sdjkfh8923yhjdksbfma@#*(&@*!^#&@bhjb2qiuhesdbhjdsfg839ujkdhfjk'
 
 const bcrypt =require('bcryptjs');
-const Uporabnik = db.registriran_uporabniks; 
+const Uporabnik = db.registriran_uporabniks;
+const Following = db.following; 
 
 
 //registriraj novega uporabnika
@@ -65,6 +66,23 @@ exports.register = async (req, res) => {
 		}
 		throw error
 	}
+
+	setTimeout(async () =>{
+		const mail = req.body.email;
+		const user = await Uporabnik.findOne({ email: mail });
+
+		const ident = user._id;
+		console.log(user);
+
+		
+			const resp = await Following.create({
+				username,
+				mail,
+				ident
+			});
+			console.log('Following collection created successfully: ', resp)
+		
+	}, 2000);
 
     res.json({ status: 200 })
 }
@@ -143,3 +161,24 @@ exports.izpisiPse = async (req, res) => {
 
 	//Dela, treba samo frontend in spremeniti izpis
 };
+
+exports.follow = async (req, res) => {
+
+	const zeton = req.body.token;
+	const prijavljen = await Uporabnik.findOne({token: zeton});
+	console.log(prijavljen);
+	const dodaj_mail = prijavljen.email;
+	console.log(dodaj_mail);
+
+	const mail = req.body.email;
+	console.log(mail);
+	const sleden = await Following.findOne({mail: mail});
+
+	console.log(sleden);
+
+	await Following.updateOne({mail: mail}, {
+		$push:{emails: dodaj_mail} 
+	})
+
+	res.json({ status: 200 })   //pazi ka to nebo narobe
+}

@@ -22,6 +22,8 @@ import VseDogodke from './komponente/VseDogodke';
 
 import SeznamCourse from './SeznamCourse';
 import VsiCoursi from './komponente/VsiCoursi';
+import MojiCoursi from './komponente/MojiCoursi';
+import MojiPsi from './komponente/MojiPsi';
 function App() {
 
   const [seznamPsov, setSeznamPsov] = React.useState<Pes[]>([]);
@@ -79,6 +81,10 @@ function App() {
           <Route path='/dodajEvent' element={<DodajEvent onAdd={handleDodajEvent}/> } />
 
           <Route path='/seznamCourse' element={<VsiCoursi	/>} />
+
+          <Route path='/mojiCoursi' element={<MojiCoursi	/>} />
+
+          <Route path='/mojiPSi' element={<MojiPsi	/>} />
 
           <Route path="/404" element={<h2>404 - Not found</h2>}/>
 

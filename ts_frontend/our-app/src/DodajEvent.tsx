@@ -6,13 +6,14 @@ import { Link } from 'react-router-dom';
 import UserNav from './komponente/UserNav';
 import Noga from './komponente/Noga';
 import Koledar from './komponente/Koledar';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 //import Menu from './Menu';
 
 interface DodajEventProps {
     onAdd: (event: Event) => any;
 }
 
-let DodajEvent = (props: DodajEventProps) => {
+const DodajEvent: React.FC<DodajEventProps> = (props: DodajEventProps) => {
 
     const [lastnosti, setLastnosti] = React.useState({
         naziv: "",
@@ -48,25 +49,51 @@ let DodajEvent = (props: DodajEventProps) => {
     <div> 
             <UserNav></UserNav>
 
-        <h2 className='podnaslov'>Vnesite podatke o eventu:</h2>
-        <form id="form" onSubmit = {handleSubmit}>
-            
-            <label>ime:</label>
-            <input name="naziv" type="text" onChange={handleChange}/>
-            <br />
-            <label>datum:</label>
-            <input name="datum" type="date" onChange={handleChange}/>
-            <br />
-            <label>Opis:</label>
-            <input name="opis" type="text" onChange={handleChange}/>
-            <br />
-            <label>naslov:</label>
-            <input name="naslov" type="text"  onChange={handleChange}/>
-            <br/>
-            <br/>
-            <input type="submit" value="Dodaj"/>
-        </form>
-         <Koledar/>
+        <Container className='margin_reg'>
+                <Row>
+                    <Col></Col>
+                    <Col xs={6} className="border_color">
+                        <Row>
+                            <Col className='center'>
+                                <h2 className='podnaslov'>Vnesite podatke o eventu:</h2>
+                            </Col>
+                        </Row>
+                        <Form onSubmit={handleSubmit}>
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Naziv:</Form.Label>
+                                <Form.Control name="naziv" type="text" placeholder="Enter name" onChange={handleChange} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Datum:</Form.Label>
+                                <Form.Control name="datum" type="date" onChange={handleChange} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" >
+                                <Form.Label>Opis:</Form.Label>
+                                <Form.Control name="opis" type="text" onChange={handleChange} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3">
+                                <Form.Label>Naslov:</Form.Label>
+                                <Form.Control name="naslov" type="text" onChange={handleChange} />
+                            </Form.Group>
+
+                            <Row>
+                            <Col></Col>
+                            <Col className='center'>
+                            <Button className='btn-block' variant="primary" type="submit">
+                                Submit
+                            </Button>
+                            </Col>
+                            <Col></Col>
+                            </Row>
+                        </Form>
+                    </Col>
+                    <Col></Col>
+                </Row>
+            </Container>
+    
         <Noga></Noga>
     </div>);
 }

@@ -1,5 +1,5 @@
 import React, { FormEvent, useState } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Container, Row, Col, Card, Badge } from 'react-bootstrap';
 import { MouseEvent } from 'react';
 //import { Course } from './razredi/Course';
 import { Event } from '../razredi/Event';
@@ -18,171 +18,201 @@ const VseDogodke: React.FC = () => {
         const dataRefresh = await refreshData(dataEventi)
         setTimeout(async () => {
 
-            setElements(dataRefresh)
+            setElements(dataRefresh.reverse()) //Vrne vse dogodke v vrstnem redu od najnovejšega do najstarejšega
         }, 500);
     } //Zato sem dodal tu '}' za zaključek funkcije, upam da je vredu, ker nevem kje drugje bi se morala zaključiti, 
-    //če je potrebno potem se nja popravi 
+    //če je potrebno potem se naj popravi 
 
-        let prijavljen;
+    let prijavljen: boolean;
 
 
 
-        if (localStorage.getItem("token") != null) {
-            prijavljen = true;
-        } else {
-            prijavljen = false;
+    if (localStorage.getItem("token") != null) {
+        prijavljen = true;
+    } else {
+        prijavljen = false;
+    }
+
+    React.useEffect(function () {
+
+
+        getEvents();
+
+    }, [])
+
+
+    const handleClickOdjava = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        let dataBack = {
+            id: e.currentTarget.id,
+            token: localStorage.getItem("token")
         }
-
-        React.useEffect(function () {
-
-
-            getEvents();
-
-        }, [])
+        odjavaZaEvent(dataBack)
+    }
+    async function odjavaZaEvent(dataBack: { id: any; token?: string | null; }) {
+        const response = await fetch("http://localhost:3001/event/" + dataBack.id);
+        const dataEvent = await response.json();
 
 
-        const handleClickOdjava = (e: MouseEvent<HTMLButtonElement>) => {
-            e.preventDefault();
-
-            let dataBack = {
-                id: e.currentTarget.id,
-                token: localStorage.getItem("token")
-            }
-            odjavaZaEvent(dataBack)
+        let dataForBackend = {
+            id: dataBack.id,
+            token: localStorage.getItem("token"),
         }
-        async function odjavaZaEvent(dataBack: { id: any; token?: string | null; }) {
-            const response = await fetch("http://localhost:3001/event/" + dataBack.id);
-            const dataEvent = await response.json();
-
-
-            let dataForBackend = {
-                id: dataBack.id,
-                token: localStorage.getItem("token"),
+        await fetch("http://localhost:3001/token/odjavaEvent", {
+            method: 'POST',
+            body: JSON.stringify(dataForBackend),
+            headers: {
+                'Content-Type': 'application/json'
             }
-            await fetch("http://localhost:3001/token/odjavaEvent", {
-                method: 'POST',
-                body: JSON.stringify(dataForBackend),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                if (response.status === 200) {
-                    response.json().then(data => {
-                        getEvents();
-                    })
-                }
-            })
-            return dataEvent;
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    getEvents();
+                })
+            }
+        })
+        return dataEvent;
 
+    }
+    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
+        let dataBack = {
+            id: e.currentTarget.id,
+            token: localStorage.getItem("token")
         }
-        const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-            e.preventDefault();
+        const data = prijavaZaEvent(dataBack);
+    }
 
-            let dataBack = {
-                id: e.currentTarget.id,
-                token: localStorage.getItem("token")
-            }
-            const data = prijavaZaEvent(dataBack);
+    async function prijavaZaEvent(dataBack: { id: any; token?: string | null; }) {
+        const response = await fetch("http://localhost:3001/event/" + dataBack.id);
+        const dataEvent = await response.json();
+
+
+        let dataForBackend = {
+            id: dataBack.id,
+            token: localStorage.getItem("token"),
         }
-
-        async function prijavaZaEvent(dataBack: { id: any; token?: string | null; }) {
-            const response = await fetch("http://localhost:3001/event/" + dataBack.id);
-            const dataEvent = await response.json();
-
-
-            let dataForBackend = {
-                id: dataBack.id,
-                token: localStorage.getItem("token"),
+        await fetch("http://localhost:3001/token/prijava", {
+            method: 'POST',
+            body: JSON.stringify(dataForBackend),
+            headers: {
+                'Content-Type': 'application/json'
             }
-            await fetch("http://localhost:3001/token/prijava", {
-                method: 'POST',
-                body: JSON.stringify(dataForBackend),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                if (response.status === 200) {
-                    response.json().then(data => {
-                        getEvents();
-                    })
-                }
-            })
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    getEvents();
+                })
+            }
+        })
 
 
 
-            return dataEvent;
+        return dataEvent;
+    }
+
+    async function refreshData(siteEventi: any[]) {
+        let dataForBackend = {
+            token: localStorage.getItem("token")
         }
-
-        async function refreshData(siteEventi: any[]) {
-            let dataForBackend = {
-                token: localStorage.getItem("token")
+        await fetch("http://localhost:3001/token/userLogged", {
+            method: 'POST',
+            body: JSON.stringify(dataForBackend),
+            headers: {
+                'Content-Type': 'application/json'
             }
-            await fetch("http://localhost:3001/token/userLogged", {
-                method: 'POST',
-                body: JSON.stringify(dataForBackend),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                if (response.status === 200) {
-                    response.json().then(data => {
-                        for (let i = 0; i <= siteEventi.length - 1; i++) {
-                            if (siteEventi[i].prijavljeni_Users.length > 0) {
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(data => {
+                    for (let i = 0; i <= siteEventi.length - 1; i++) {
+                        if (siteEventi[i].prijavljeni_Users.length > 0) {
 
-                                for (let j = 0; j <= siteEventi[i].prijavljeni_Users.length - 1; j++) {
-                                    if (siteEventi[i].prijavljeni_Users[j] === data.id) {
-                                        console.log("prijaven na eventot")
-                                        console.log(siteEventi[i].ime)
-                                        siteEventi[i].daIliNe = true;
+                            for (let j = 0; j <= siteEventi[i].prijavljeni_Users.length - 1; j++) {
+                                if (siteEventi[i].prijavljeni_Users[j] === data.id) {
+                                    console.log("prijaven na eventot")
+                                    console.log(siteEventi[i].ime)
+                                    siteEventi[i].daIliNe = true;
 
-                                        break;
-                                    }
+                                    break;
                                 }
-                            } else {
-                                siteEventi[i].daIliNe = false;
-
                             }
+                        } else {
+                            siteEventi[i].daIliNe = false;
 
                         }
-                        return siteEventi
-                    })
-                }
-            })
-            return siteEventi
 
-        }
-
-
-        return (
-
-            <div >
-                {prijavljen ? <UserNav /> : <Navigacija />}
-                <div className='container-md' >
-
-                    {elements?.map(event => (<div style={{ border: "solid 4px whiteSmoke", borderRadius: "10px", margin: "15px" }} key={event.ime}>
-
-                        <span><h3>{event.ime}</h3></span><br />
-
-                        <span>{event.opis}</span><br />
-
-                        <span>{event.naslov}</span><br />
-
-                        <span>{event.datum}</span><br />
-
-                        {event.daIliNe ? <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button> :
-                            <Button id={event.id.toString()} onClick={handleClick}>Prijava</Button>
-                        }
-
-                    </div>))}
-
-                    <Koledar />
-                    <Noga />
-                </div>
-
-            </div>
-
-        );
+                    }
+                    return siteEventi
+                })
+            }
+        })
+        return siteEventi
 
     }
 
-    export default VseDogodke;
+
+    return (
+
+        <div >
+            {prijavljen ? <UserNav /> : <Navigacija />}
+            <div className='container-md' >
+                <Koledar />
+                <Container className='margin_reg'>
+                    <Row xs={1} md={2} className="g-4">
+                        {elements?.map(event => (
+                            <Col>
+                                <Card key={event.ime} border="info" >
+                                    <Card.Header><h3>{event.ime}</h3></Card.Header>
+                                    <Card.Body>
+                                        <Card.Text>
+                                            <h6>Opis:</h6>
+                                            <span>{event.opis}</span>
+                                        </Card.Text>
+                                        <Card.Text>
+                                            <h6>Naslov:</h6>
+                                            <span>{event.naslov}</span>
+                                        </Card.Text>
+                                        <Card.Text>
+                                            <h6>Datum: <Badge bg="success">{event.datum}</Badge></h6>
+                                        </Card.Text>
+                                        <div className='center'>
+                                    {
+                                        (() => {
+                                            if (prijavljen) {
+                                                if (event.daIliNe && (prijavljen)) {
+                                                    return <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button>
+                                                }
+                                                if (!event.daIliNe && (prijavljen)) {
+                                                    return <Button id={event.id.toString()} onClick={handleClick}>Prijava</Button>
+                                                }
+                                            }
+                                            else {
+                                                return null
+                                            }
+                                        })()
+                                    }
+                                    </div>
+                                    </Card.Body>
+                                    </Card>
+
+                                    {/*event.daIliNe ? <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button> :
+                        <Button id={event.id.toString()} onClick={handleClick}>Prijava</Button>
+                */}
+
+                                {/*</div>*/}
+                            </Col>))}
+                    </Row>
+                    <Noga />
+
+                </Container>
+            </div>
+
+        </div>
+
+    );
+
+}
+
+export default VseDogodke;

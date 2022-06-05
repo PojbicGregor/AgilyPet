@@ -15,7 +15,7 @@ const Koledar: React.FC = () => {
                 <Col>
                 </Col>
                 <Col>
-                <iframe className='koledar' src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23039BE5&ctz=Europe%2FBelgrade&showPrint=1&showDate=1&showNav=1&showTitle=0&src=YmxhemhlbWFuZXZyaXNAZ21haWwuY29t&color=%23039BE5"></iframe>
+                <iframe className='koledar' src="https://calendar.google.com/calendar/embed?height=600&wkst=1&bgcolor=%23F6BF26&ctz=Europe%2FBelgrade&showPrint=1&showDate=1&showNav=1&showTitle=0&src=YmxhemhlbWFuZXZyaXNAZ21haWwuY29t&color=%23039BE5"></iframe>
                 </Col>
                 <Col>
                 </Col>

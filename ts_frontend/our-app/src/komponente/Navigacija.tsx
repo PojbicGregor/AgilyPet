@@ -13,7 +13,7 @@ const Navigacija: React.FC = () => {
 
     return (
         <>
-            <Navbar className='bg-orange pisava-white'>
+            <Navbar expand="lg" className='bg-orange pisava-white'>
                 <Container>
                     <Navbar.Brand href="/">
                         <img
