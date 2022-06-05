@@ -2,6 +2,9 @@
 const db = require("../models/baza");
 const Course = db.courses;
 const Uporabnik = db.registriran_uporabniks;
+const Following = db.following; 
+
+var mail = require('../mailer/mailer');
 
 
 module.exports = {
@@ -87,7 +90,7 @@ module.exports = {
 
                 });
 
-
+                
 
 
             })
@@ -112,12 +115,12 @@ module.exports = {
                 const coursePromena = await Course.findOne({ naziv: naz }).lean()
                 if (up.email === "admin@admin.com") {
                     await Course.updateOne({ naziv: naz }, {
-                        $set: { jeDodal: " added from a Administrator" }
+                        $set: { jeDodal: " added by an Administrator" }
                     })
                 } else {              
                               console.log("zxvzxvxzv")
                     await Course.updateOne({ naziv: naz }, {
-                        $set: { jeDodal: " added from : "+ up.email }
+                        $set: { jeDodal: up.email }
                     })
 
                 }
@@ -130,6 +133,12 @@ module.exports = {
                     },
                     $push: { uporabnik: up_id }
                 })
+
+                const trenutni = await Following.findOne({ ident: up_id })
+                for(let i = 0; i < trenutni.emails.length; i++){
+                    mail.sendEmail(trenutni.emails[i], 'posiljam', 'posiljam iz node');
+                    console.log(trenutni.emails[i]);
+                };
             }, 1000);
         }
 

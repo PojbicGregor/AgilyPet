@@ -171,6 +171,7 @@ exports.follow = async (req, res) => {
 	console.log(dodaj_mail);
 
 	const mail = req.body.email;
+	console.log(mail);
 	const sleden = await Following.findOne({mail: mail});
 
 	console.log(sleden);
@@ -178,4 +179,6 @@ exports.follow = async (req, res) => {
 	await Following.updateOne({mail: mail}, {
 		$push:{emails: dodaj_mail} 
 	})
+
+	res.json({ status: 200 })   //pazi ka to nebo narobe
 }
