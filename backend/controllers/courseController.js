@@ -5,6 +5,7 @@ const Uporabnik = db.registriran_uporabniks;
 const Following = db.following; 
 
 var mail = require('../mailer/mailer');
+const { compareSync } = require("bcrypt");
 
 
 module.exports = {
@@ -135,11 +136,16 @@ module.exports = {
                 })
 
                 const trenutni = await Following.findOne({ ident: up_id })
+                console.log(trenutni)
+                if(trenutni===null ){
+                                 console.log("Nima prijavljenega")
+                }else{
                 for(let i = 0; i < trenutni.emails.length; i++){
                     mail.sendEmail(trenutni.emails[i], 'posiljam', 'posiljam iz node');
                     console.log(trenutni.emails[i]);
                 };
-            }, 1000);
+            }
+            }, 3000);
         }
 
     },
