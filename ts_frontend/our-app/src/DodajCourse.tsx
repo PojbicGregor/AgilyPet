@@ -35,6 +35,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
 
 
     let prijavljen;
+    var myBlob= "";
 
     if (localStorage.getItem("token") != null) {
         prijavljen = true;
@@ -43,7 +44,6 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
     }
     const [selectedImg, setSelectedImg] = React.useState(0);
     const [imagesTotal, setImagesTotal] = React.useState(0);
-    const [blobForBackend, setMyBlob] = React.useState("");
 
     React.useEffect(function () {
         const getCourses = async function () {
@@ -57,21 +57,26 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
     const exportAsImage = async (element: HTMLElement, imageFileName: string) => {
         const canvas = await html2canvas(element);
         const image = canvas.toDataURL("image/png", 1.0);
-        setMyBlob(image);
-        downloadImage(image, imageFileName);
+        await downloadImage(image, imageFileName);
     };
-    const downloadImage = (blob: string, imageFileName: string) => {
+    const downloadImage = async (blob: string, imageFileName: string) => {
         const fakeLink = window.document.createElement("a");
 
         fakeLink.download = imageFileName;
 
         fakeLink.href = blob;
 
+
+        myBlob = fakeLink.href;
+        console.log(myBlob);
+
         document.body.appendChild(fakeLink);
         fakeLink.click();
         document.body.removeChild(fakeLink);
 
-        fakeLink.remove();
+
+        
+        
     };
 
 
@@ -87,16 +92,16 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
         if (selectedImg === 6) e.currentTarget.innerHTML = "<img style='max-width:50px; max-height:50px;'src='../slike/end.png'></img>";
     }
 
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
 
         e.preventDefault();
 
-        exportAsImage(exportRef.current, "image");
+        await exportAsImage(exportRef.current, "image");
 
 
         let data = {
             naziv: lastnosti.naziv,
-            slika: blobForBackend,
+            slika: myBlob,
             opis: lastnosti.opis,
             //velikost: velikostiArray,
             manjkaEna: lastnosti.manjkaEna,
@@ -304,16 +309,9 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                                     <Col>
                                     </Col>
                                 </Row>
-
-
+                                
                                 <br />
-                                <Row>
-                                    <Col></Col>
-                                    <Col xs={8} className='center'>
-                                        <p>Doube click to save</p>
-                                    </Col>
-                                    <Col></Col>
-                                </Row>
+                                
                                 <Row>
                                     <Col></Col>
                                     <Col className='center'>

@@ -33,7 +33,7 @@ function SeznamCourse () {
 
 
                     {/*<span><ZdrastvenoStanje seznam = {course.zdrastvenoStanje}></ZdrastvenoStanje></span>*/}
-                    <img style={{maxWidth:"260px"}} src={'../slike/courseImages/'+ course.slika}></img>
+                    <img style={{maxWidth:"260px"}} src={course.slika}></img>
                 </div>))}
             </div>
         </div>

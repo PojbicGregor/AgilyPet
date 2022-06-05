@@ -36,6 +36,7 @@
     "node-fetch": "^3.2.4",
     "nodemailer": "^6.7.5",
     "nodemailer-express-handlebars": "^5.0.0",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "react-scripts": "^5.0.1"
   }
 }
