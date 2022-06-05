@@ -1,5 +1,7 @@
 const db = require("../models/baza");
 var EventModel = db.event;
+var Uporabnik = db.registriran_uporabniks;
+
 const { google } = require('googleapis');
 
 /**
@@ -52,7 +54,9 @@ module.exports = {
     /**
      * eventController.create()
      */
-    create: function (req, res) {
+    create: async function (req, res) {
+     let   imeEvent=req.body.ime;
+
         var event = new EventModel({
             ime: req.body.ime,
             datum: req.body.datum,
@@ -82,7 +86,7 @@ module.exports = {
         eventEndTime.setMinutes(eventEndTime.getMinutes() + 45)
 
 
-        console.log(eventEndTime)
+        //console.log(eventEndTime)
         const event1 = {
             summary: req.body.ime,
             location: req.body.naslov,
@@ -123,6 +127,8 @@ module.exports = {
 
               
             }
+
+
         )
         //
         event.save(function (err, event) {
@@ -133,8 +139,17 @@ module.exports = {
                 });
             }
 
-            return res.status(201).json(event);
         });
+
+        setTimeout(async () => {
+        const nov_event = await EventModel.findOne({ ime: imeEvent})
+        await Uporabnik.updateOne({ token: req.body.token }, {
+            $push: { event: nov_event._id }
+        })
+        return res.status(201).json(nov_event);
+
+    }, 1000);
+
     },
 
     /**

@@ -20,7 +20,10 @@ module.exports = mongoose => {
             course:{ type : Array , "default" : [] },
             prijavljeni:{ type : Array , "default" : [] },
             pes: [pesSchema],
-            course: [String]
+            course: [String],
+            event:{ type : Array , "default" : [] },
+            event:[String],
+
         }
       );
 
