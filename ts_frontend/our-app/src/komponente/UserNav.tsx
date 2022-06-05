@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Navbar } from 'react-bootstrap';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { Nav } from 'react-bootstrap';
 import { NavDropdown } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image'
@@ -24,7 +24,7 @@ const UserNav: React.FC = () => {
 
     return (
         <>
-            <Navbar className='bg-orange pisava-white'>
+            <Navbar expand="lg" className='bg-orange pisava-white'>
                 <Container>
                     <Navbar.Brand href="/">
                         <img
