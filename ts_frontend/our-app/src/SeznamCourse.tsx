@@ -8,6 +8,16 @@ import ZdrastvenoStanje from './ZdrastvenoStanje';
 
 const SeznamCourse: React.FC = () => {
 
+    let prijavljen: boolean = false;
+
+    
+
+    if (localStorage.getItem("token") != null) {
+        prijavljen = true;
+    }else{
+        prijavljen = false;
+    }
+
     const ref = useRef(null);
 
     const [elements, setElements] = React.useState<Course[]>();
@@ -90,42 +100,7 @@ const SeznamCourse: React.FC = () => {
     
 
     
-//DODAJ IZPISE ZA BOOLEAN VREDNOSTI
-    /*return(
-        <div className='container' style={{backgroundColor:"white", borderRadius:"15px"}}>
-            <div className='container-md' >
-                {elements?.map(course => (<div style={{border:"solid 4px whiteSmoke", borderRadius:"10px", margin:"15px"}} key={course.naziv}>
-                    <span><h3>{course.naziv}</h3></span><br/>
-                    <span>{course.opis}</span><br/>
-                    <span>Missing a limb:{JSON.stringify(course.manjkaEna)}</span><br/>
-                    <span>Missing two limbs:{JSON.stringify(course.manjkataDve)}</span><br/>
-                    <span>Dog with joint issues:{JSON.stringify(course.sklepi)}</span><br/>
-                    <span>Added by: {course.jeDodal}</span><br/>
 
-                    <span>
-                    <form id="form" onSubmit={handleSubmit}>
-
-                    {/*<span><ZdrastvenoStanje seznam = {course.zdrastvenoStanje}></ZdrastvenoStanje></span>*/
-                   
-                        {/*<select name="jeDodal" value={lastnosti.jeDodal} onChange={handleChange}>
-                            <option  value={course.jeDodal}>{course.jeDodal}</option>
-                            <option  value="dingdong@gmail.com">test</option>
-    </select>
-                        <input id="dodal" type="text" value={course.jeDodal} ></input>
-                        
-
-                        <input type="submit" value="Follow"/>
-                    </form>
-                    
-                    </span><br />
-
-                    
-                    {/*<span><ZdrastvenoStanje seznam = {course.zdrastvenoStanje}></ZdrastvenoStanje></span>
-                    <img style={{maxWidth:"260px"}} src={'../slike/courseImages/'+ course.slika}></img>
-                </div>))}
-            </div>
-        </div>
-    */
         
 
     const handleChangeOne = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -222,30 +197,34 @@ const SeznamCourse: React.FC = () => {
                                 {JSON.stringify(course.sklepi) === 'true' ? <><span><Badge bg="warning" text="dark">Joint issues</Badge></span><br /></> : null}
                                 {(JSON.stringify(course.manjkaEna) === 'true' || JSON.stringify(course.manjkataDve) === 'true' || JSON.stringify(course.sklepi) === 'true') ? <><span><Badge bg="success">No issues</Badge></span><br /></> : null}
                                 </Card.Text>
-                                {/*<form id="form" onSubmit={handleSubmit}>
 
-                                    <select name="jeDodal" value={lastnosti.jeDodal} onChange={handleChange}>
-                                        <option  value={course.jeDodal}>{course.jeDodal}</option>
-                                        <option  value="dingdong@gmail.com">test</option>
-                                    </select>
-                                    <input ref={ref} name="dodal" type="text" value={course.jeDodal} ></input>
-                                    
-
-                                    <input type="submit" value="Follow"/>
-                                </form>*/}
-
-                                <button onClick= {() => handleClick(course.jeDodal)}>Follow</button>
                             </Card.Body>
                             {(course.jeDodal !== undefined && (course.jeDodal.includes('admin') || course.jeDodal.includes('Admin')) && !course.jeDodal.includes('@')) ? 
                             <Card.Footer className='small_foot_min'>
+                                <Row>
+                                    <Col sm={8}>
                                 <small className="text-muted">
                                     {course.jeDodal}
                                     <Badge bg="info">Admin</Badge>
                                 </small>
+                                </Col>
+                                <Col>
+                                {prijavljen ? <button className='btn  btn-outline-primary btn-sm' onClick= {() => handleClick(course.jeDodal)}>Follow</button> : null}
+                                </Col>
+                                </Row>
                             </Card.Footer> 
                             :
                             <Card.Footer className='small_foot_min'>
-                            <small className="text-muted">{course.jeDodal}</small>
+                            <Row>
+                                    <Col sm={8}>
+                                <small className="text-muted">
+                                    {course.jeDodal}
+                                </small>
+                                </Col>
+                                <Col>
+                                {prijavljen ? <button className='btn  btn-outline-primary btn-sm' onClick= {() => handleClick(course.jeDodal)}>Follow</button> : null}
+                                </Col>
+                                </Row>
                             </Card.Footer>}
                             </div>
                         </Card>
@@ -255,6 +234,5 @@ const SeznamCourse: React.FC = () => {
         </Container>
     </>
     );
-}
 }
 export default SeznamCourse;
