@@ -57,7 +57,7 @@ const MojiCoursi: React.FC = () => {
                                     <div className='border_orange'>
                                         <Card.Header className='img_min'>
                                             <div className='center'>
-                                                <Card.Img variant="top" style={{ maxWidth: "260px" }} src={'../slike/courseImages/' + course.slika} />
+                                                <Card.Img variant="top" style={{ maxWidth: "260px" }} src={course.slika} />
                                             </div>
                                         </Card.Header>
                                         <Card.Body>
