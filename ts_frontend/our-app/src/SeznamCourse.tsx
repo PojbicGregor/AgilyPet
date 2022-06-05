@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Row, Card, Container, Badge } from 'react-bootstrap';
+import { Col, Row, Card, Container, Badge, Form, Button } from 'react-bootstrap';
 import { Course } from './razredi/Course';
 import Velikost from './Velikost';
 import ZdrastvenoStanje from './ZdrastvenoStanje';
@@ -7,6 +7,7 @@ import ZdrastvenoStanje from './ZdrastvenoStanje';
 const SeznamCourse: React.FC = () => {
 
     const [elements, setElements] = React.useState<Course[]>();
+    const [elements2, setElements2] = React.useState<Course[]>();
 
 
 
@@ -14,15 +15,84 @@ const SeznamCourse: React.FC = () => {
         const getCourses = async function () {
             const res = await fetch("http://localhost:3001/course");
             const data = await res.json();
-            setElements(data.reverse()); // 'reverse()', zato da so na vrhu prikazani najnovejši coursi
+            setElements(data); // 'reverse()', zato da so na vrhu prikazani najnovejši coursi
+            setElements2(data.reverse());
             console.log(data)
         }
         getCourses();
     }, [])
 
+    const handleChangeOne = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const len = elements2?.length ?? 0;
+        const array = elements2 ?? [];
+        const array2: Course[] = [];
+        for (let index = 0; index < len; index++) {
+            const ena = array[index].manjkaEna ?? false;
+            const dva = array[index].manjkataDve ?? false;
+            const sklep = array[index].sklepi ?? false;
+            if (ena) {
+                array2.push(array[index]);
+            }
+        }
+        console.log(array2)
+        setElements(array2);
+    }
+
+    const handleChangeTwo = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const len = elements2?.length ?? 0;
+        const array = elements2 ?? [];
+        const array2: Course[] = [];
+        for (let index = 0; index < len; index++) {
+            const ena = array[index].manjkaEna ?? false;
+            const dva = array[index].manjkataDve ?? false;
+            const sklep = array[index].sklepi ?? false;
+            if (dva) {
+                array2.push(array[index]);
+            }
+        }
+        console.log(array2)
+        setElements(array2);
+    }
+
+    const handleChangeJoint = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const len = elements2?.length ?? 0;
+        const array = elements2 ?? [];
+        const array2: Course[] = [];
+        for (let index = 0; index < len; index++) {
+            const ena = array[index].manjkaEna ?? false;
+            const dva = array[index].manjkataDve ?? false;
+            const sklep = array[index].sklepi ?? false;
+            if (sklep) {
+                array2.push(array[index]);
+            }
+        }
+        console.log(array2)
+        setElements(array2);
+    }
+
+
     //DODAJ IZPISE ZA BOOLEAN VREDNOSTI
     return (<>
         <Container className='margin_reg'>
+            <Row>
+                <Form>
+                <Form.Group className="mb-3">
+                            <Form.Label>Missing one limb?</Form.Label>
+                            <input name="manjkaEna" type="checkbox" value="true" onChange={handleChangeOne} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Missing two limbs?</Form.Label>
+                            <input name="manjkataDve" type="checkbox" value="true" onChange={handleChangeTwo} />
+                        </Form.Group>
+
+                        <Form.Group className="mb-3">
+                            <Form.Label>Joint related problems?</Form.Label>
+                            <input name="sklepi" type="checkbox" value="true" onChange={handleChangeJoint} />
+                        </Form.Group>
+                </Form>
+                <Button></Button>
+            </Row>
             <Row xs={1} md={3} className="g-4">
                 {elements?.map(course => (
                     <Col>
