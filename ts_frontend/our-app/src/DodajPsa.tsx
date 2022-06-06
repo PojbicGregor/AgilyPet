@@ -113,7 +113,7 @@ let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
                 <Col></Col>
                 <Col xs={10} md={6} className='center'>
                     <h1 className='center'>
-                        Vnesite podatke o vašem psu:
+                        Enter details about your dog:
                     </h1>
                 </Col>
                 <Col></Col>
@@ -123,12 +123,12 @@ let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
                 <Col xs={10} md={6} className="border_color">
                     <Form id='form' onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" >
-                            <Form.Label>Ime</Form.Label>
-                            <Form.Control name="ime" type="text" placeholder="Vnesite ime" value={lastnosti.ime} onChange={handleChange} />
+                            <Form.Label>Name</Form.Label>
+                            <Form.Control name="ime" type="text" placeholder="" value={lastnosti.ime} onChange={handleChange} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Pasma</Form.Label>
+                            <Form.Label>Breed</Form.Label>
                             <Form.Select aria-label="Default select example" name="pasma" value={lastnosti.pasma} onChange={handleChange2}>
                                 {psi.map(e => {
                                     return <option key={e} value={e}>{e}</option>;
@@ -137,12 +137,12 @@ let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Višina</Form.Label>
+                            <Form.Label>Height</Form.Label>
                             <Form.Control name="visina" type="number" value={lastnosti.visina} onChange={handleChange} />
                         </Form.Group>
 
                         <Form.Group className="mb-3">
-                            <Form.Label>Starost</Form.Label>
+                            <Form.Label>Age</Form.Label>
                             <Form.Control name="starost" type="number" value={lastnosti.starost} onChange={handleChange} />
                         </Form.Group>
 
@@ -165,7 +165,7 @@ let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
                         <Row>
                             <Col className='text-center'>
                                 <Button variant="primary" type="submit">
-                                    Dodaj
+                                    Add
                                 </Button>
                             </Col>
                         </Row>

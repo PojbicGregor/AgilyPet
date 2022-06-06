@@ -52,7 +52,7 @@ const UserNav: React.FC = () => {
                         </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end">
-                        <Button variant="danger" onClick={handleClick}>Odjava</Button>
+                        <Button variant="danger" onClick={handleClick}>Logout</Button>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
@@ -60,5 +60,6 @@ const UserNav: React.FC = () => {
         </>
     );
 }
+
 
 export default UserNav;

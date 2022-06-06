@@ -20,11 +20,11 @@ const Vsebina: React.FC = () => {
                         <Image src={psi} className="slika" fluid />
                     </Col>
                     <Col>
-                        <h1>Ustvarite prilagojen agility course za vašega psa.</h1>
+                        <h1>Create a course, fit for your dog.</h1>
                         <div>
                             <p>
-                                Course lahko prilagodite potrebam vašega psa. Graditelj coursov je narejen z namenom rekreacije, 
-                                rehabilitacije in izboljšanje zdravja psa.
+                                You can adapt the course to the needs of your dog. 
+                                The course creator is made for purposes of recreation, rehabilitation in improvement of your dog's health.
                             </p>
                         </div>
                     </Col>
@@ -35,12 +35,12 @@ const Vsebina: React.FC = () => {
                 <Row className='padding_bottom'>
                     <Col>
                         <h1>
-                            Vnesite psa in pridobite njemu prilagojene podatke.
+                            Add a dog, get additional information on it's breed.
                         </h1>
                         <div>
                             <p>
-                                Po vnosu podatkov psa vam bo AgilyPet ponudil prilagojene podatke glede na pasmo vašega psa.
-                                Podatki bodo vsebovali karakter psa, zaželjeno težo, višuno in pričakovano življenjsko dobo.
+                                The additional information that AgilyPet offers, based on the breed of your dog, is character,
+                                ideal weight, height in expected life-span.
                             </p>
                         </div>
                     </Col>
@@ -54,13 +54,13 @@ const Vsebina: React.FC = () => {
                 <Row className='padding_bottom'>
                     <Col>
                         <h1>
-                            Brskajte po najboljših agility coursih. 
+                            Browse already created courses.
                         </h1>
                         <div>
                             <p>
-                                AgilyPet vam bo ponudil najboljše agility course, ki so vam na voljo. Na posameznega kreatorja 
-                                coursa se lahko tudi naročite in boste obveščeni, vsakič, ko zgradi nov agility course. Po agility 
-                                coursih lahko tudi brskate in prilagodite iskanje glede na željene zahteve in na svojega psa.
+                                AgilyPet offers you the best agility courses available. You can also follow other users, to be notified
+                                whenever they create a new course. You can also filter between courses, to get results fit for your
+                                dog's medical condition.
                             </p>
                         </div>
                     </Col>

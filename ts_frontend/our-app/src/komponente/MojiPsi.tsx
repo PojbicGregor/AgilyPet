@@ -48,7 +48,7 @@ const MojiPsi: React.FC = () => {
     if (elements === undefined || elements.length == 0) {
         return (<>            <UserNav />
             <h1 className="text-center">
-                Dear, you have not added a Dog yet, click on the button to add a Dog</h1>
+                You have not added a Dog yet, click on the button to add a Dog</h1>
             <Button href='/dodajPsa'>ADD</Button>
             <Noga />
         </>)
