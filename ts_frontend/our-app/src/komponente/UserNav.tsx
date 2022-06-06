@@ -39,13 +39,16 @@ const UserNav: React.FC = () => {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto pisava-white">
                             <Nav.Link className="mouse_over" href="/"> <div className="pisava-white">Home</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/seznamCourse"><div className="pisava-white">All Courses</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/mojiCoursi"><div className="pisava-white">My Courses</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/dodajCourse"><div className="pisava-white">Create a Course</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/dodajPsa"><div className="pisava-white">Add Dogs</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/seznamCourse"><div className="pisava-white">Courses</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/dodajCourse"><div className="pisava-white">Create a course</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/dodajPsa"><div className="pisava-white">Add your dog</div></Nav.Link>
                             <Nav.Link className="mouse_over" href="/vseDogodkev"><div className="pisava-white">Events</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/dodajEvent"><div className="pisava-white">Add Events</div></Nav.Link>
-
+                            <Nav.Link className="mouse_over" href="/dodajEvent"><div className="pisava-white">Add event</div></Nav.Link>
+                            <NavDropdown className="mouse_over bg-orange pisava-white" title="User pages" id="basic-nav-dropdown white_text">
+                                <NavDropdown.Item href="/mojiCoursi">My courses</NavDropdown.Item>
+                                <NavDropdown.Item href="/mojiDogodki">My events</NavDropdown.Item>
+                                <NavDropdown.Item href="/mojiPSi">My dogs</NavDropdown.Item>
+                            </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end">
@@ -57,5 +60,6 @@ const UserNav: React.FC = () => {
         </>
     );
 }
+
 
 export default UserNav;

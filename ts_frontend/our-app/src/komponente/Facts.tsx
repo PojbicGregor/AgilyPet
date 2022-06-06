@@ -11,8 +11,40 @@ import { Col, Container, Form, Row } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router';
 import { stringify } from 'querystring';
+import { Pes } from '../razredi/Pes';
 
 const Facts: React.FC = () => {
+
+    const [psi, setPsi] = React.useState<Pes[]>([]);
+
+    React.useEffect(function () {
+        const getPsi = async function () {
+            const res = await fetch("http://localhost:3001/token/" + localStorage.getItem("token"));
+            const data = await res.json();
+            setPsi(data);
+        }
+        getPsi();
+    }, [])
+
+    if (psi.length === 0) {
+        fetch('http://localhost:3001/token/' + localStorage.getItem("token"), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                console.log(response);
+                response.json().then(data => {
+                    console.log(data);
+                    setPsi(data);
+                });
+            }
+        });
+    }
+
+    const [izbranPes, setIzbranPes] = React.useState("");
 
     const [lastnosti, setLastnosti] = React.useState({
         name: "",
@@ -69,6 +101,49 @@ const Facts: React.FC = () => {
         })
     }
 
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        console.log(e.target.value);
+        setIzbranPes(e.target.value);
+        fetch("https://api.thedogapi.com/v1/breeds/search?q=" + e.target.value, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                console.log(response);
+                response.json().then(data => {
+                    console.log(data[0]);
+                    setLastnosti({
+                        name: data[0].name,
+                        weight: data[0].weight.metric,
+                        height: data[0].height.metric,
+                        bred_for: data[0].bred_for,
+                        life_span: data[0].life_span,
+                        temperament: data[0].temperament
+                    });
+
+                    fetch('https://api.thedogapi.com/v1/images/' + data[0].reference_image_id, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+                        }
+                    }).then(response => {
+                        if (response.status === 200) {
+                            console.log(response);
+                            response.json().then(data => {
+                                console.log(data);
+                                setUrlImg(data.url);
+                            });
+                        }
+                    });
+                })
+            }
+        })
+    }
+
     return (
         <>
 
@@ -77,12 +152,11 @@ const Facts: React.FC = () => {
                 <Row>
                     <Col></Col>
                     <Col xs={6} className="">
-                        <Form onSubmit={handleSubmit}>
-
-                            <Button variant="primary" type="submit">
-                                Select
-                            </Button>
-                        </Form>
+                        <Form.Select aria-label="Default select example" value={izbranPes} onChange={handleChange}>
+                        {psi!.map(e => {
+                            return <option key={e.ime} value={e.pasma}>{e.ime}</option>;
+                        })}
+                        </Form.Select>
                     </Col>
                     <Col></Col>
                 </Row>

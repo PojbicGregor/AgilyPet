@@ -27,7 +27,8 @@ const DodajEvent: React.FC<DodajEventProps> = (props: DodajEventProps) => {
          ime:lastnosti.naziv,
          datum:lastnosti.datum,
          opis : lastnosti.opis,
-         naslov: lastnosti.naslov
+         naslov: lastnosti.naslov,
+         token:localStorage.getItem("token")
         } 
          console.log(data)
         fetch("http://localhost:3001/event/dodajEvent", {

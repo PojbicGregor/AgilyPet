@@ -54,21 +54,22 @@ exports.prijavlenUser = async (req, res) => {
 
 exports.mojCourse = async (req, res) => {
     let mojiCoursi = [];
-          const novUporabnik = await Uporabnik.findOne({ token: req.body.token })
+    const novUporabnik = await Uporabnik.findOne({ token: req.body.token })
 
-        for(let i=0;i<=novUporabnik.course.length-1;i++){
-             let course=await  Course.findOne({ _id: novUporabnik.course[i] })
-             if(course===null){
-             }
-                else {
-                    mojiCoursi.push(course)}
-
+    for (let i = 0; i <= novUporabnik.course.length - 1; i++) {
+        let course = await Course.findOne({ _id: novUporabnik.course[i] })
+        if (course === null) {
         }
-        console.log("konec")
+        else {
+            mojiCoursi.push(course)
+        }
+
+    }
+    console.log("konec")
 
     return res.json(mojiCoursi);
 
-           
+
 
 }
 
@@ -78,14 +79,62 @@ exports.myDogs = async (req, res) => {
     return res.json(novUporabnik.pes);
 
 }
-exports.deleteDog=async(req,res)=>{
+exports.deleteDog = async (req, res) => {
 
     await Uporabnik.updateOne({ token: req.body.token }, {
-        "$pull":{"pes":{"_id":req.body.id}} 
-       })
+        "$pull": { "pes": { "_id": req.body.id } }
+    })
     const uporabnik = await Uporabnik.findOne({ token: req.body.token })
     return res.json(uporabnik.pes);
-   
+
+
+
+}
+exports.getDogodki = async (req, res) => {
+    const uporbanikZaEvent = await Uporabnik.findOne({ token: req.params.id })
+    let mojiEvents = [];
+    console.log(uporbanikZaEvent.event.length)
+    if (uporbanikZaEvent.event.length === 0) {
+        return res.json(mojiEvents);
+
+    } else {
+        for (let i = 0; i <= uporbanikZaEvent.event.length - 1; i++) {
+            let event = await Event.findOne({ _id: uporbanikZaEvent.event[i] })
+            if (event === null) {
+            }
+            else {
+                mojiEvents.push(event)
+            }
+        }
+        return res.json(mojiEvents);
+    }
+}
+
+exports.deleteEvent = async (req, res) => {
+    
+    await Uporabnik.updateOne({ token: req.body.token }, {
+        "$pull": { "event": req.body.id }
+    });
+
+    const uporbanikZaEvent = await Uporabnik.findOne({ token: req.body.token })
+    let mojiEvents = [];
+
+    console.log(uporbanikZaEvent)
+
+    if (uporbanikZaEvent.event.length === null) {
+        return res.json(mojiEvents);
+
+    } else {
+        for (let i = 0; i <= uporbanikZaEvent.event.length - 1; i++) {
+            let event = await Event.findOne({ _id: uporbanikZaEvent.event[i] })
+            if (event === null) {
+            }
+            else {
+                mojiEvents.push(event)
+            }
+        }
+        return res.json(mojiEvents);
+    }
 
 
 }

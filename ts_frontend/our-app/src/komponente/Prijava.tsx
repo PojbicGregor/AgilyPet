@@ -44,11 +44,16 @@ const Prijava: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProps) =>
             if (response.status === 200) {
                 console.log(response);
                 response.json().then(data => {
-                    console.log(data.data);
+                    if(data.status==='error'){
+                        alert("Error in email/password");
+
+                    }else{
                     localStorage.setItem("token", data.data);
                     sessionStorage.setItem('reloadCount', String(0));
+                    navigate("/");
+
+                }
                 })
-                navigate("/");
             }
         })
     }

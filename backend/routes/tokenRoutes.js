@@ -13,9 +13,13 @@ module.exports = app => {
 
     router.post("/mojCourse",tokens.mojCourse);
 
-    router.get("/:id",tokens.myDogs)
+    router.get("/:id",tokens.myDogs);
     
-    router.post("/deleteDog",tokens.deleteDog)
+    router.post("/deleteDog",tokens.deleteDog);
+
+    router.get('/zaDogodki/:id',tokens.getDogodki);
+
+    router.post("/deleteEvent",tokens.deleteEvent);
 
     app.use("/token", router);
   };

@@ -18,6 +18,7 @@ const MojiPsi: React.FC = () => {
         }
         getPsi();
     }, [])
+    
     async function deleteDog(dataForBackend: { id: any; token?: string | null; }) {
         await fetch("http://localhost:3001/token/deleteDog", {
             method: 'POST',

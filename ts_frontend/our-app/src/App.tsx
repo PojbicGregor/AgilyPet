@@ -24,6 +24,7 @@ import SeznamCourse from './SeznamCourse';
 import VsiCoursi from './komponente/VsiCoursi';
 import MojiCoursi from './komponente/MojiCoursi';
 import MojiPsi from './komponente/MojiPsi';
+import MojiDogodki from './komponente/MojiDogodki';
 function App() {
 
   const [seznamPsov, setSeznamPsov] = React.useState<Pes[]>([]);
@@ -83,6 +84,8 @@ function App() {
           <Route path='/seznamCourse' element={<VsiCoursi	/>} />
 
           <Route path='/mojiCoursi' element={<MojiCoursi	/>} />
+
+          <Route path='/mojiDogodki' element={<MojiDogodki	/>} />
 
           <Route path='/mojiPSi' element={<MojiPsi	/>} />
 
