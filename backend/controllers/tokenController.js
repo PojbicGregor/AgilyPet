@@ -94,7 +94,7 @@ exports.getDogodki = async (req, res) => {
     const uporbanikZaEvent = await Uporabnik.findOne({ token: req.params.id })
     let mojiEvents = [];
     console.log(uporbanikZaEvent.event.length)
-    if (uporbanikZaEvent.event.length === null) {
+    if (uporbanikZaEvent.event.length === 0) {
         return res.json(mojiEvents);
 
     } else {

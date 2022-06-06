@@ -19,7 +19,8 @@ const Registracija: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProp
     const [lastnosti, setLastnosti] = React.useState({
         email: "",
         username: "",
-        geslo: ""
+        geslo: "",
+        proverka: "",
     });
 
     const navigate = useNavigate();
@@ -27,26 +28,32 @@ const Registracija: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProp
     const handleSubmit = (e: FormEvent) => {
         console.log("submit");
         e.preventDefault();
+        if (lastnosti.geslo != lastnosti.proverka) {
+            alert("passwords doesnt match")
+        } else if (lastnosti.username === "" || lastnosti.email === "") {
+            alert("fill all empty places ")
+        } else {
+            let data = {
+                email: lastnosti.email,
+                username: lastnosti.username,
+                geslo: lastnosti.geslo
+            }
 
-        let data = {
-            email: lastnosti.email,
-            username: lastnosti.username,
-            geslo: lastnosti.geslo
+            fetch("http://localhost:3001/api/register", {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).then(response => {
+                if (response.status == 200) {
+                    console.log("uspesno");
+                    navigate("/prijava");
+                }
+            })
         }
-
-        fetch("http://localhost:3001/api/register", {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            if (response.status == 200) {
-                console.log("uspesno");
-                navigate("/prijava");
-            }
-        })
     }
+
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setLastnosti({ ...lastnosti, [e.target.name]: e.target.value });
@@ -78,6 +85,11 @@ const Registracija: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProp
                             <Form.Group className="mb-3" controlId="formBasicPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control name="geslo" type="password" placeholder="Password" value={lastnosti.geslo} onChange={handleChange} />
+                            </Form.Group>
+
+                            <Form.Group className="mb-3" controlId="formBasicPassword">
+                                <Form.Label>Passwvcxvord</Form.Label>
+                                <Form.Control name="proverka" type="password" placeholder="Password" value={lastnosti.proverka} onChange={handleChange} />
                             </Form.Group>
 
                             <Button variant="primary" type="submit">

@@ -12,7 +12,6 @@ const Following = db.following;
 //registriraj novega uporabnika
 exports.register = async (req, res) => {
     console.log("nekaj dela");
-    console.log(req.body);
 
 
     const email = req.body.email;
@@ -99,10 +98,12 @@ exports.login = async (req, res) => {
 	if (!user) {
 		return res.json({ status: 'error', error: 'Invalid username/password' })
 	}
-
-	if (await bcrypt.compare(password, user.password)) {
+	
+	let proba=await bcrypt.compare(password, user.password)
+	console.log(proba)
+	if (proba===true) {
 		// the username, password combination is successful
-
+         console.log("kxmlkgmdjgdkgs")
 		const token = jwt.sign(
 			{
 				id: user._id,
@@ -119,10 +120,12 @@ exports.login = async (req, res) => {
 		   }
 	   )
 		return res.json({ status: 'ok', data: token })
+	}else{
+
+		res.json({ status: 'error', error: 'Invalid username/password' })
+	}
 	}
 
-	res.json({ status: 'error', error: 'Invalid username/password' })
-}
 
 exports.dodajPsa = async (req,res) => {
 	const pes = {
