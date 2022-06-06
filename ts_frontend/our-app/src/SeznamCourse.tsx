@@ -282,7 +282,7 @@ const SeznamCourse: React.FC = () => {
 //DODAJ IZPISE ZA BOOLEAN VREDNOSTI
 return (<>
     <Container className='margin_reg'>
-        <Row>
+        <Row className='mb-3'>
             <Button variant="primary" onClick={handleShow}>
                 Filter
             </Button>
@@ -321,7 +321,7 @@ return (<>
                 </Modal.Footer>
             </Modal>
         </Row>
-        <Row xs={1} md={3} className="g-4">
+        <Row xs={1} md={2} lg={3} className="g-4">
             {elements?.map(course => (
                 <Col>
                     <Card border="warning" className='border_orange'>

@@ -104,84 +104,87 @@ const SelectFacts: React.FC = () => {
 
             <Container className='margin_reg'>
                 <Row>
+                    <h2 className='center'>Search by dog breed</h2>
+                </Row>
+                <Row>
                     <Col></Col>
                     <Col xs={6} className="">
                         <Form.Select aria-label="Default select example" value={izbranPes} onChange={handleChange}>
-                        {psi.map(e => {
-                            return <option key={e} value={e}>{e}</option>;
-                        })}
+                            {psi.map(e => {
+                                return <option key={e} value={e}>{e}</option>;
+                            })}
                         </Form.Select>
                     </Col>
                     <Col></Col>
                 </Row>
                 <Row className='mt-2'>
                     <Col></Col>
-                    <Col className='podatki' xs={6}>
-                        <div className=''>
-                            <Row>
-                                <Col>
-                                    <h1>
-                                        Dog facts:
-                                    </h1>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.name ? <h2>Breed:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.name ? <p className='text-justify mt-2'>{lastnosti.name}</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.weight ? <h2>Weight:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.weight ? <p className='text-justify mt-2'>{lastnosti.weight} kg</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.height ? <h2>Height:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.height ? <p className='text-justify mt-2'>{lastnosti.height} cm</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.bred_for ? <h2>Bread for:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.bred_for ? <p className='text-justify mt-2'>{lastnosti.bred_for}</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.life_span ? <h2>Life span:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.life_span ? <p className='text-justify mt-2'>{lastnosti.life_span}</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.temperament ? <h2>Temperament:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.temperament ? <p className='text-justify mt-2'>{lastnosti.temperament}</p> : null}
-                                </Col>
-                            </Row>
-                            <Row className='mb-2'>
-                                <Col></Col>
-                                <Col xs={9}>
-                                    {urlImg ? <img className='slika_psa' src={urlImg} alt="Slika psa" /> : null}
-                                </Col>
-                                <Col></Col>
-                            </Row>
-                        </div>
-                    </Col>
+                    {lastnosti.name ?
+                        <Col className='podatki' xs={10} md={6}>
+                            <div className=''>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.name ? <h1>Dog facts:</h1> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.name ? <h2>Breed:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.name ? <p className='text-justify mt-2'>{lastnosti.name}</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.weight ? <h2>Weight:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.weight ? <p className='text-justify mt-2'>{lastnosti.weight} kg</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.height ? <h2>Height:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.height ? <p className='text-justify mt-2'>{lastnosti.height} cm</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.bred_for ? <h2>Bread for:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.bred_for ? <p className='text-justify mt-2'>{lastnosti.bred_for}</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.life_span ? <h2>Life span:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.life_span ? <p className='text-justify mt-2'>{lastnosti.life_span}</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.temperament ? <h2>Temperament:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.temperament ? <p className='text-justify mt-2'>{lastnosti.temperament}</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row className='mb-2'>
+                                    <Col></Col>
+                                    <Col xs={9}>
+                                        {urlImg ? <img className='slika_psa' src={urlImg} alt="Slika psa" /> : null}
+                                    </Col>
+                                    <Col></Col>
+                                </Row>
+                            </div>
+                        </Col>
+                        : null}
                     <Col></Col>
                 </Row>
             </Container>

@@ -1,9 +1,11 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Row, Col, Container } from 'react-bootstrap';
 import { Pes } from '../razredi/Pes';
 import Noga from './Noga';
 import UserNav from './UserNav';
 import { MouseEvent } from 'react';
+import '../css/oblikovanje.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const MojiPsi: React.FC = () => {
     const [elements, setElements] = React.useState<Pes[]>();
     let preveri;
@@ -18,7 +20,7 @@ const MojiPsi: React.FC = () => {
         }
         getPsi();
     }, [])
-    
+
     async function deleteDog(dataForBackend: { id: any; token?: string | null; }) {
         await fetch("http://localhost:3001/token/deleteDog", {
             method: 'POST',
@@ -53,29 +55,35 @@ const MojiPsi: React.FC = () => {
     }
     else {
         return (
-
-            <><UserNav />
+            <>
+            <UserNav />
                     <h1 className="text-center">Dogs added by me</h1>
 
                 <div className='container' style={{ backgroundColor: "white", borderRadius: "15px" }}>
 
                     <div className='container-md' >
+                        <Container>
+                            <Row sm={1} md={2} lg={3}>
+                        {elements?.map(psi => (<Col sm={12} md={6}><div className='dogs bg-orange' key={psi.ime}>
+                            <span className='center'><h3>{psi.ime}</h3></span>
+                            <div className=''>
+                            <span className='center'><b>Breed: </b>{psi.pasma}</span>
 
-                        {elements?.map(psi => (<div style={{ border: "solid 4px whiteSmoke", borderRadius: "10px", margin: "15px" }} key={psi.ime}>
+                            <span className='center'><b>Height: </b>{psi.visina}cm</span>
 
-                            <span><h3>{psi.ime}</h3></span><br />
-
-                            <span>{psi.pasma}</span><br />
-
-                            <span>{psi.visina}</span><br />
-
-                            <span>{psi.starost}</span><br />
-                            <span>Missing a limb:{JSON.stringify(psi.manjkaEna)}</span><br />
-                            <span>Missing two limbs:{JSON.stringify(psi.manjkataDve)}</span><br />
-                            <span>Dog with joint issues:{JSON.stringify(psi.sklepi)}</span><br />
+                            <span className='center'><b>Age: </b>{psi.starost} years</span>
+                            {psi.manjkaEna === true ? <span className='center'>Dog is missing one limb </span> : null}
+                            
+                            {psi.manjkataDve === true ? <span className='center'>Dog is missing two limbs </span> : null}
+                            
+                            {psi.sklepi === true ? <span className='center'>Dog has joint issues </span> : null}
+                            </div>
+                            <span className='center mb-2 mt-3'>
                             <Button variant='danger' id={psi._id.toString()} onClick={handleClick}>Delete</Button>
-                        </div>))}
-
+                            </span>
+                        </div></Col>))}
+                        </Row>
+                        </Container>
                     </div>
 
                 </div>

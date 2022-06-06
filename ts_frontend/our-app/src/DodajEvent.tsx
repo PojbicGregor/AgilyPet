@@ -53,7 +53,7 @@ const DodajEvent: React.FC<DodajEventProps> = (props: DodajEventProps) => {
         <Container className='margin_reg'>
                 <Row>
                     <Col></Col>
-                    <Col xs={6} className="border_color">
+                    <Col xs={10} md={6} className="border_color">
                         <Row>
                             <Col className='center'>
                                 <h2 className='podnaslov'>Vnesite podatke o eventu:</h2>

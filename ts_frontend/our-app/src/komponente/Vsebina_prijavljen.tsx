@@ -20,9 +20,7 @@ const Vsebina_prijavljen: React.FC = () => {
                 <Row className='padding_top padding_bottom'>
                     <Facts></Facts>
                 </Row>
-                <Row>
-                    <hr></hr>
-                </Row>
+                <hr />
                 <Row className='padding_bottom'>
                     <SelectFacts></SelectFacts>
                 </Row>

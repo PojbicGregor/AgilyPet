@@ -150,6 +150,9 @@ const Facts: React.FC = () => {
 
             <Container className='margin_reg'>
                 <Row>
+                    <h2 className='center'>Select your dog</h2>
+                </Row>
+                <Row>
                     <Col></Col>
                     <Col xs={6} className="">
                         <Form.Select aria-label="Default select example" value={izbranPes} onChange={handleChange}>
@@ -162,13 +165,12 @@ const Facts: React.FC = () => {
                 </Row>
                 <Row className='mt-2'>
                     <Col></Col>
-                    <Col className='podatki' xs={6}>
+                    {lastnosti.name ? 
+                    <Col className='podatki' xs={10} md={6}>
                         <div className=''>
                             <Row>
                                 <Col>
-                                    <h1>
-                                        Dog facts:
-                                    </h1>
+                                {lastnosti.name ? <h1>Dog facts:</h1> : null}
                                 </Col>
                             </Row>
                             <Row>
@@ -228,6 +230,7 @@ const Facts: React.FC = () => {
                             </Row>
                         </div>
                     </Col>
+                    : null}
                     <Col></Col>
                 </Row>
             </Container>

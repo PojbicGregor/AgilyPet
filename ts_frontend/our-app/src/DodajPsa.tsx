@@ -105,41 +105,14 @@ let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
     }
 
     return (<div>
-        {/*<h2 className='podnaslov'>Vnesite podatke o psu:</h2>
-        <form id="form" onSubmit = {handleSubmit}>
-            
-            <label>Ime:</label>
-            <input name="ime" type="text" value={lastnosti.ime} onChange={handleChange}/>
-            <br />
-            <label>Pasma:</label>
-            <input name="pasma" type="text" value={lastnosti.pasma} onChange={handleChange}/>
-            <br />
-            <label>Visina:</label>
-            <input name="visina" type="number" value={lastnosti.visina} onChange={handleChange}/>
-            <br />
-            <label>Starost:</label>
-            <input name="starost" type="number" value={lastnosti.starost} onChange={handleChange}/>
-            <br />
-            <label>Missing one limb?</label>
-            <input name="manjkaEna" type="checkbox" value = "true" onChange={handleChange}/> Yes
-            <br />
-            <label>Missing two limbs?</label>
-            <input name="manjkataDve" type="checkbox" value = "true" onChange={handleChange}/> Yes
-            <br />
-            <label>Joint related problems?</label>
-            <input name="sklepi" type="checkbox" value = "true" onChange={handleChange}/> Yes
-            <br />
-            <input type="submit" value="Dodaj"/>
-        </form>
-    <button>{<Link className="domov" to={`/`}>Domov</Link>}</button>*/}
 
         {prijavljen ? <UserNav /> : <Navigacija />}
 
         <Container className='margin_reg'>
             <Row>
                 <Col></Col>
-                <Col xs={6} >
-                    <h1>
+                <Col xs={10} md={6} className='center'>
+                    <h1 className='center'>
                         Vnesite podatke o vašem psu:
                     </h1>
                 </Col>
@@ -147,7 +120,7 @@ let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
             </Row>
             <Row>
                 <Col></Col>
-                <Col xs={6} className="border_color">
+                <Col xs={10} md={6} className="border_color">
                     <Form id='form' onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" >
                             <Form.Label>Ime</Form.Label>

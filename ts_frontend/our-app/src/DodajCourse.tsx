@@ -83,13 +83,13 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
 
 
     const handleAddObstacle = (x: number, y: number, e: React.MouseEvent<HTMLTableCellElement, MouseEvent>) => {
-        if (selectedImg === 0) e.currentTarget.innerHTML = "<img style='max-width:50px; max-height:50px;' src='../slike/jump.png'></img>";
-        if (selectedImg === 1) e.currentTarget.innerHTML = "<img style='max-width:50px; max-height:50px;' src='../slike/tire.png'></img>";
-        if (selectedImg === 2) e.currentTarget.innerHTML = "<img style='max-width:50px; max-height:50px;' src='../slike/tunnel.png'></img>";
-        if (selectedImg === 3) e.currentTarget.innerHTML = "<img style='max-width:50px; max-height:50px;' src='../slike/tunnel90.png'></img>";
-        if (selectedImg === 4) e.currentTarget.innerHTML = "<img style='max-width:50px; max-height:50px;'src='../slike/totter.png'></img>";
-        if (selectedImg === 5) e.currentTarget.innerHTML = "<img style='max-width:50px; max-height:50px;'src='../slike/start.png'></img>";
-        if (selectedImg === 6) e.currentTarget.innerHTML = "<img style='max-width:50px; max-height:50px;'src='../slike/end.png'></img>";
+        if (selectedImg === 0) e.currentTarget.innerHTML = "<img class='slika_ovir' src='../slike/jump.png'></img>";
+        if (selectedImg === 1) e.currentTarget.innerHTML = "<img class='slika_ovir' src='../slike/tire.png'></img>";
+        if (selectedImg === 2) e.currentTarget.innerHTML = "<img class='slika_ovir' src='../slike/tunnel.png'></img>";
+        if (selectedImg === 3) e.currentTarget.innerHTML = "<img class='slika_ovir' src='../slike/tunnel90.png'></img>";
+        if (selectedImg === 4) e.currentTarget.innerHTML = "<img class='slika_ovir' src='../slike/totter.png'></img>";
+        if (selectedImg === 5) e.currentTarget.innerHTML = "<img class='slika_ovir' src='../slike/start.png'></img>";
+        if (selectedImg === 6) e.currentTarget.innerHTML = "<img class='slika_ovir' src='../slike/end.png'></img>";
     }
 
     const handleSubmit = async (e: FormEvent) => {
@@ -138,62 +138,6 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
     }
 
     return (<div>
-        {/*<UserNav/>
-        <div className="container" >
-            <div className='container-md' style={{backgroundColor: "white", borderRadius:"15px"}}>
-                <h2 className='podnaslov'>Vnesite podatke o course:</h2>
-                <form id="form" onSubmit={handleSubmit}>
-
-                    <label>Naziv:</label>
-                    <input name="naziv" type="text" onChange={handleChange} />
-                    <br />
-                    <label>Opis:</label>
-                    <input name="opis" type="text" onChange={handleChange} />
-                    <br />
-                    <label>For dogs with a missing limb?</label>
-                    <input name="manjkaEna" type="checkbox" value = "true" onChange={handleChange}/>
-                    <br/>
-                    <label>For dogs with two missing limbs?</label>
-                    <input name="manjkataDve" type="checkbox" value = "true" onChange={handleChange}/>
-                    <br/>
-                    <label>For dogs with join issues?</label>
-                    <input name="sklepi" type="checkbox" value = "true" onChange={handleChange}/>
-                    <br/>
-
-
-                    <div>
-                        <img onClick={handleImgClick} id='5' style={{ maxWidth: "50px", maxHeight: "50px" }} src='../slike/start.png'></img>
-                        <img onClick={handleImgClick} id='0' style={{ maxWidth: "50px", maxHeight: "50px" }} src='../slike/jump.png'></img>
-                        <img onClick={handleImgClick} id='1' style={{ maxWidth: "50px", maxHeight: "50px" }} src='../slike/tire.png'></img>
-                        <img onClick={handleImgClick} id='2' style={{ maxWidth: "50px", maxHeight: "50px" }} src="../slike/tunnel.png"></img>
-                        <img onClick={handleImgClick} id='3' style={{ maxWidth: "50px", maxHeight: "50px" }} src='../slike/tunnel90.png'></img>
-                        <img onClick={handleImgClick} id='4' style={{ maxWidth: "50px", maxHeight: "50px" }} src='../slike/totter.png'></img>
-                        <img onClick={handleImgClick} id='6' style={{ maxWidth: "50px", maxHeight: "50px" }} src='../slike/end.png'></img>
-
-                        <br />
-                        {selectedImg === 0 && <img style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/jump.png'></img>}
-                        {selectedImg === 1 && <img style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/tire.png'></img>}
-                        {selectedImg === 2 && <img style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/tunnel.png'></img>}
-                        {selectedImg === 3 && <img style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/tunnel90.png'></img>}
-                        {selectedImg === 4 && <img style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/totter.png'></img>}
-                        {selectedImg === 5 && <img style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/start.png'></img>}
-                        {selectedImg === 6 && <img style={{ maxWidth: "70px", maxHeight: "70px" }} src='../slike/end.png'></img>}
-                    </div>
-
-
-
-
-                    <div ref={exportRef} style={{ display: "inline-block", textAlign: "center", margin: "10px" }}>
-                        <table >
-                            <tbody >
-                                <MyRow handleAddObstacle={handleAddObstacle} rowNum={0}></MyRow>
-                                <MyRow handleAddObstacle={handleAddObstacle} rowNum={1}></MyRow>
-                                <MyRow handleAddObstacle={handleAddObstacle} rowNum={2}></MyRow>
-                                <MyRow handleAddObstacle={handleAddObstacle} rowNum={3}></MyRow>
-                                <MyRow handleAddObstacle={handleAddObstacle} rowNum={4}></MyRow>
-                                <MyRow handleAddObstacle={handleAddObstacle} rowNum={5}></MyRow>
-                            </tbody>
-    </table>*/}
         <UserNav />
         <Container className='margin_top'>
             <Row>
@@ -262,7 +206,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
 
                                 <Row >
                                     <br />
-                                    <Col>
+                                    <Col xs={0.1} md={1} lg={2}>
                                     </Col>
                                     {selectedImg === null ? <div></div> : <Col xs={5} className='izbran_element center'><h3 className='izbran_element'>Chosen element:</h3></Col>}
                                     <Col xs={3} md={2} lg={1}>
@@ -283,7 +227,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                                         {selectedImg === 5 && <h4 className='izbran_element'>Start</h4>}
                                         {selectedImg === 6 && <h4 className='izbran_element'>End</h4>}
                                     </Col>
-                                    <Col>
+                                    <Col xs={0.1} md={1}>
                                     </Col>
                                 </Row>
 
