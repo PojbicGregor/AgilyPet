@@ -38,14 +38,17 @@ const UserNav: React.FC = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto pisava-white">
-                            <Nav.Link className="mouse_over" href="/"> <div className="pisava-white">Domov</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/seznamCourse"><div className="pisava-white">Vsi coursi</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/mojiCoursi"><div className="pisava-white">Moji coursi</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/dodajCourse"><div className="pisava-white">Kreiraj cours</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/dodajPsa"><div className="pisava-white">Dodaj psa</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/vseDogodkev"><div className="pisava-white">Dogodki</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/dodajEvent"><div className="pisava-white">Dodaj dogodek</div></Nav.Link>
-
+                            <Nav.Link className="mouse_over" href="/"> <div className="pisava-white">Home</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/seznamCourse"><div className="pisava-white">Courses</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/dodajCourse"><div className="pisava-white">Create a course</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/dodajPsa"><div className="pisava-white">Add your dog</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/vseDogodkev"><div className="pisava-white">Events</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/dodajEvent"><div className="pisava-white">Add event</div></Nav.Link>
+                            <NavDropdown className="mouse_over bg-orange pisava-white" title="User pages" id="basic-nav-dropdown white_text">
+                                <NavDropdown.Item href="/mojiCoursi">My courses</NavDropdown.Item>
+                                <NavDropdown.Item href="/mojiDogodki">My events</NavDropdown.Item>
+                                <NavDropdown.Item href="/mojiPSi">My dogs</NavDropdown.Item>
+                            </NavDropdown>
                         </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end">
