@@ -1,5 +1,5 @@
 .bg-orange {
-  background-color: #b87a00;
+  background-color: #b87a00 !important;
 }
 
 .bg-orange_vsebina {
@@ -120,3 +120,11 @@
   min-height: 2.5em;
 }
 
+#white_text{
+  color: #fff;
+}
+
+.btn-secondary {
+  background-color: #b87a00 !important;
+  border-color: #b87a00 !important;
+}

@@ -13,7 +13,7 @@ const MojiPsi: React.FC = () => {
 
 
 
-  
+
 
 
     React.useEffect(function () {
@@ -35,7 +35,7 @@ const MojiPsi: React.FC = () => {
         }).then(response => {
             if (response.status === 200) {
                 response.json().then(data => {
-                           setElements(data)
+                    setElements(data)
                 })
             }
         })
@@ -44,24 +44,34 @@ const MojiPsi: React.FC = () => {
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         console.log(e.currentTarget.id)
-        let dataForBackend={
+        let dataForBackend = {
             id: e.currentTarget.id,
             token: localStorage.getItem("token"),
         }
         deleteEvent(dataForBackend)
     }
     if (elements === undefined || elements.length === 0) {
-        return (<>            <UserNav />
+        return (<>
+            <UserNav />
+            <Row>
             <h1 className="text-center">
-                Dear, you have not added a Event yet, click on the button to add a Event</h1>
-            <Button href='/dodajEvent'>ADD</Button>
+                You have not added a Event yet, click on the button to add a Event
+            </h1>
+            </Row>
+            <Row>
+                <Col></Col>
+            <Col className='center'>
+                <Button className='btn btn-secondary btn-block' href='/dodajEvent'>ADD</Button>
+            </Col>
+            <Col></Col>
+            </Row>
             <Noga />
         </>)
     }
     else {
         return (
             <div >
-                 <UserNav />
+                <UserNav />
                 <div className='container-md' >
                     <Container className='margin_reg'>
                         <Row xs={1} md={2} className="g-4">
