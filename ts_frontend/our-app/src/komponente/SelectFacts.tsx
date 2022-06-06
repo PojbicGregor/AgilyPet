@@ -151,7 +151,7 @@ const SelectFacts: React.FC = () => {
                             </Row>
                             <Row>
                                 <Col>
-                                    {lastnosti.bred_for ? <h2>Bread for:</h2> : null}
+                                    {lastnosti.bred_for ? <h2>Bred for:</h2> : null}
                                 </Col>
                                 <Col className='text-justify'>
                                     {lastnosti.bred_for ? <p className='text-justify mt-2'>{lastnosti.bred_for}</p> : null}

@@ -167,25 +167,25 @@ const VseDogodke: React.FC = () => {
                                     <Card.Header><h3>{event.ime}</h3></Card.Header>
                                     <Card.Body>
                                         <Card.Text>
-                                            <h6>Opis:</h6>
+                                            <h6>Description:</h6>
                                             <span>{event.opis}</span>
                                         </Card.Text>
                                         <Card.Text>
-                                            <h6>Naslov:</h6>
+                                            <h6>Title:</h6>
                                             <span>{event.naslov}</span>
                                         </Card.Text>
                                         <Card.Text>
-                                            <h6>Datum: <Badge bg="success">{event.datum}</Badge></h6>
+                                            <h6>Date: <Badge bg="success">{event.datum}</Badge></h6>
                                         </Card.Text>
                                         <div className='center'>
                                     {
                                         (() => {
                                             if (prijavljen) {
                                                 if (event.daIliNe && (prijavljen)) {
-                                                    return <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button>
+                                                    return <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Cancel</Button>
                                                 }
                                                 if (!event.daIliNe && (prijavljen)) {
-                                                    return <Button id={event.id.toString()} onClick={handleClick}>Prijava</Button>
+                                                    return <Button id={event.id.toString()} onClick={handleClick}>Sign up</Button>
                                                 }
                                             }
                                             else {

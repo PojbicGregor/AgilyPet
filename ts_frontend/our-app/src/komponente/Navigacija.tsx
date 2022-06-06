@@ -27,15 +27,15 @@ const Navigacija: React.FC = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto pisava-white">
-                            <Nav.Link className="mouse_over" href="/"> <div className="pisava-white">Domov</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/seznamCourse"><div className="pisava-white">Seznam coursov</div></Nav.Link>
-                            <Nav.Link className="mouse_over" href="/vseDogodkev"><div className="pisava-white">Dogodki</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/"> <div className="pisava-white">Home</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/seznamCourse"><div className="pisava-white">All Courses</div></Nav.Link>
+                            <Nav.Link className="mouse_over" href="/vseDogodkev"><div className="pisava-white">Events</div></Nav.Link>
 
                         </Nav>
                     </Navbar.Collapse>
                     <Navbar.Collapse className="justify-content-end">
-                                <Nav.Link className="mouse_over" href="/registracija"><div className="pisava-white">Registracija</div></Nav.Link>
-                                <Nav.Link className="mouse_over" href="/prijava"><div className="pisava-white">Prijava</div></Nav.Link>
+                                <Nav.Link className="mouse_over" href="/registracija"><div className="pisava-white">Create an account</div></Nav.Link>
+                                <Nav.Link className="mouse_over" href="/prijava"><div className="pisava-white">Login</div></Nav.Link>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

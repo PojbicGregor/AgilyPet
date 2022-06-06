@@ -202,13 +202,13 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                 <Col xs={12} className="border_color">
                     <div className="container" >
                         <div className='container-md' style={{ backgroundColor: "white", borderRadius: "15px" }}>
-                            <h2 className='podnaslov'>Vnesite podatke o course:</h2>
+                            <h2 className='podnaslov'>Enter the course details:</h2>
                             <form id="form" onSubmit={handleSubmit}>
 
-                                <label>Naziv:</label>
+                                <label>Name:</label>
                                 <input name="naziv" type="text" className='form-control' onChange={handleChange} />
                                 <br />
-                                <label>Opis:</label>
+                                <label>Description:</label>
                                 <input name="opis" type="text" className='form-control' onChange={handleChange} />
                                 <br />
                                 
@@ -324,7 +324,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                             <Row >
                                 <Col></Col>
                                 <Col className='center'>
-                                    <button className='btn btn-primary btn-block'>{<Link className="domov" to={`/`}>Domov</Link>}</button>
+                                    <button className='btn btn-primary btn-block'>{<Link className="domov" to={`/`}>Home</Link>}</button>
                                 </Col>
                                 <Col></Col>
                             </Row>

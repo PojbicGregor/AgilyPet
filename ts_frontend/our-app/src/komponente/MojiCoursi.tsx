@@ -37,7 +37,7 @@ const MojiCoursi: React.FC = () => {
     if (elements === undefined ||elements.length == 0) {
         return (<>            <UserNav />
                      <h1 className="text-center">
-                         Dear, you have not added a course yet, click on the button to add a course</h1>
+                         You have not added a course yet, click on the button to add a course</h1>
                          <Button  href='/DodajCourse'>ADD</Button>
                          <Noga/>
         </>)

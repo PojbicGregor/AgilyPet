@@ -16,7 +16,7 @@ function SeznamPsov (props: seznamPsovProps) {
             <div className="seznamPsov">
                 {element.map((el, indeks) => (
                 <div className="seznam" key={indeks}>
-                        <b>Pes: </b> {el.ime} {el.pasma} {el.visina} {el.starost}
+                        <b>Dog: </b> {el.ime} {el.pasma} {el.visina} {el.starost}
                         
                         
                 </div>        

@@ -55,27 +55,27 @@ const DodajEvent: React.FC<DodajEventProps> = (props: DodajEventProps) => {
                     <Col xs={6} className="border_color">
                         <Row>
                             <Col className='center'>
-                                <h2 className='podnaslov'>Vnesite podatke o eventu:</h2>
+                                <h2 className='podnaslov'>Enter event details:</h2>
                             </Col>
                         </Row>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" >
-                                <Form.Label>Naziv:</Form.Label>
-                                <Form.Control name="naziv" type="text" placeholder="Enter name" onChange={handleChange} />
+                                <Form.Label>Title:</Form.Label>
+                                <Form.Control name="naziv" type="text" placeholder="Enter title" onChange={handleChange} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" >
-                                <Form.Label>Datum:</Form.Label>
+                                <Form.Label>Date:</Form.Label>
                                 <Form.Control name="datum" type="date" onChange={handleChange} />
                             </Form.Group>
 
                             <Form.Group className="mb-3" >
-                                <Form.Label>Opis:</Form.Label>
+                                <Form.Label>Description:</Form.Label>
                                 <Form.Control name="opis" type="text" onChange={handleChange} />
                             </Form.Group>
 
                             <Form.Group className="mb-3">
-                                <Form.Label>Naslov:</Form.Label>
+                                <Form.Label>Address:</Form.Label>
                                 <Form.Control name="naslov" type="text" onChange={handleChange} />
                             </Form.Group>
 
