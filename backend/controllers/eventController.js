@@ -68,12 +68,12 @@ module.exports = {
         const { OAuth2 } = google.auth
 
         const oAuth2Client = new OAuth2(
-            '395321912984-mqg57h5o34radlvlf99jlrqqmmfas82k.apps.googleusercontent.com',
-            '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'
+            '395321912984-5o8pnf4ghq97047ll613ftgu0lv17a82.apps.googleusercontent.com',
+            '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'
         )
 
         oAuth2Client.setCredentials({
-            refresh_token: '1//04nF377NVe3N6CgYIARAAGAQSNwF-L9IrJ93FIBNBCjFKbfQijXLQylPEFJkrS3e1Kxt55og46PUDhjiDGaAlVxpmJWSYCqBElOc'
+            refresh_token: '1//04qkFgI7KO6FwCgYIARAAGAQSNwF-L9IrMBrqCQXlLF_i4wP3cRcR6s_IXZkuPw8A4b80tYoI_uKWE0zXHC_iQXEP72BGd9O-Tpg'
         })
 
 
