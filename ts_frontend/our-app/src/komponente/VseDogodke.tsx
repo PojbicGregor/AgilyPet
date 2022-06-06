@@ -175,7 +175,18 @@ const VseDogodke: React.FC = () => {
                                             <span>{event.naslov}</span>
                                         </Card.Text>
                                         <Card.Text>
-                                            <h6>Datum: <Badge bg="success">{event.datum}</Badge></h6>
+
+                                            {
+                                                (() => {
+                                                    let date = new Date(event.datum);
+                                                    let today = new Date();
+                                                    if (date < today) {
+                                                        return <h6>Datum: <Badge bg="danger">{event.datum}</Badge></h6>
+                                                    }else {
+                                                        return <h6>Datum: <Badge bg="success">{event.datum}</Badge></h6>
+                                                    }
+                                                })()
+                                            }
                                         </Card.Text>
                                         <div className='center'>
                                     {
