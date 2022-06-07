@@ -189,11 +189,17 @@ const VseDogodke: React.FC = () => {
                                             }
                                         </Card.Text>
                                         <div className='center'>
-                                    {
+                                        {
                                         (() => {
                                             if (prijavljen) {
-                                                if (event.daIliNe && (prijavljen)) {
-                                                    return <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Cancel</Button>
+                                                let date = new Date(event.datum);
+                                                let today = new Date();
+                                                if (date < today) {
+                                                    return  <Badge bg="danger">Event has Expired</Badge>
+                                                }
+                                               else if (event.daIliNe && (prijavljen)) {
+                                                    return( <> <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Cancel</Button>
+                                               </>)
                                                 }
                                                 if (!event.daIliNe && (prijavljen)) {
                                                     return <Button id={event.id.toString()} onClick={handleClick}>Sign up</Button>
