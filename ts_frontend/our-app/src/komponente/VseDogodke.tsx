@@ -182,39 +182,39 @@ const VseDogodke: React.FC = () => {
                                                     let today = new Date();
                                                     if (date < today) {
                                                         return <h6>Datum: <Badge bg="danger">{event.datum}</Badge></h6>
-                                                    }else {
+                                                    } else {
                                                         return <h6>Datum: <Badge bg="success">{event.datum}</Badge></h6>
                                                     }
                                                 })()
                                             }
                                         </Card.Text>
                                         <div className='center'>
-                                        {
-                                        (() => {
-                                            if (prijavljen) {
-                                                let date = new Date(event.datum);
-                                                let today = new Date();
-                                                if (date < today) {
-                                                    return  <Badge bg="danger">Event has Expired</Badge>
-                                                }
-                                               else if (event.daIliNe && (prijavljen)) {
-                                                    return( <> <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Cancel</Button>
-                                               </>)
-                                                }
-                                                if (!event.daIliNe && (prijavljen)) {
-                                                    return <Button id={event.id.toString()} onClick={handleClick}>Sign up</Button>
-                                                }
+                                            {
+                                                (() => {
+                                                    if (prijavljen) {
+                                                        let date = new Date(event.datum);
+                                                        let today = new Date();
+                                                        if (date < today) {
+                                                            return <h4><Badge bg="danger">Event has Expired</Badge></h4>
+                                                        }
+                                                        else if (event.daIliNe && (prijavljen)) {
+                                                            return (<> <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Cancel</Button>
+                                                            </>)
+                                                        }
+                                                        if (!event.daIliNe && (prijavljen)) {
+                                                            return <Button id={event.id.toString()} onClick={handleClick}>Sign up</Button>
+                                                        }
+                                                    }
+                                                    else {
+                                                        return null
+                                                    }
+                                                })()
                                             }
-                                            else {
-                                                return null
-                                            }
-                                        })()
-                                    }
-                                    </div>
+                                        </div>
                                     </Card.Body>
-                                    </Card>
+                                </Card>
 
-                                    {/*event.daIliNe ? <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button> :
+                                {/*event.daIliNe ? <Button variant="danger" id={event.id.toString()} onClick={handleClickOdjava}>Odjava</Button> :
                         <Button id={event.id.toString()} onClick={handleClick}>Prijava</Button>
                 */}
 

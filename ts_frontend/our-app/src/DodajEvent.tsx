@@ -2,7 +2,7 @@ import React from 'react';
 import {ChangeEvent} from 'react';
 import {FormEvent} from 'react';
 import {Event} from './razredi/Event';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserNav from './komponente/UserNav';
 import Noga from './komponente/Noga';
 import Koledar from './komponente/Koledar';
@@ -14,6 +14,8 @@ interface DodajEventProps {
 }
 
 const DodajEvent: React.FC<DodajEventProps> = (props: DodajEventProps) => {
+
+    const navigate = useNavigate();
 
     const [lastnosti, setLastnosti] = React.useState({
         naziv: "",
@@ -38,6 +40,12 @@ const DodajEvent: React.FC<DodajEventProps> = (props: DodajEventProps) => {
                 'Content-Type': 'application/json'
             }
         })
+        setTimeout(function(){
+            navigate("/mojiDogodki");
+            setTimeout(function(){
+                window.location.reload();
+            }, 2000);
+        }, 0);
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

@@ -92,8 +92,12 @@ let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
                 })
             }
         })
-
-        navigate("/");
+        setTimeout(function(){
+            navigate("/mojiPSi");
+            setTimeout(function(){
+                window.location.reload();
+            }, 2000);
+        }, 0);
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -177,59 +181,6 @@ let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
         </Container>
 
         <Noga></Noga>
-        {/*<div>
-
-        {prijavljen ? <UserNav /> : <Navigacija />}
-
-        <Container className='margin_reg'>
-            <Row>
-                <Col></Col>
-                <Col xs={6} >
-                    <h1>
-                        Vnesite podatke o vašem psu:
-                    </h1>
-                </Col>
-                <Col></Col>
-            </Row>
-            <Row>
-                <Col></Col>
-                <Col xs={6} className="border_color">
-                    <Form id='form' onSubmit={handleSubmit}>
-                        <Form.Group className="mb-3" >
-                            <Form.Label>Ime</Form.Label>
-                            <Form.Control name="ime" type="text" placeholder="Vnesite ime" value={lastnosti.ime} onChange={handleChange} />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Pasma</Form.Label>
-                            <Form.Control name="pasma" type="text" placeholder="Vnesite pasmo" value={lastnosti.pasma} onChange={handleChange} />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Višina</Form.Label>
-                            <Form.Control name="visina" type="number" value={lastnosti.visina} onChange={handleChange} />
-                        </Form.Group>
-
-                        <Form.Group className="mb-3">
-                            <Form.Label>Starost</Form.Label>
-                            <Form.Control name="starost" type="number" value={lastnosti.starost} onChange={handleChange} />
-                        </Form.Group>
-
-                        <Row>
-                            <Col className='text-center'>
-                                <Button variant="primary" type="submit">
-                                    Dodaj
-                                </Button>
-                            </Col>
-                        </Row>
-                        
-                    </Form>
-                </Col>
-                <Col></Col>
-            </Row>
-        </Container>
-
-    <Noga></Noga>*/}
 
     </div>);
 }

@@ -44,24 +44,8 @@ const Facts: React.FC = () => {
         });
     }
 
-    const [izbranPes, setIzbranPes] = React.useState("");
-
-    const [lastnosti, setLastnosti] = React.useState({
-        name: "",
-        weight: "",
-        height: "",
-        bred_for: "",
-        life_span: "",
-        temperament: ""
-    });
-
-    const [urlImg, setUrlImg] = React.useState("");
-
-    const handleSubmit = (e: FormEvent) => {
-        console.log("submit");
-        e.preventDefault();
-
-        fetch("https://api.thedogapi.com/v1/breeds/search?q=german she", {
+    if (psi.length === 1) {
+        fetch("https://api.thedogapi.com/v1/breeds/search?q=" + psi[0].pasma, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -100,6 +84,19 @@ const Facts: React.FC = () => {
             }
         })
     }
+
+    const [izbranPes, setIzbranPes] = React.useState("");
+
+    const [lastnosti, setLastnosti] = React.useState({
+        name: "",
+        weight: "",
+        height: "",
+        bred_for: "",
+        life_span: "",
+        temperament: ""
+    });
+
+    const [urlImg, setUrlImg] = React.useState("");
 
     const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
         console.log(e.target.value);
@@ -144,6 +141,13 @@ const Facts: React.FC = () => {
         })
     }
 
+    const navigate = useNavigate();
+
+    const handleLocationClick = (e: FormEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        navigate('/dodajPsa');
+    }
+
     return (
         <>
 
@@ -155,82 +159,103 @@ const Facts: React.FC = () => {
                 <Row>
                     <Col></Col>
                     <Col xs={6} className="">
-                        <Form.Select aria-label="Default select example" value={izbranPes} onChange={handleChange}>
-                        {psi!.map(e => {
-                            return <option key={e.ime} value={e.pasma}>{e.ime}</option>;
-                        })}
-                        </Form.Select>
+                        {
+                            (() => {
+                                if (psi.length > 0) {
+                                    return <Form.Select aria-label="Default select example" value={izbranPes} onChange={handleChange}>
+                                    {psi!.map(e => {
+                                        return <option key={e.ime} value={e.pasma}>{e.ime}</option>;
+                                    })}
+                                </Form.Select>
+                                }
+                                else {
+                                    return <>
+                                    <Row >
+                                        <Col sm={1}></Col>
+                                        <Col sm={10}><h3 className='center'>You have no added dogs</h3></Col>
+                                        <Col sm={1}></Col>
+                                    </Row>
+                                    <Row>
+                                        <Col sm={1}></Col>
+                                        <Col className='center' sm={10}>
+                                            <Button className='btn-secondary' onClick={handleLocationClick}>Add dog</Button>
+                                        </Col>
+                                        <Col sm={1}></Col>
+                                    </Row></>
+                                }
+                            })()
+                        }
                     </Col>
                     <Col></Col>
                 </Row>
                 <Row className='mt-2'>
                     <Col></Col>
-                    {lastnosti.name ? 
-                    <Col className='podatki' xs={10} md={6}>
-                        <div className=''>
-                            <Row>
-                                <Col>
-                                {lastnosti.name ? <h1>Dog facts:</h1> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.name ? <h2>Breed:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.name ? <p className='text-justify mt-2'>{lastnosti.name}</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.weight ? <h2>Weight:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.weight ? <p className='text-justify mt-2'>{lastnosti.weight} kg</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.height ? <h2>Height:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.height ? <p className='text-justify mt-2'>{lastnosti.height} cm</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.bred_for ? <h2>Bred for:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.bred_for ? <p className='text-justify mt-2'>{lastnosti.bred_for}</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    {lastnosti.life_span ? <h2>Life span:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.life_span ? <p className='text-justify mt-2'>{lastnosti.life_span}</p> : null}
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                {lastnosti.temperament ? <h2>Temperament:</h2> : null}
-                                </Col>
-                                <Col className='text-justify'>
-                                    {lastnosti.temperament ? <p className='text-justify mt-2'>{lastnosti.temperament}</p> : null}
-                                </Col>
-                            </Row>
-                            <Row className='mb-2'>
-                                <Col></Col>
-                                <Col xs={9}>
-                                    {urlImg ? <img className='slika_psa' src={urlImg} alt="Slika psa" /> : null}
-                                </Col>
-                                <Col></Col>
-                            </Row>
-                        </div>
-                    </Col>
-                    : null}
+                    {lastnosti.name ?
+                        <Col className='podatki' xs={10} md={6}>
+                            <div className=''>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.name ? <h1>Dog facts:</h1> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.name ? <h2>Breed:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.name ? <p className='text-justify mt-2'>{lastnosti.name}</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.weight ? <h2>Weight:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.weight ? <p className='text-justify mt-2'>{lastnosti.weight} kg</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.height ? <h2>Height:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.height ? <p className='text-justify mt-2'>{lastnosti.height} cm</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.bred_for ? <h2>Bred for:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.bred_for ? <p className='text-justify mt-2'>{lastnosti.bred_for}</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.life_span ? <h2>Life span:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.life_span ? <p className='text-justify mt-2'>{lastnosti.life_span}</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Col>
+                                        {lastnosti.temperament ? <h2>Temperament:</h2> : null}
+                                    </Col>
+                                    <Col className='text-justify'>
+                                        {lastnosti.temperament ? <p className='text-justify mt-2'>{lastnosti.temperament}</p> : null}
+                                    </Col>
+                                </Row>
+                                <Row className='mb-2'>
+                                    <Col></Col>
+                                    <Col xs={9}>
+                                        {urlImg ? <img className='slika_psa' src={urlImg} alt="Slika psa" /> : null}
+                                    </Col>
+                                    <Col></Col>
+                                </Row>
+                            </div>
+                        </Col>
+                        : null}
                     <Col></Col>
                 </Row>
             </Container>

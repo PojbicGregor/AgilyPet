@@ -88,7 +88,7 @@ const Registracija: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProp
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label>Passwvcxvord</Form.Label>
+                                <Form.Label>Password</Form.Label>
                                 <Form.Control name="proverka" type="password" placeholder="Password" value={lastnosti.proverka} onChange={handleChange} />
                             </Form.Group>
 

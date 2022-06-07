@@ -12,7 +12,7 @@ const SeznamCourse: React.FC = () => {
     const [show, setShow] = useState(false);
 
     //za obvestilo o followanju
-    const [show2, setShow2] = useState(true);
+    const [show2, setShow2] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => {
