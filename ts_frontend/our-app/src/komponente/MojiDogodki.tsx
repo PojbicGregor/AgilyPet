@@ -50,6 +50,7 @@ const MojiPsi: React.FC = () => {
         }
         deleteEvent(dataForBackend)
     }
+    
     if (elements === undefined || elements.length === 0) {
         return (<>
             <UserNav />

@@ -34,12 +34,22 @@ const MojiCoursi: React.FC = () => {
         getMojCoursi()
         //  console.log(elements)
     }, [])
-    if (elements === undefined ||elements.length == 0) {
-        return (<>            <UserNav />
-                     <h1 className="text-center">
-                         You have not added a course yet, click on the button to add a course</h1>
-                         <Button  href='/DodajCourse'>ADD</Button>
-                         <Noga/>
+    if (elements === undefined || elements.length == 0) {
+        return (<>
+            <UserNav />
+            <Row>
+                <h1 className="text-center">
+                You have not added a course yet, click on the button to add a course
+                </h1>
+            </Row>
+            <Row>
+                <Col></Col>
+                <Col className='center'>
+                    <Button className='btn btn-secondary btn-block' href='/dodajCourse'>ADD</Button>
+                </Col>
+                <Col></Col>
+            </Row>
+            <Noga />
         </>)
     }
     else {
