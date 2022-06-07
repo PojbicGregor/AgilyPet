@@ -2,12 +2,12 @@ version: '3'
 
 services:
   backend:
-    image: janlukac/agilypet-backend:0.1
+    image: janlukac/agilypet-backend:0.2
     ports:
       - "3001:3001"
 
   frontend:
-    image: janlukac/agilypet-frontend:0.2
+    image: janlukac/agilypet-frontend:0.5
     ports:
       - "3000:3000"
     depends_on:

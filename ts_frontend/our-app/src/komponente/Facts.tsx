@@ -44,6 +44,47 @@ const Facts: React.FC = () => {
         });
     }
 
+    if (psi.length === 1) {
+        fetch("https://api.thedogapi.com/v1/breeds/search?q=" + psi[0].pasma, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+            }
+        }).then(response => {
+            if (response.status === 200) {
+                console.log(response);
+                response.json().then(data => {
+                    console.log(data[0]);
+                    setLastnosti({
+                        name: data[0].name,
+                        weight: data[0].weight.metric,
+                        height: data[0].height.metric,
+                        bred_for: data[0].bred_for,
+                        life_span: data[0].life_span,
+                        temperament: data[0].temperament
+                    });
+
+                    fetch('https://api.thedogapi.com/v1/images/' + data[0].reference_image_id, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-api-key': '06ff55ca-df70-4318-9705-9a778bea3c83' //API key: 06ff55ca-df70-4318-9705-9a778bea3c83
+                        }
+                    }).then(response => {
+                        if (response.status === 200) {
+                            console.log(response);
+                            response.json().then(data => {
+                                console.log(data);
+                                setUrlImg(data.url);
+                            });
+                        }
+                    });
+                })
+            }
+        })
+    }
+
     const [izbranPes, setIzbranPes] = React.useState("");
 
     const [lastnosti, setLastnosti] = React.useState({
@@ -144,11 +185,6 @@ const Facts: React.FC = () => {
                                 }
                             })()
                         }
-                        <Form.Select aria-label="Default select example" value={izbranPes} onChange={handleChange}>
-                            {psi!.map(e => {
-                                return <option key={e.ime} value={e.pasma}>{e.ime}</option>;
-                            })}
-                        </Form.Select>
                     </Col>
                     <Col></Col>
                 </Row>
