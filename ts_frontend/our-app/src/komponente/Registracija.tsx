@@ -67,7 +67,7 @@ const Registracija: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProp
             <Container className='margin_reg'>
                 <Row>
                     <Col></Col>
-                    <Col xs={6} className="border_color">
+                    <Col xs={10} md={6} className="border_color">
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
@@ -92,9 +92,11 @@ const Registracija: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProp
                                 <Form.Control name="proverka" type="password" placeholder="Password" value={lastnosti.proverka} onChange={handleChange} />
                             </Form.Group>
 
+                            <div className='center'>
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
+                            </div>
                         </Form>
                     </Col>
                     <Col></Col>

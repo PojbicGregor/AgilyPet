@@ -70,7 +70,7 @@ const Prijava: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProps) =>
             <Container className='margin_reg'>
                 <Row>
                     <Col></Col>
-                    <Col xs={6} className="border_color">
+                    <Col xs={10} md={6} className="border_color">
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label>Email address</Form.Label>
@@ -82,9 +82,11 @@ const Prijava: React.FC<DodajUporabnikaProps> = (props: DodajUporabnikaProps) =>
                                 <Form.Control name="geslo" type="password" placeholder="Password" value={lastnosti.geslo} onChange={handleChange} />
                             </Form.Group>
 
+                            <div className='center'>
                             <Button variant="primary" type="submit">
                                 Submit
                             </Button>
+                            </div>
                         </Form>
                     </Col>
                     <Col></Col>
