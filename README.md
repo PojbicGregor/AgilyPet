@@ -1,5 +1,60 @@
 # AgilyPet 
 
+## Namen projekta
+Naš cilj je narediti rešitev, ki bo zadovoljevala vsem pogojem/vmesnim ciljem/funkcionalnostim, ki si jih zastavimo.
+Cilj je narediti čim boljšo spletno aplikacijo, ki bo tehnološko zahtevna in lepo oblikovana. Cilj je tudi pravilno uporabljati
+vse tehnologije ki smo se jih dogovorili uporabiti. V povzetku je naš cilj zadovoljiva in uporabna spletna aplikacija.
+
+## Funkcionalnosti
+- **Urejanje coursov**
+- **Risanje coursov**
+- **Sledenje kreatorju coursa**
+- **Pošiljanje maila ob izdaji novega coursa**
+- **Podatki o pasmi psa uporabnika**
+- **Podatki o izbrani pasmi psa**
+- **Urejanje dogodkov**
+- **Prikaz dogodka na koledarju**
+- **Prijava in odjava na dogodek**
+- **Vnos psa**
+- **Filtriranje po coursih glede na zdravstveno stanje psa**
+- **Avtentikacija**
+
+## Tehnološki sklad
+![Tehnološki sklad](/slike/AgilyPet_tehnološkiSklad.png)
+
+## Razvojno okolje
+- VisualStudio Code
+
+## GitLab repozitorij
+Celoten repozitorij celotnega projekta se nahaja na [GitLab-u](https://gitlab.com/LukacJan/agilypet).
+
+## Vzpostavitev projekta
+Ker se projekt nahaja na GitLab-u, lahko vzpostavimo projekt tako da kloniramo [GitLab repozitorij](https://gitlab.com/LukacJan/agilypet).
+
+## Zagon projekta
+### Zagon backenda
+Backend zaženemo v mapi ![Mape backend](/slike/backend_mapa.PNG) z ukazom ```nodemon index.js``` ali samo ```nodemon``` lahko pa tudi z ukazom ```node index.js```.
+
+### Zagon frontenda
+Frontend zaženemo v mapi ![Mape frontend](/slike/frontend_mapa.PNG) z ukazom ```npm start```.
+
+## Namestitev projekta
+Projekt se lahko namesti s pomočjo ```docker-compose.yml``` datoteke, ki se nahaja v root direktoriju projekta. 
+Ukaz za namestitev je: ```docker-compose up```.
+
+## Vloge
+username: osnovni@uporabnik.si
+password: osnovni123
+
+## Zaslonske maske
+
+
+## Člani
+- **Pojbič Gregor**
+- **Manev Blazhe**
+- **Ristova Kristina**
+- **Lukač Jan**
+<!--
 ## Opis projekta
 ### Člani
 Člani ekipe, ki dela na tem projektu smo Blazhe Manev, Gregor Pojbič, Kristina Ristova in Jan Lukač.
