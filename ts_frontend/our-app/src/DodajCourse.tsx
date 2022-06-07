@@ -120,7 +120,13 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
                 'Content-Type': 'application/json'
             }
         })
-        // navigate("/");
+
+        setTimeout(function(){
+            navigate("/mojiCoursi");
+            setTimeout(function(){
+                window.location.reload();
+            }, 2000);
+        }, 1000);
 
 
 
