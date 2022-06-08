@@ -86,6 +86,16 @@ module.exports = {
         eventEndTime.setMinutes(eventEndTime.getMinutes() + 45)
 
 
+      let idZaEvent=  req.body.ime.split('').sort().join('').toLowerCase();
+      idZaEvent=  idZaEvent.trim();
+      console.log(idZaEvent)
+     for(let i =0;i<req.body.ime.length;i++){
+        idZaEvent=idZaEvent.replace('w','v');
+        idZaEvent=idZaEvent.replace('x','v');
+        idZaEvent=idZaEvent.replace('y','v');
+        idZaEvent=idZaEvent.replace('z','v');
+
+     }
         //console.log(eventEndTime)
         const event1 = {
             summary: req.body.ime,
@@ -101,6 +111,7 @@ module.exports = {
                 timeZone: 'America/Denver',
 
             },
+            id : idZaEvent
         }
         calendar.freebusy.query(
             {
