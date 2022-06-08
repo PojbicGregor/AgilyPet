@@ -40,12 +40,7 @@ const DodajEvent: React.FC<DodajEventProps> = (props: DodajEventProps) => {
                 'Content-Type': 'application/json'
             }
         })
-        setTimeout(function(){
-            navigate("/mojiDogodki");
-            setTimeout(function(){
-                window.location.reload();
-            }, 2000);
-        }, 0);
+        navigate("/");
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
