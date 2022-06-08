@@ -20,7 +20,7 @@ vse tehnologije ki smo se jih dogovorili uporabiti. V povzetku je naš cilj zado
 - **Avtentikacija**
 
 ## Tehnološki sklad
-![Tehnološki sklad](/slike/AgilyPet_tehnološkiSklad.png)
+![Tehnološki sklad](/slike/Agilypet_tehnoloskiSklad.png)
 
 ## Razvojno okolje
 - VisualStudio Code

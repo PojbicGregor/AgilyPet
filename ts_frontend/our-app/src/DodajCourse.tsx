@@ -122,10 +122,7 @@ let DodajCourse: React.FC<DodajCourseProps> = (props: DodajCourseProps) => {
         })
 
         setTimeout(function(){
-            navigate("/mojiCoursi");
-            setTimeout(function(){
-                window.location.reload();
-            }, 2000);
+            navigate("/");
         }, 1000);
 
 

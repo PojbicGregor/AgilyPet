@@ -92,12 +92,7 @@ let DodajPsa: React.FC<DodajPsaProps> = (props: DodajPsaProps) => {
                 })
             }
         })
-        setTimeout(function(){
-            navigate("/mojiPSi");
-            setTimeout(function(){
-                window.location.reload();
-            }, 2000);
-        }, 0);
+        navigate("/");
     }
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
